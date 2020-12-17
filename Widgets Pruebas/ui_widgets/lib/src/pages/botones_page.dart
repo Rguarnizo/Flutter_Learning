@@ -134,6 +134,5 @@ class BotonesPage extends StatelessWidget {
           ],
         ),
     );
-
   }
 }
