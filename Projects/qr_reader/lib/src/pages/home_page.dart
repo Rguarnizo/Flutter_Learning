@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qr_reader/src/pages/direcciones_page.dart';
 import 'package:qr_reader/src/pages/mapas_page.dart';
-import 'package:qrcode_reader/qrcode_reader.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
 
 
     try{
-      resultScan =await QRCodeReader().scan();
+      String cameraScanResult = await scanner.scan();
     }catch(e){
       resultScan = e.toString();
     }
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
       print('Temenos Información');
     }
 
-    
+
 
   }
 }
