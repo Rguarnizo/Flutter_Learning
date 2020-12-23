@@ -111,4 +111,24 @@ initDB() async {
     return res;
   }
 
+
+  deleteScan(int id) async {
+    final db = await database;
+
+    final res = await db.delete('Scans',where: "id = ?",whereArgs: [id]);
+    
+    return res;
+  }
+
+    deleteScanAll() async {
+    final db = await database;
+
+    final res = await db.rawDelete('DELETE fROM Scans');
+    
+    return res;
+  }
+
+  
+
+
 }
