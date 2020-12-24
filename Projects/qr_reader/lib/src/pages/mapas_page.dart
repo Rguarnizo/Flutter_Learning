@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qr_reader/src/bloc/scans_bloc.dart';
 import 'package:qr_reader/src/providers/db_provider.dart';
+import 'package:qr_reader/src/utils/utils.dart';
 
 
 class MapasPage extends StatelessWidget {
@@ -40,6 +41,9 @@ class MapasPage extends StatelessWidget {
               title: Text(scans[index].valor),
               subtitle: Text('Id: ${scans[index].id}'),
               trailing: Icon(Icons.keyboard_arrow_right_outlined),
+              onTap: (){
+                launchURL(scans[index]);
+              },
             ),
           ),
         );
