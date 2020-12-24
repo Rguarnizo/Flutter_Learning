@@ -4,6 +4,7 @@ import 'package:qr_reader/src/models/scan_,model.dart';
 import 'package:qr_reader/src/pages/direcciones_page.dart';
 import 'package:qr_reader/src/pages/mapas_page.dart';
 import 'package:qr_reader/src/providers/db_provider.dart';
+import 'package:qr_reader/src/utils/utils.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 
 class HomePage extends StatefulWidget {
@@ -79,7 +80,9 @@ class _HomePageState extends State<HomePage> {
     if(resultScan != null){
       
       ScanModel scan = ScanModel(valor: resultScan);
-      scansBloc.agregarScan(scan);      
+      scansBloc.agregarScan(scan);
+
+      launchURL(scan);      
        
     }
 
