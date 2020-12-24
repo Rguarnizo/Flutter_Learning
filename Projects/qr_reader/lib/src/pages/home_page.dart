@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
 
   void scanQR(context) async{
     String resultScan = 'https://fernando-herrera.com';
-    String resultScan2 = 'geo:40.72423304,-74.00731459';
+    String resultScan2 = 'geo:42.33143,-83.04575';
 
     if(resultScan != null){
       
