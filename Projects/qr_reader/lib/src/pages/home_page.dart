@@ -25,7 +25,9 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('QR SCanner'),
         actions: [
-        IconButton(icon: Icon(Icons.delete_forever),onPressed: (){},),
+        IconButton(icon: Icon(Icons.delete_forever),onPressed: (){
+          scansBloc.borrarScansAll();
+        },),
       ],),
       bottomNavigationBar: _bottonNaviBar(),
       body: _callPage(currentIndex),
