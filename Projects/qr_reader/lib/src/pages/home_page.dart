@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qr_reader/src/bloc/scans_bloc.dart';
 import 'package:qr_reader/src/models/scan_,model.dart';
 import 'package:qr_reader/src/pages/direcciones_page.dart';
 import 'package:qr_reader/src/pages/mapas_page.dart';
@@ -13,6 +14,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  ScansBloc scansBloc = ScansBloc();
 
   int currentIndex = 0;
 
@@ -74,7 +77,7 @@ class _HomePageState extends State<HomePage> {
     if(resultScan != null){
       
       ScanModel scan = ScanModel(valor: resultScan);
-      DBProvider.db.nuevoScan(scan);
+      scansBloc.agregarScan(scan);      
        
     }
 

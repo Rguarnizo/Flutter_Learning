@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:qr_reader/src/bloc/scans_bloc.dart';
 import 'package:qr_reader/src/providers/db_provider.dart';
 
 
 class MapasPage extends StatelessWidget {
-  const MapasPage({Key key}) : super(key: key);
+  MapasPage({Key key}) : super(key: key);
+
+  final ScansBloc scansBloc = new ScansBloc();
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder <List<ScanModel>>(
-      future: DBProvider.db.getScansList(),
+    return StreamBuilder <List<ScanModel>>(
+      stream: scansBloc.scansStream,
       builder: (context, snapshot) {
         
         if(!snapshot.hasData){
@@ -30,7 +33,7 @@ class MapasPage extends StatelessWidget {
             key: UniqueKey(),
             background: Container(color: Colors.red,),
             onDismissed: (direction) {
-              DBProvider.db.deleteScan(scans[index].id); 
+              scansBloc.borrarScan(scans[index].id);
             },
             child: ListTile(
               leading: Icon(Icons.cloud_queue,color:Theme.of(context).primaryColor),
@@ -40,9 +43,7 @@ class MapasPage extends StatelessWidget {
             ),
           ),
         );
-
-
-      },
+        },
       );
   }
 }
