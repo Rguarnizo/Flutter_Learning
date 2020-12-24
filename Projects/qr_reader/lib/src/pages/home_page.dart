@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.filter_center_focus),
         onPressed: () {
-          scanQR();
+          scanQR(context);
         },
         backgroundColor: Theme.of(context).primaryColor,
       ),
@@ -74,15 +74,19 @@ class _HomePageState extends State<HomePage> {
 
   }
 
-  void scanQR() async{
+  void scanQR(context) async{
     String resultScan = 'https://fernando-herrera.com';
+    String resultScan2 = 'geo:40.72423304,-74.00731459';
 
     if(resultScan != null){
       
       ScanModel scan = ScanModel(valor: resultScan);
       scansBloc.agregarScan(scan);
 
-      launchURL(scan);      
+      ScanModel scan2 = ScanModel(valor: resultScan2);
+      scansBloc.agregarScan(scan2);
+
+      launchURL(scan2,context);      
        
     }
 

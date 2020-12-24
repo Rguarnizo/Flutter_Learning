@@ -1,9 +1,9 @@
-
+import 'package:flutter/material.dart';
 
 import 'package:qr_reader/src/models/scan_,model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-launchURL(ScanModel scan) async {
+launchURL(ScanModel scan,context) async {
   
   if(scan.tipo == 'http'){
 
@@ -13,6 +13,6 @@ launchURL(ScanModel scan) async {
     throw 'Could not launch ${scan.valor}';
   }
   }else {
-    print('Geo...');
+    Navigator.pushNamed(context, 'Mapa',arguments: scan);
   }
 }

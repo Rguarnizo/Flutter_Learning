@@ -42,7 +42,7 @@ class MapasPage extends StatelessWidget {
               subtitle: Text('Id: ${scans[index].id}'),
               trailing: Icon(Icons.keyboard_arrow_right_outlined),
               onTap: (){
-                launchURL(scans[index]);
+                launchURL(scans[index],context);
               },
             ),
           ),
