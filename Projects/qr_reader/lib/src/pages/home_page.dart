@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:qr_reader/src/models/scan_,model.dart';
 import 'package:qr_reader/src/pages/direcciones_page.dart';
 import 'package:qr_reader/src/pages/mapas_page.dart';
+import 'package:qr_reader/src/providers/db_provider.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 
 class HomePage extends StatefulWidget {
@@ -67,20 +69,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   void scanQR() async{
-    String resultScan = '';
-
-
-    try{
-      String cameraScanResult = await scanner.scan();
-    }catch(e){
-      resultScan = e.toString();
-    }
-
-
-    print('Future string: $resultScan');
+    String resultScan = 'https://fernando-herrera.com';
 
     if(resultScan != null){
-      print('Temenos Información');
+      
+      ScanModel scan = ScanModel(valor: resultScan);
+      DBProvider.db.nuevoScan(scan);
+       
     }
 
 
