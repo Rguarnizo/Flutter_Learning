@@ -4,6 +4,8 @@ import 'package:qr_reader/src/pages/home_page.dart';
 import 'package:qr_reader/src/pages/mapa_page.dart';
 
  
+//* APLICACIÓN TERMINADA CON EXITOOOOOO!
+
 void main() => runApp(MyApp());
  
 class MyApp extends StatelessWidget {
