@@ -55,22 +55,13 @@ class _SettingsPageState extends State<SettingsPage> {
           RadioListTile(
             value: 1,
             groupValue: _genero,
-            onChanged: (value) {
-              setState(() {
-                _genero = value;
-              });
-            },
+            onChanged: _setSelectedRadio,
             title: Text('Masculino'),
           ),
           RadioListTile(
             value: 2,
             groupValue: _genero,
-            onChanged: (value) {
-              _genero = value;
-              setState(() {
-                
-              });
-            },
+            onChanged: _setSelectedRadio,            
             title: Text('Femenino'),
           ),
           Divider(),
@@ -86,5 +77,13 @@ class _SettingsPageState extends State<SettingsPage> {
         ],
       ),
     );
+  }
+
+  _setSelectedRadio(int valor) {
+    
+
+    _genero = valor;
+    setState(() {      
+    });
   }
 }
