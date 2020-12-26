@@ -15,6 +15,7 @@ class HomePage extends StatelessWidget {
       drawer: _drawer(context),
       appBar: AppBar(title: Text('Preferencias de usuario.'),),
       body: Column(
+       mainAxisAlignment: MainAxisAlignment.center,
        children: [
          Text('Color secundario: '),
          Divider(),
@@ -39,11 +40,18 @@ class HomePage extends StatelessWidget {
               image: DecorationImage(image: AssetImage('assets/Images/menu-img.jpg'),fit: BoxFit.cover),
             ),),
           ),
+           ListTile(
+            leading: Icon(Icons.pages,color: Colors.blue),
+            title: Text('Home'),
+            onTap: (){
+              Navigator.pushReplacementNamed(context, HomePage.routeName);
+            },
+          ),
           ListTile(
             leading: Icon(Icons.pages,color: Colors.blue),
             title: Text('Pages'),
             onTap: (){
-
+        
             },
           ),
           ListTile(
