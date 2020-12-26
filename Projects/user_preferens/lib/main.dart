@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:user_preferens/src/pages/home_page.dart';
+import 'package:user_preferens/src/pages/setting_page.dart';
  
 void main() => runApp(MyApp());
  
@@ -7,9 +9,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      initialRoute: 'Home',
+      initialRoute: HomePage.routeName,
       routes: {
-
+        HomePage.routeName    : (BuildContext context) => HomePage(),
+        SettingsPage.routeName: (BuildContext context) => SettingsPage(),
+        
       },
     );
   }
