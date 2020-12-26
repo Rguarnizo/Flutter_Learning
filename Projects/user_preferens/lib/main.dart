@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
       routes: {
         HomePage.routeName    : (BuildContext context) => HomePage(),
         SettingsPage.routeName: (BuildContext context) => SettingsPage(),
-        
       },
     );
   }
