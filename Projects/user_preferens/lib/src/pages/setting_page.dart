@@ -1,22 +1,90 @@
 import 'package:flutter/material.dart';
 import 'package:user_preferens/src/widgets/menu_widget.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({Key key}) : super(key: key);
 
   static final String routeName = 'Settings';
 
   @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+
+  bool _colorSecundario = true;
+  int _genero = 1;
+  String _nombre = 'Pedro';
+  TextEditingController _textEditing;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _textEditing = new TextEditingController(text:_nombre);
+  }
+
+  @override
   Widget build(BuildContext context) {
-
-    
-
     return Scaffold(
       drawer: MenuWidget(),
-      appBar: AppBar(title: Text('Ajustes'),),
-      body: Center(
-        child: Text('Ajustes Page'),
-      )
+      appBar: AppBar(
+        title: Text('Ajustes'),
+      ),
+      body: ListView(
+        children: [
+          Container(
+            padding: EdgeInsets.all(5.0),
+            child: Text(
+              'Settings',
+              style: TextStyle(fontSize: 45.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Divider(),
+          SwitchListTile(
+            value: _colorSecundario,
+            title: Text('Color secundario'),
+            onChanged: (value) {
+              setState(() {
+                
+              _colorSecundario = value;
+              });
+            },
+          ),
+          RadioListTile(
+            value: 1,
+            groupValue: _genero,
+            onChanged: (value) {
+              setState(() {
+                _genero = value;
+              });
+            },
+            title: Text('Masculino'),
+          ),
+          RadioListTile(
+            value: 2,
+            groupValue: _genero,
+            onChanged: (value) {
+              _genero = value;
+              setState(() {
+                
+              });
+            },
+            title: Text('Femenino'),
+          ),
+          Divider(),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextField(
+              controller: _textEditing,
+              decoration: InputDecoration(
+                  labelText: 'Nombre',
+                  helperText: 'Nombre de la persona usando el telefono'),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
