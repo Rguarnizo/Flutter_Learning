@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:user_preferens/src/widgets/menu_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key key}) : super(key: key);
@@ -79,8 +80,9 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  _setSelectedRadio(int valor) {
+  _setSelectedRadio(int valor) async{
     
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
     _genero = valor;
     setState(() {      
