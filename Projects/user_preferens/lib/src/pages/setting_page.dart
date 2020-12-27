@@ -84,6 +84,8 @@ class _SettingsPageState extends State<SettingsPage> {
     
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
+    prefs.setInt('genero', valor);
+
     _genero = valor;
     setState(() {      
     });
