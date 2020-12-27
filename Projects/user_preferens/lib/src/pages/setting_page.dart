@@ -20,8 +20,10 @@ class _SettingsPageState extends State<SettingsPage> {
 
 
   @override
-  void initState() {
-    // TODO: implement initState
+  void initState() async {
+    
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _genero = prefs.getInt('genero');
     super.initState();
     _textEditing = new TextEditingController(text:_nombre);
   }
