@@ -39,8 +39,8 @@ class PreferenciasUsuario{
   set nombre(String value) => _prefs.setString('nombre', value);
 
 
-  get colorSecunadrio => _prefs.getBool('colorSecundaio')?? 1;
-  set colorSercundario(value) => _prefs.setBool('colorSecundario', value);
+  get colorSecundario => _prefs.getBool('colorSecundaio')?? 1;
+  set colorSecundario(value) => _prefs.setBool('colorSecundario', value);
 
 
 

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:user_preferens/src/shere_prefs/user_prefs.dart';
 import 'package:user_preferens/src/widgets/menu_widget.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+  HomePage({Key key}) : super(key: key);
 
   static final String routeName = 'Home';
+
+  final PreferenciasUsuario prefs = PreferenciasUsuario();
 
   /// Commit de urgenciaaa!
 
@@ -19,7 +22,7 @@ class HomePage extends StatelessWidget {
       body: Column(
        mainAxisAlignment: MainAxisAlignment.center,
        children: [
-         Text('Color secundario: '),
+         Text('Color secundario: ${prefs.colorSecundario}'),
          Divider(),
          Text('Género: '),
          Divider(),
