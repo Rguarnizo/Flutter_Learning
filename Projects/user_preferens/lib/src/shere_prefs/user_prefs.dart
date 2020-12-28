@@ -12,14 +12,19 @@ class PreferenciasUsuario{
   
     static final PreferenciasUsuario _instancia = new PreferenciasUsuario._internal();
 
-    PreferenciasUsuario();
+
     
-    factory PreferenciasUsuario._internal(){
+    factory PreferenciasUsuario(){
       return _instancia;
     }
+    
 
 
-  SharedPreferences _prefs;
+    SharedPreferences _prefs;
+
+  factory PreferenciasUsuario._internal(){
+    return _instancia;
+  }
 
   initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
