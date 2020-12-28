@@ -10,8 +10,10 @@ class PreferenciasUsuario{
 
   
   
-  static final PreferenciasUsuario _instancia = new PreferenciasUsuario._internal();
-  
+    static final PreferenciasUsuario _instancia = new PreferenciasUsuario._internal();
+
+    PreferenciasUsuario();
+    
     factory PreferenciasUsuario._internal(){
       return _instancia;
     }
@@ -29,7 +31,7 @@ class PreferenciasUsuario{
   }
 
   set genero(int value){
-    
+    _prefs.setInt('genero', value);
   }
 
 
