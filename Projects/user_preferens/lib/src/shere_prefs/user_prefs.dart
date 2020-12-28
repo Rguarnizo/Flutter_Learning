@@ -42,4 +42,6 @@ class PreferenciasUsuario{
   get colorSecundario => _prefs.getBool('colorSecundaio')?? 1;
   set colorSecundario(value) => _prefs.setBool('colorSecundario', value);
 
+  get ultimaPagina => _prefs.getString('ultimaPagina')?? 'home';
+  set ultimaPagina(value) => _prefs.setString('ultimaPagina', value);
 }
