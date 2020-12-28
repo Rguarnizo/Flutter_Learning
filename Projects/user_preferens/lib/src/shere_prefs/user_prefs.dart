@@ -34,10 +34,13 @@ class PreferenciasUsuario{
   get genero => _prefs.getInt('genero')?? 1;
   set genero(int value)=> _prefs.setInt('genero', value);
 
+
   get nombre => _prefs.get('nombre');
   set nombre(String value) => _prefs.setString('nombre', value);
 
 
+  get colorSecunadrio => _prefs.getBool('colorSecundaio')?? 1;
+  set colorSercundario(value) => _prefs.setBool('colorSecundario', value);
 
 
 
