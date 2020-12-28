@@ -26,10 +26,7 @@ class PreferenciasUsuario{
 
   }
 
-  get genero{
-    return _prefs.getInt('genero')?? 1;
-  }
-
+  get genero => _prefs.getInt('genero')?? 1;
   set genero(int value)=> _prefs.setInt('genero', value);
 
   get nombre => _prefs.get('nombre');
