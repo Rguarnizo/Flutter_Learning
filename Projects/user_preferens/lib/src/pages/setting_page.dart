@@ -72,6 +72,9 @@ class _SettingsPageState extends State<SettingsPage> {
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: TextField(
               controller: _textEditing,
+              onChanged: (value){
+                prefs.nombre = value;
+              },
               decoration: InputDecoration(
                   labelText: 'Nombre',
                   helperText: 'Nombre de la persona usando el telefono'),
