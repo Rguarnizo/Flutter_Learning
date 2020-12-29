@@ -67,10 +67,8 @@ class LoginPage extends StatelessWidget {
   }
 
   _loginForm(context) {
-
     final bloc = Provider.of(context);
     final size = MediaQuery.of(context).size;
-
 
     return SingleChildScrollView(
       child: Column(
@@ -95,11 +93,17 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: [
                 Text('Ingreso'),
-                SizedBox(height: 60.0,),
+                SizedBox(
+                  height: 60.0,
+                ),
                 _crarEmail(bloc),
-                SizedBox(height: 30.0,),
+                SizedBox(
+                  height: 30.0,
+                ),
                 _crarPassword(bloc),
-                SizedBox(height: 30.0,),
+                SizedBox(
+                  height: 30.0,
+                ),
                 _crearBoton(),
               ],
             ),
@@ -109,57 +113,62 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-  
+
   _crarEmail(LoginBloc bloc) {
     return StreamBuilder<String>(
-      stream: bloc.emailStream,
-      builder: (context, snapshot) {
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: TextField(
+        stream: bloc.emailStream,
+        builder: (context, snapshot) {
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextField(
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                hintText: 'ejemplo@correo.com',
-                
-                labelText: 'Correo electrónico',
-                counterText: snapshot.data,
+                  hintText: 'ejemplo@correo.com',
+                  labelText: 'Correo electrónico',
+                  counterText: snapshot.data,
+                  errorText: snapshot.error,
                   icon: Icon(
-                Icons.alternate_email,
-                color: Colors.deepPurple,
-              )),
+                    Icons.alternate_email,
+                    color: Colors.deepPurple,
+                  )),
               onChanged: bloc.changeEmail,
-              ),
-        );
-      }
-    );
+            ),
+          );
+        });
   }
 
   _crarPassword(LoginBloc bloc) {
-
-    
     return StreamBuilder(
-      stream: bloc.passwordStream,
-      builder: (context, snapshot) {
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: TextField(
+        stream: bloc.passwordStream,
+        builder: (context, snapshot) {
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextField(
               keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(          
-                labelText: 'Contraseña',
-                counterText: snapshot.data,
+              decoration: InputDecoration(
+                  labelText: 'Contraseña',
+                  counterText: snapshot.data,
+                  errorText: snapshot.error,
                   icon: Icon(
-                Icons.lock,
-                color: Colors.deepPurple,
-              )),
+                    Icons.lock,
+                    color: Colors.deepPurple,
+                  )),
               onChanged: bloc.changePassword,
-              ),
-        );
-      }
+            ),
+          );
+        });
+  }
+
+  _crearBoton() {
+    return RaisedButton(
+      color: Colors.deepPurple,
+      textColor: Colors.white,
+      onPressed: () {},
+      padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+      child: Container(
+        child: Text('Ingresar'),
+      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
     );
   }
-
-  _crearBoton(){
-    return RaisedButton(color: Colors.deepPurple,textColor: Colors.white,onPressed: (){},padding: EdgeInsets.symmetric(horizontal:80,vertical:15 ),child: Container(child: Text('Ingresar'),),shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(5.0)),);
-  }
 }
-
