@@ -33,8 +33,10 @@ class LoginPage extends StatelessWidget {
     final circulo = Container(
       width: 100.0,
       height: 100.0,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(100.0)),
-      color: Color.fromRGBO(255, 255, 255, 0.05),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100.0),
+        color: Color.fromRGBO(255, 255, 255, 0.05),
+      ),
     );
 
     return Stack(
@@ -91,11 +93,52 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: [
                 Text('Ingreso'),
+                SizedBox(height: 60.0,),
+                _crarEmail(),
+                SizedBox(height: 30.0,),
+                _crarPassword(),
+                SizedBox(height: 30.0,),
+                _crearBoton(),
               ],
             ),
-          )
+          ),
+          Text('¿Olvido su contraseña?'),
         ],
       ),
     );
   }
+  
+  _crarEmail() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      child: TextField(
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+            hintText: 'ejemplo@correo.com',
+            labelText: 'Correo electrónico',
+              icon: Icon(
+            Icons.alternate_email,
+            color: Colors.deepPurple,
+          ))),
+    );
+  }
+
+  _crarPassword() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      child: TextField(
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(          
+            labelText: 'Contraseña',
+              icon: Icon(
+            Icons.lock,
+            color: Colors.deepPurple,
+          ))),
+    );
+  }
+
+  _crearBoton(){
+    return RaisedButton(color: Colors.deepPurple,textColor: Colors.white,onPressed: (){},padding: EdgeInsets.symmetric(horizontal:80,vertical:15 ),child: Container(child: Text('Ingresar'),),shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(5.0)),);
+  }
 }
+
