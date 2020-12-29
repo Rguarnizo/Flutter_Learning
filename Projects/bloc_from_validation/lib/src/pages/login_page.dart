@@ -1,3 +1,4 @@
+import 'package:bloc_from_validation/src/bloc/provider.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -66,7 +67,10 @@ class LoginPage extends StatelessWidget {
   }
 
   _loginForm(context) {
+
+    final bloc = Provider.of(context);
     final size = MediaQuery.of(context).size;
+
 
     return SingleChildScrollView(
       child: Column(
@@ -92,9 +96,9 @@ class LoginPage extends StatelessWidget {
               children: [
                 Text('Ingreso'),
                 SizedBox(height: 60.0,),
-                _crarEmail(),
+                _crarEmail(bloc),
                 SizedBox(height: 30.0,),
-                _crarPassword(),
+                _crarPassword(bloc),
                 SizedBox(height: 30.0,),
                 _crearBoton(),
               ],
@@ -106,7 +110,7 @@ class LoginPage extends StatelessWidget {
     );
   }
   
-  _crarEmail() {
+  _crarEmail(bloc) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: TextField(
@@ -121,7 +125,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _crarPassword() {
+  _crarPassword(bloc) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: TextField(
