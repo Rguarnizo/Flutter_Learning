@@ -110,32 +110,51 @@ class LoginPage extends StatelessWidget {
     );
   }
   
-  _crarEmail(bloc) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: TextField(
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            hintText: 'ejemplo@correo.com',
-            labelText: 'Correo electrónico',
-              icon: Icon(
-            Icons.alternate_email,
-            color: Colors.deepPurple,
-          ))),
+  _crarEmail(LoginBloc bloc) {
+    return StreamBuilder<String>(
+      stream: bloc.emailStream,
+      builder: (context, snapshot) {
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: TextField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                hintText: 'ejemplo@correo.com',
+                
+                labelText: 'Correo electrónico',
+                counterText: snapshot.data,
+                  icon: Icon(
+                Icons.alternate_email,
+                color: Colors.deepPurple,
+              )),
+              onChanged: bloc.changeEmail,
+              ),
+        );
+      }
     );
   }
 
-  _crarPassword(bloc) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: TextField(
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(          
-            labelText: 'Contraseña',
-              icon: Icon(
-            Icons.lock,
-            color: Colors.deepPurple,
-          ))),
+  _crarPassword(LoginBloc bloc) {
+
+    
+    return StreamBuilder(
+      stream: bloc.passwordStream,
+      builder: (context, snapshot) {
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: TextField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(          
+                labelText: 'Contraseña',
+                counterText: snapshot.data,
+                  icon: Icon(
+                Icons.lock,
+                color: Colors.deepPurple,
+              )),
+              onChanged: bloc.changePassword,
+              ),
+        );
+      }
     );
   }
 
