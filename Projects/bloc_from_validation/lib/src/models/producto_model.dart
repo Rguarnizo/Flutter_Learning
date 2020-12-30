@@ -9,6 +9,7 @@ ProductoModel productoModelFromJson(String str) => ProductoModel.fromJson(json.d
 String productoModelToJson(ProductoModel data) => json.encode(data.toJson());
 
 class ProductoModel {
+  
     ProductoModel({
         this.id,
         this.titulo = '',
