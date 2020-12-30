@@ -12,14 +12,13 @@ class HomePage extends StatelessWidget {
     final bloc = Provider.of(context);
     
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-       Text('Correo: ${bloc.email}'),
-       Divider(),
-       Text('Password: ${bloc.password}') 
-      ],),
+      appBar: AppBar(title: Text('Home'),),
+      floatingActionButton: _crearBoton(context),
+      body: SingleChildScrollView(child: Container()),
     );
+  }
+
+  _crearBoton(context) {
+    return FloatingActionButton(onPressed: (){Navigator.pushNamed(context, 'producto');},child: Icon(Icons.add,color: Colors.deepPurple),);
   }
 }
