@@ -167,8 +167,9 @@ class LoginPage extends StatelessWidget {
             return RaisedButton(
             color: Colors.deepPurple,
             textColor: Colors.white,
-            onPressed: snapshot.hasData? (){}:null,
+            onPressed: snapshot.hasData? () => _login(bloc,context):null,
             padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+            
             child: Container(
               child: Text('Ingresar'),
             ),
@@ -177,5 +178,13 @@ class LoginPage extends StatelessWidget {
         }
             
     );
+  }
+
+  _login(LoginBloc bloc,context){
+  
+    print('email: ${bloc.email}');
+    print('password: ${bloc.password} ');
+    Navigator.of(context).pushReplacementNamed('home');
+
   }
 }

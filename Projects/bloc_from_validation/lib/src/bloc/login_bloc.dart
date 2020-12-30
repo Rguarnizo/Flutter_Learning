@@ -7,8 +7,8 @@ import 'package:rxdart/rxdart.dart';
 
 class LoginBloc with Validator{
 
-  final _emailController = StreamController<String>.broadcast();
-  final _passwordController = StreamController<String>.broadcast();
+  final _emailController = BehaviorSubject<String>();
+  final _passwordController = BehaviorSubject<String>();
 
   Function(String) get changeEmail => _emailController.sink.add;
   Function(String) get changePassword => _passwordController.sink.add;
@@ -20,6 +20,12 @@ class LoginBloc with Validator{
   Stream<String> get passwordStream => _passwordController.stream.transform(validarPassword);
 
   LoginBloc();
+
+
+  //Obtener Ultimo Valor ingresado en los streams
+
+  String get email => _emailController.value;
+  String get password => _passwordController.value;
 
   
   
