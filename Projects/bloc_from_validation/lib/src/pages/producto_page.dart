@@ -1,4 +1,6 @@
 import 'package:bloc_from_validation/src/models/producto_model.dart';
+import 'package:bloc_from_validation/src/providers/productos_provider.dart';
+import 'package:bloc_from_validation/src/providers/productos_provider.dart';
 import 'package:bloc_from_validation/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,7 @@ class ProductoPage extends StatefulWidget {
 
 class _ProductoPageState extends State<ProductoPage> {
   final _formKey = GlobalKey<FormState>();
+  final ProductosProvider productosProvider = new ProductosProvider();
 
   ProductoModel producto = new ProductoModel();
 
@@ -89,8 +92,12 @@ class _ProductoPageState extends State<ProductoPage> {
   }
 
   void _submit(){
-    _formKey.currentState.validate();
+
+    if(!_formKey.currentState.validate()) return null;
     _formKey.currentState.save();
+
+    productosProvider.crearProducto(producto);
+    
   }
 
   _crearDisponible() {
