@@ -56,12 +56,13 @@ class HomePage extends StatelessWidget {
         key: UniqueKey(),
         background: Container(color: Colors.red,),
         onDismissed: (direccion){
-          //TODO: Borrar Productos.          
+          //TODO: Borrar Productos.        
+          productosProvider.borrarProducto(producto.id);  
         },
         child: ListTile(
         title: Text('${producto.titulo} - ${producto.valor}'),
         subtitle: Text(producto.id),
-        onTap: () => Navigator.pushNamed(context,''),
+        onTap: () => Navigator.pushNamed(context,'producto',arguments: producto),
       ),
     );
   }
