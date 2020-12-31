@@ -13,9 +13,12 @@ class ProductoPage extends StatefulWidget {
 
 class _ProductoPageState extends State<ProductoPage> {
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final ProductosProvider productosProvider = new ProductosProvider();
 
+
   ProductoModel producto = new ProductoModel();
+  bool _guardando = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +27,7 @@ class _ProductoPageState extends State<ProductoPage> {
     if(prodData != null) producto = prodData;
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text('Producto'),
         actions: [
@@ -85,7 +89,7 @@ class _ProductoPageState extends State<ProductoPage> {
   }
 
   _crearBoton() {
-    return RaisedButton.icon(icon: Icon(Icons.save),onPressed: (){
+    return RaisedButton.icon(icon: Icon(Icons.save),onPressed: _guardando? null: (){
       _submit();
     },
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -100,10 +104,20 @@ class _ProductoPageState extends State<ProductoPage> {
     if(!_formKey.currentState.validate()) return null;
     _formKey.currentState.save();
     
-    if(producto.id == null) productosProvider.crearProducto(producto);
+    _guardando = true;
+    setState(() {
+      
+    });
+
+    if(producto.id == null) productosProvider.crearProducto(producto); 
 
     else                    productosProvider.editarProducto(producto);
-    
+
+    _guardando = false;
+
+    snackBar('Registro Guardado con exito');    
+
+    Navigator.pop(context);
     
   }
 
@@ -116,6 +130,12 @@ class _ProductoPageState extends State<ProductoPage> {
     }, 
     title: Text('Disponible'),
     );
+  }
+
+  void snackBar(String message){
+    final snackBar = SnackBar(content: Text(message),duration: Duration(milliseconds: 1500),);
+
+    _scaffoldKey.currentState.showSnackBar(snackBar);
   }
 
 }
