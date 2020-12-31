@@ -59,11 +59,20 @@ class HomePage extends StatelessWidget {
           //TODO: Borrar Productos.        
           productosProvider.borrarProducto(producto.id);  
         },
-        child: ListTile(
-        title: Text('${producto.titulo} - ${producto.valor}'),
-        subtitle: Text(producto.id),
-        onTap: () => Navigator.pushNamed(context,'producto',arguments: producto),
-      ),
+        child: Card(
+          child: Column(
+            children: [
+              (producto.fotoUrl == null)? Image(image: AssetImage('assets/no-image.png'),): FadeInImage(placeholder: AssetImage('assets/loading2.gif'), image: NetworkImage(producto.fotoUrl),height: 300,width: double.infinity,),
+               ListTile(
+                title: Text('${producto.titulo} - ${producto.valor}'),
+                subtitle: Text(producto.id),
+                onTap: () => Navigator.pushNamed(context,'producto',arguments: producto),
+              ),
+            ],
+          ),
+        )
     );
+
+   
   }
 }

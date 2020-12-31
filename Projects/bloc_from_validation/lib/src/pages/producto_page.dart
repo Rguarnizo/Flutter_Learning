@@ -148,7 +148,7 @@ class _ProductoPageState extends State<ProductoPage> {
 
             _mostrarFoto(){
               if(producto.fotoUrl != null){
-                return Container();
+                return FadeInImage(placeholder: AssetImage('assets/loading2.gif'), image: NetworkImage(producto.fotoUrl));
               }else{
                 return Image(image: AssetImage(foto?.path?? 'assets/no-image.png'),);
               }
@@ -159,7 +159,7 @@ class _ProductoPageState extends State<ProductoPage> {
               foto = (await ImagePicker.platform.pickImage(source: ImageSource.gallery));
 
                if(foto != null){
-                 //limpieza
+                 producto.fotoUrl = null;
                }
 
                setState(() { 
@@ -172,6 +172,7 @@ class _ProductoPageState extends State<ProductoPage> {
 
                if(foto != null){
                  //limpieza
+                 producto.fotoUrl = null;
                }
 
                setState(() { 
