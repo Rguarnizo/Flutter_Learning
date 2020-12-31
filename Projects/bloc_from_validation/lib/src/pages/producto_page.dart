@@ -152,7 +152,7 @@ class _ProductoPageState extends State<ProductoPage> {
           
           
              _seleccionarFoto() async{
-               foto = (await ImagePicker.platform.pickImage(source: ImageSource.gallery));
+              foto = (await ImagePicker.platform.pickImage(source: ImageSource.gallery));
 
                if(foto != null){
                  //limpieza
@@ -165,6 +165,15 @@ class _ProductoPageState extends State<ProductoPage> {
             }
 
             _tomarfoto() async{
+              foto = (await ImagePicker.platform.pickImage(source: ImageSource.camera));
+
+               if(foto != null){
+                 //limpieza
+               }
+
+               setState(() { 
+                 
+               });
 
             }
 }
