@@ -42,7 +42,7 @@ class ProductosProvider{
 
     });
 
-    print(productos);
+    
 
     return productos;
   }
