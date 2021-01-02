@@ -27,6 +27,17 @@ class UsuarioProvider{
 
     Map <String,dynamic> decodedResp = json.decode(resp.body);
 
+
+
+    if(decodedResp.containsKey('idToken')){
+      return {
+        'ok': true,'token': decodedResp['idToken'],
+      };
+    }else{
+      return {
+        'ok': false,'mensaje':decodedResp['error']['message'],
+      };
+    }
     
   }
 
