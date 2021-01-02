@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:bloc_from_validation/src/models/producto_model.dart';
+import 'package:bloc_from_validation/src/providers/shered_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,10 +12,11 @@ import 'package:mime_type/mime_type.dart';
 class ProductosProvider{
 
   final String _url = 'https://moviliapp-b94cc.firebaseio.com';
+  final _prefs = new PreferenciasUsuario();
 
 
   Future<bool> crearProducto(ProductoModel producto) async {
-    final url = '$_url/Productos.json';
+    final url = '$_url/Productos.json?auth=${_prefs.token}';
 
     final resp = await http.post(url,body: productoModelToJson(producto));
 
@@ -26,7 +28,7 @@ class ProductosProvider{
   }
 
   Future<bool> editarProducto(ProductoModel producto) async {
-    final url = '$_url/Productos/${producto.id}.json';
+    final url = '$_url/Productos/${producto.id}.json?auth=${_prefs.token}';
 
     final resp = await http.put(url,body: productoModelToJson(producto));
 
@@ -40,7 +42,7 @@ class ProductosProvider{
 
 
   Future<List<ProductoModel>> cargarProductos() async {
-    final url = '$_url/Productos.json';
+    final url = '$_url/Productos.json?auth=${_prefs.token}';
 
     final resp = await http.get(url);
     
@@ -66,7 +68,7 @@ class ProductosProvider{
 
     Future<int> borrarProducto(String id) async {
 
-    final url = '$_url/Productos/$id.json';
+    final url = '$_url/Productos/$id.json?auth=${_prefs.token}';
 
     final resp = await http.delete(url);
 
