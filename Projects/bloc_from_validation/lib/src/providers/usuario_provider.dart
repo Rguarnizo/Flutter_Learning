@@ -1,12 +1,14 @@
 
 import 'dart:convert';
 
+import 'package:bloc_from_validation/src/providers/shered_preferences.dart';
 import 'package:http/http.dart' as http;
 
 
 class UsuarioProvider{
 
   final String _firebaseToken = 'AIzaSyCS3_gFL09KWVBQX1LtIuV2mk_wyEqnmEk';
+  final _prefs = new PreferenciasUsuario();
 
 
 
@@ -30,6 +32,7 @@ class UsuarioProvider{
 
 
     if(decodedResp.containsKey('idToken')){
+      _prefs.token = decodedResp['idToken'];
       return {
         'ok': true,'token': decodedResp['idToken'],
       };
@@ -60,6 +63,7 @@ class UsuarioProvider{
     print(decodedResp);
 
     if(decodedResp.containsKey('idToken')){
+      _prefs.token = decodedResp['idToken'];
       return {
         'ok': true,'token': decodedResp['idToken'],
       };
