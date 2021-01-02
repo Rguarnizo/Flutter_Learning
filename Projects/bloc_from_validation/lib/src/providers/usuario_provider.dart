@@ -21,13 +21,13 @@ class UsuarioProvider{
     };
 
     final resp = await http.post(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=$_firebaseToken',
+      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=$_firebaseToken',
       body: json.encode(authData),
     );
 
     Map <String,dynamic> decodedResp = json.decode(resp.body);
 
-    print(decodedResp);
+    
   }
 
 }
