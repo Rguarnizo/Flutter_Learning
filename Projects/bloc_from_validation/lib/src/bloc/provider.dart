@@ -1,8 +1,20 @@
 import 'package:bloc_from_validation/src/bloc/login_bloc.dart';
+import 'package:bloc_from_validation/src/bloc/productos_bloc.dart';
 import 'package:flutter/material.dart';
 export 'login_bloc.dart';
+export 'productos_bloc.dart';
 
 class Provider extends InheritedWidget{ 
+
+
+
+   final LoginBloc _loginBloc = LoginBloc();
+   final ProductosBloc _productosBloc = ProductosBloc();
+
+
+
+
+
 
   static Provider _instancia;
 
@@ -19,14 +31,15 @@ class Provider extends InheritedWidget{
 
   Provider._internal({Key key, Widget child}):super(key: key,child: child);
 
-
-  final LoginBloc loginBloc = LoginBloc();
-
   @override
   bool updateShouldNotify(covariant InheritedWidget oldWidget) => true;
 
   static LoginBloc of (BuildContext context){
-    return (context.dependOnInheritedWidgetOfExactType<Provider>().loginBloc);
+    return (context.dependOnInheritedWidgetOfExactType<Provider>()._loginBloc);
+  }
+
+  static ProductosBloc productosBloc (BuildContext context){
+    return (context.dependOnInheritedWidgetOfExactType<Provider>()._productosBloc);
   }
 
 
