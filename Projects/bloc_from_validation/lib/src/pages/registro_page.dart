@@ -1,8 +1,11 @@
 import 'package:bloc_from_validation/src/bloc/provider.dart';
+import 'package:bloc_from_validation/src/providers/usuario_provider.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key key}) : super(key: key);
+class RegistroPage extends StatelessWidget {
+  RegistroPage({Key key}) : super(key: key);
+
+  final usuarioProvider = UsuarioProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +95,7 @@ class LoginPage extends StatelessWidget {
                 ]),
             child: Column(
               children: [
-                Text('Ingreso'),
+                Text('Crear cuenta'),
                 SizedBox(
                   height: 60.0,
                 ),
@@ -107,10 +110,7 @@ class LoginPage extends StatelessWidget {
                 _crearBoton(bloc),
               ],
             ),
-          ),
-          GestureDetector(child: Text('Crear una nueva cuenta.'),onTap: (){
-              Navigator.of(context).pushNamed('registro');
-          },),
+          ),          
         ],
       ),
     );
@@ -184,9 +184,7 @@ class LoginPage extends StatelessWidget {
 
   _login(LoginBloc bloc,context){
   
-    print('email: ${bloc.email}');
-    print('password: ${bloc.password} ');
-    Navigator.of(context).pushReplacementNamed('home');
+    usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
 
   }
 }
