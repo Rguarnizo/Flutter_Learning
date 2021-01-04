@@ -151,7 +151,8 @@ class HeaderPicudo extends StatelessWidget {
         //color: Color(0xff615AAB),     
         ),
         child: CustomPaint(
-          painter: _HeaderPicudoPainter(),
+          painter: _HeaderPicudoPainter(),          
+          
         ),
       );
   }
@@ -178,6 +179,65 @@ class _HeaderPicudoPainter extends CustomPainter{
       path.lineTo(size.width*0.5, size.height*0.35);
       path.lineTo(size.width, size.height*0.3);
       path.lineTo(size.width,0);
+      
+      
+
+      canvas.drawPath(path, paint);
+
+    }
+  
+    @override
+    bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    
+    return true;
+  }
+
+
+
+}
+
+class HeaderCurvo extends StatelessWidget {
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+    borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(60), bottomRight: Radius.circular(60)),
+        //color: Color(0xff615AAB),     
+        ),
+        child: CustomPaint(
+          painter: _HeaderCurvoPainter(),          
+          
+        ),
+      );
+  }
+}
+
+
+class _HeaderCurvoPainter extends CustomPainter{
+  @override
+  void paint(Canvas canvas, Size size) {
+      
+      //? Lapiz con el que dibujar
+      final paint = new Paint();
+
+      //?Propiedades
+      paint.color = Color(0xff615AAB);
+      paint.style = PaintingStyle.fill;
+      paint.strokeWidth = 5;
+
+      final path = new Path();
+
+
+      //?Dibujar con el path y el lapiz
+      path.lineTo(0, size.height*0.3);
+      //! Los primeros valores xy simbolizan el punto en donde tendrá que pasar la curvatura.
+      path.quadraticBezierTo(size.width*0.5, size.height*0.35,size.width, size.height*0.3);
+      path.lineTo(size.width, 0);
       
       
 
