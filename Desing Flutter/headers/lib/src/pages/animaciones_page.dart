@@ -46,7 +46,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
   void initState() { 
     _animationController = new AnimationController(vsync: this,duration: Duration(milliseconds: 4000));
     rotacion = Tween(begin: 0.0,end: 2.0).animate(_animationController);
-    _animationController.forward();
+    
     super.initState();
     
   }
@@ -61,7 +61,14 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    return _Rectangulo();
+
+    //? Play / Reproducción
+    _animationController.forward();
+
+    return AnimatedBuilder(animation: _animationController, builder: (context, child) {
+      print('Rotación: ${rotacion.value}');
+      return Transform.rotate(angle: rotacion.value,child: _Rectangulo());
+    },);
   }
 }
 
