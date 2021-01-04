@@ -35,7 +35,30 @@ class CuadradoAnimado extends StatefulWidget {
   _CuadradoAnimadoState createState() => _CuadradoAnimadoState();
 }
 
-class _CuadradoAnimadoState extends State<CuadradoAnimado> {
+class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProviderStateMixin{
+
+  //! Es parecido a una barra de reproducción (Por ejemplo la de Youtube).  
+  AnimationController _animationController;
+    
+  Animation<double> rotacion;
+
+  @override
+  void initState() { 
+    _animationController = new AnimationController(vsync: this,duration: Duration(milliseconds: 4000));
+    rotacion = Tween(begin: 0.0,end: 2.0).animate(_animationController);
+    _animationController.forward();
+    super.initState();
+    
+  }
+
+  @override
+  void dispose() {
+
+    _animationController.dispose();
+    super.dispose();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return _Rectangulo();
