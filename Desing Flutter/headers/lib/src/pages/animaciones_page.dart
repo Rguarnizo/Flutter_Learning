@@ -42,13 +42,18 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
   AnimationController _animationController;
     
   Animation<double> rotacion;
+  Animation<double> opacidad;
 
   @override
   void initState() { 
     _animationController = new AnimationController(vsync: this,duration: Duration(milliseconds: 4000));
+    
     rotacion = Tween(begin: 0.0,end: 2.0 * Math.pi).animate(
       CurvedAnimation(parent: _animationController,curve: Curves.bounceOut)
     );
+
+    //! Diferente Duración!
+    opacidad = Tween(begin: 0.1,end: 1.0).animate(CurvedAnimation(parent: _animationController,curve: Interval(0.5,1,curve: Curves.bounceOut)));
 
 
     _animationController.addListener(() {
@@ -78,9 +83,9 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
     //? Play / Reproducción
     _animationController.forward();
 
-    return AnimatedBuilder(animation: _animationController, builder: (context, child) {
+    return AnimatedBuilder(animation: _animationController,child: _Rectangulo() ,builder: (context, child) {
       print('Rotación: ${rotacion.value}');
-      return Transform.rotate(angle: rotacion.value,child: _Rectangulo());
+      return Transform.rotate(angle: rotacion.value,child: Opacity(opacity: opacidad.value, child: child,));
     },);
   }
 }
