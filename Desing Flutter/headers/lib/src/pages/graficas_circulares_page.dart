@@ -24,7 +24,7 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
           child: Icon(Icons.refresh),
         ),
         body: Center(
-          child: Container(width: 400,height: 400,child: RadialProgress(porcentaje:porcentaje),),
+          child: Container(width: 400,height: 400,child: RadialProgress(porcentaje:porcentaje,colorPrimario: Colors.blueAccent,colorSecundario: Colors.pink,),),
           //child: Text('$porcentaje %',style: TextStyle(fontSize: 50) ),
         ));
   }

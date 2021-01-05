@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 
 class RadialProgress extends StatefulWidget {
   final double porcentaje;
+  final Color colorPrimario;
+  final Color colorSecundario;
+  final double grosorSecundario;
+  final double grosorPrimario;
 
-  RadialProgress({Key key, this.porcentaje}) : super(key: key);
+  RadialProgress({Key key,@required this.porcentaje, this.colorPrimario = Colors.blue, this.colorSecundario = Colors.grey, this.grosorSecundario=5, this.grosorPrimario = 10}) : super(key: key);
 
   @override
   _RadialProgressState createState() => _RadialProgressState();
@@ -47,7 +51,7 @@ class _RadialProgressState extends State<RadialProgress>
               child: CustomPaint(
                 painter: _MiRadialProgress(
                     (widget.porcentaje - diferenciaAnimar) +
-                        (diferenciaAnimar * controller.value)),
+                        (diferenciaAnimar * controller.value),widget.colorPrimario,widget.colorSecundario,widget.grosorSecundario,widget.grosorPrimario),
               ));
         });
   }
@@ -55,15 +59,19 @@ class _RadialProgressState extends State<RadialProgress>
 
 class _MiRadialProgress extends CustomPainter {
   double porcentaje;
+  Color colorPrimario;
+  Color colorSecundario;
+  double grosorSecundario;
+  double grosorPrimario;
 
-  _MiRadialProgress(this.porcentaje);
+  _MiRadialProgress(this.porcentaje,this.colorPrimario,this.colorSecundario,this.grosorSecundario,this.grosorPrimario);
 
   @override
   void paint(Canvas canvas, Size size) {
     //?Circulo Completado
     final paint = new Paint()
-      ..strokeWidth = 5
-      ..color = Colors.grey
+      ..strokeWidth = grosorSecundario
+      ..color = colorSecundario
       ..style = PaintingStyle.stroke;
 
     Offset center = new Offset(size.height * 0.5, size.width * 0.5);
@@ -73,8 +81,8 @@ class _MiRadialProgress extends CustomPainter {
 
     //? Arco
     final paintArco = new Paint()
-      ..strokeWidth = 10
-      ..color = Colors.pink
+      ..strokeWidth = grosorPrimario
+      ..color = colorPrimario
       ..style = PaintingStyle.stroke;
 
     //? Porcentage Arco
