@@ -12,6 +12,7 @@ class CircularProgressPage extends StatefulWidget {
 class _CircularProgressPageState extends State<CircularProgressPage> {
   double porcentaje = 10;
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +66,9 @@ class _MiRadialProgress extends CustomPainter {
 
     //? Porcentage Arco
     double arcAngle = 2 * pi * (porcentaje / 100);
-    canvas.drawArc(Rect.fromCircle(center: center, radius: radio), -pi / 2,
+
+    //? Primer argumento es el Rect, el segundo es donde comenzará a dibujar, el punto final del dibujo.
+    canvas.drawArc(Rect.fromCircle(center: center, radius: radio),-pi/2,
         arcAngle, false, paintArco);
   }
 
