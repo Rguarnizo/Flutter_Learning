@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:headers/src/Challenges/cuadrado_animado_page.dart';
 import 'package:headers/src/pages/animaciones_page.dart';
+import 'package:headers/src/pages/circular_progress_page.dart';
 import 'package:headers/src/pages/headers_page.dart';
  
 void main() => runApp(MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: CuadradoAnimadoPage(),
+      home: CircularProgressPage(),
     );
   }
 } 
