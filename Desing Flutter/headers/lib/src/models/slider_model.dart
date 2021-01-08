@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-class SliderModel{
+class SliderModel with ChangeNotifier{
 
   double _currentPage = 0;
 
@@ -9,6 +9,7 @@ class SliderModel{
   
   set currentPage(double currentPage){
     this._currentPage = currentPage;
+    notifyListeners();
   }
 
 
