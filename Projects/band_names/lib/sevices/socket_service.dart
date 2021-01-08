@@ -18,13 +18,13 @@ class SocketService with ChangeNotifier{
   get serverStatus => this._serverStatus;
 
   void _initConfig(){
-      IO.Socket socket = IO.io('http://192.168.56.1:3000',
+      IO.Socket socket = IO.io('https://flutter-socket-server-band.herokuapp.com/',
       IO.OptionBuilder().setTransports(['websocket'])
       .build());
 
       socket.connect();
 
-    socket.onConnect((_){
+      socket.onConnect((_){
       print('connect');
       socket.emit('msg','test');
       this._serverStatus = ServerStatus.Online;
