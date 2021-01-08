@@ -15,6 +15,8 @@ class SocketService with ChangeNotifier{
     this._initConfig();
   }
 
+  get serverStatus => this._serverStatus;
+
   void _initConfig(){
       IO.Socket socket = IO.io('http://192.168.56.1:3000',
       IO.OptionBuilder().setTransports(['websocket'])
@@ -25,11 +27,16 @@ class SocketService with ChangeNotifier{
     socket.onConnect((_){
       print('connect');
       socket.emit('msg','test');
+      this._serverStatus = ServerStatus.Online;
+      notifyListeners();
       }); 
 
     socket.on('event',(data) => print(data));
 
-    socket.onDisconnect((_) => print('disconnect'));
+    socket.onDisconnect((_) {
+      this._serverStatus = ServerStatus.Offline;
+      notifyListeners();
+    });
 
     socket.on('fromServer', (_) => print(_));
   }
