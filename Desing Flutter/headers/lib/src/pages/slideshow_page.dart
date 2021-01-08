@@ -55,13 +55,31 @@ class _Dot extends StatelessWidget {
   }
 }
 
-class _Slides extends StatelessWidget {
+class _Slides extends StatefulWidget {
   const _Slides({Key key}) : super(key: key);
+
+  @override
+  __SlidesState createState() => __SlidesState();
+}
+
+class __SlidesState extends State<_Slides> {
+
+final pageViewController = PageController();
+
+
+  @override
+  void initState() { 
+    super.initState();
+    pageViewController.addListener(() {
+      print('Pagina Actual ${pageViewController.page}');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: PageView(
+        controller: pageViewController,
         children: [
           _Slide(svg: 'assets/svg/slide-1.svg'),
           _Slide(svg: 'assets/svg/slide-2.svg'),
