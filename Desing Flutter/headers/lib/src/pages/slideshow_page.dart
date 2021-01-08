@@ -30,9 +30,9 @@ class _Dots extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _Dot(),
-          _Dot(),
-          _Dot(),
+          _Dot(0),
+          _Dot(1),
+          _Dot(2),
         ],
       ),
     );
@@ -40,7 +40,10 @@ class _Dots extends StatelessWidget {
 }
 
 class _Dot extends StatelessWidget {
-  const _Dot({
+
+  final int index;
+  const _Dot(this.index,{
+    
     Key key,
   }) : super(key: key);
 
