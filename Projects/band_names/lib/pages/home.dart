@@ -165,11 +165,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   void addBandToList(String name) {
+
+    final socketServer = Provider.of<SocketService>(context,listen: false);
+
     if (name.length > 1) {
-      this
-          .bands
-          .add(new Band(id: DateTime.now().toString(), name: name, votes: 0));
-      setState(() {});
+            socketServer.emit('add-band',{'name':name});
     }
     Navigator.pop(context);
   }
