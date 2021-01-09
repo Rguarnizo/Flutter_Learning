@@ -10,35 +10,42 @@ enum ServerStatus{
 class SocketService with ChangeNotifier{
 
   ServerStatus _serverStatus = ServerStatus.Connecting;
+  IO.Socket _socket;
+  Function get emit => this._socket.emit;
 
   SocketService( ){
     this._initConfig();
   }
 
-  get serverStatus => this._serverStatus;
+  IO.Socket get socket => _socket;
+  ServerStatus get serverStatus => this._serverStatus;
 
   void _initConfig(){
-      IO.Socket socket = IO.io('https://flutter-socket-server-band.herokuapp.com/',
+      _socket = IO.io('https://flutter-socket-server-band.herokuapp.com/',
       IO.OptionBuilder().setTransports(['websocket'])
       .build());
 
-      socket.connect();
+      _socket.connect();
 
-      socket.onConnect((_){
+      _socket.onConnect((_){
       print('connect');
-      socket.emit('msg','test');
+      _socket.emit('msg','test');
       this._serverStatus = ServerStatus.Online;
       notifyListeners();
       }); 
 
-    socket.on('event',(data) => print(data));
+    _socket.on('event',(data) => print(data));
 
-    socket.onDisconnect((_) {
+    _socket.onDisconnect((_) {
       this._serverStatus = ServerStatus.Offline;
       notifyListeners();
     });
 
-    socket.on('fromServer', (_) => print(_));
+    _socket.on('fromServer', (_) => print(_));
+
+    _socket.on('mensaje',(payload){
+      print('Mensaje: ' + payload['admin']);
+    });
   }
 
 

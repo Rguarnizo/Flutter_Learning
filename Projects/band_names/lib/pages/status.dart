@@ -12,6 +12,9 @@ class StatusPage extends StatelessWidget {
 
     final socketService = Provider.of<SocketService>(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        socketService.socket.emit('mensaje',{'nombre': 'Ruben','apellido':'Martínez'});
+      },child: Icon(Icons.message),),
       body: Center(        
         child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
