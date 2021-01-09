@@ -103,7 +103,8 @@ class _HomePageState extends State<HomePage> {
             style: TextStyle(fontSize: 20),
           ),
           onTap: () {
-            print(band.name);
+            final socketService = Provider.of<SocketService>(context,listen: false);
+            socketService.emit('vote-band',{'id': band.id});
           },
         ),
         onDismissed: (direction) {
