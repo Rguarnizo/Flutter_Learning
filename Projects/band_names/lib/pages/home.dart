@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:band_names/models/band.dart';
+import 'package:band_names/sevices/socket_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -22,13 +24,25 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final socket = Provider.of<SocketService>(context);
+
     return Scaffold(
+    
       floatingActionButton: FloatingActionButton(
         onPressed: addNewBand,
         child: Icon(Icons.add),
         elevation: 2,
       ),
       appBar: AppBar(
+        actions: [
+          Container(
+            margin: EdgeInsets.only(right: 10),
+            child: socket.serverStatus == ServerStatus.Online?
+            Icon(Icons.check_circle,color: Colors.blue[300],):
+            Icon(Icons.offline_bolt,color: Colors.red,),
+          )
+        ],
         title: Text(
           'BandNames',
           style: TextStyle(color: Colors.black87),
