@@ -15,11 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Band> bands = [
-    Band(id: '1', name: 'Metallica', votes: 5),
-    Band(id: '2', name: 'Bobo', votes: 7),
-    Band(id: '3', name: 'Bibi', votes: 10),
-    Band(id: '4', name: 'Jonson', votes: 1),
-    Band(id: '5', name: 'Ben', votes: 4),
+
   ];
 
   @override
@@ -108,8 +104,9 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         onDismissed: (direction) {
-          print(direction);
-          print('id: ${band.id}');
+          final socket = Provider.of<SocketService>(context,listen:false);
+
+          socket.emit('delete-band',{'id': band.id});
         },
       );
 
