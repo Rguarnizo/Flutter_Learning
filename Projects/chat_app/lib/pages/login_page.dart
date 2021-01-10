@@ -17,9 +17,9 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Logo(),
+                Logo(title: 'Chat with Friends',),
                 _From(),
-                Labels(),
+                Labels(route: 'register',title: '¡Crea una cuenta!',subtitle: '¿No tienes cuenta?',),
                 Text('Terminos y condiciones de uso')
               ],
             ),
@@ -63,7 +63,7 @@ class __FromState extends State<_From> {
           BlueButton(callBackFunction: (){
             print('email: '+ emailCtrl.text);
             print('password: '+passwordCtrl.text);
-          }, text: 'Ingrese')
+          }, text: 'Login')
         ],
       ),
     );

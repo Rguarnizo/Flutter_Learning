@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-
-
-
-
-
 class Logo extends StatelessWidget {
-  const Logo({Key key}) : super(key: key);
+  final String title;
+
+  const Logo({
+    Key key,
+    this.title = 'Title',
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +17,14 @@ class Logo extends StatelessWidget {
           children: [
             Image(
               image: AssetImage('assets/images/loginLogo.jpg'),
-              height: 300,
-              width: 300,
+              height: 250,
+              width: 250,
             ),
             SizedBox(
               height: 50,
             ),
             Text(
-              'Chat with Friends',
+              title,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
             ),
           ],
