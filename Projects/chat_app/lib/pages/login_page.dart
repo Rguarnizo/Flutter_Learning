@@ -10,14 +10,20 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Logo(),
-            _From(),
-            Labels(),
-            Text('Terminos y condiciones de uso')
-          ],
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Container(
+            height: MediaQuery.of(context).size.height *0.95,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Logo(),
+                _From(),
+                Labels(),
+                Text('Terminos y condiciones de uso')
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -56,7 +62,7 @@ class __FromState extends State<_From> {
           ),
           BlueButton(callBackFunction: (){
             print('email: '+ emailCtrl.text);
-            print('password:'+passwordCtrl.text);
+            print('password: '+passwordCtrl.text);
           }, text: 'Ingrese')
         ],
       ),
