@@ -12,6 +12,8 @@ class _ChatPageState extends State<ChatPage> {
   final textCtrl = new TextEditingController();
   final focusNode = new FocusNode();
 
+  bool estaEscribiendo = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +66,15 @@ class _ChatPageState extends State<ChatPage> {
             child: TextField(
               controller: textCtrl,
               onSubmitted: _handleSubmit,
-              onChanged: (String texto) {},
+              onChanged: (String texto) {
+                setState(() {
+                  if(texto.trim().length >0){
+                    estaEscribiendo = true;
+                  }else{
+                    estaEscribiendo = false;
+                  }
+                });
+              },
               decoration: InputDecoration.collapsed(hintText: 'Enviar Mensaje'),
               focusNode: focusNode,
             ),
@@ -75,17 +85,27 @@ class _ChatPageState extends State<ChatPage> {
                 ? CupertinoButton(child: Text('Enviar'), onPressed: () {})
                 : Container(
                     margin: EdgeInsets.symmetric(horizontal: 4.0),
-                    child:
-                        IconButton(icon: Icon(Icons.send), onPressed: () {},color: Colors.blue,)),
+                    child: IconTheme(
+                        data: IconThemeData(color: Colors.blue[400]),
+                        child: IconButton(
+                          icon: Icon(Icons.send),
+                          onPressed: estaEscribiendo? ()=> _handleSubmit(textCtrl.text.trim()):null,                          
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
+                        ))),
           )
         ],
       ),
     ));
   }
 
-  _handleSubmit(String string){
+  _handleSubmit(String string) {
     print(string);
     textCtrl.clear();
     focusNode.requestFocus();
+
+    setState(() {
+      estaEscribiendo = false;
+    });
   }
 }
