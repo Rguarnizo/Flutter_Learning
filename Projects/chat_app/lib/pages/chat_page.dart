@@ -9,17 +9,12 @@ class ChatPage extends StatefulWidget {
   _ChatPageState createState() => _ChatPageState();
 }
 
-class _ChatPageState extends State<ChatPage> {
+class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin{
   final textCtrl = new TextEditingController();
   final focusNode = new FocusNode();
 
   List<ChatMessage> _message = [
-    ChatMessage(uid: '123',texto: 'Holasdasdasdasdasdadssssssssssssssssssssssssssssssssssssss sdadasdsadsadasdasdsadasdasd s asdas ad sa dsa das d asas da',),
-    ChatMessage(uid: '123',texto: 'Como',),
-    ChatMessage(uid: '123asdf',texto: 'Estas',),
-    ChatMessage(uid: '123sadf',texto: 'Espero',),
-    ChatMessage(uid: '123',texto: 'Que ',),
-    ChatMessage(uid: '123asdf',texto: 'Bien',),
+    
   ];
 
   bool estaEscribiendo = false;
@@ -116,10 +111,10 @@ class _ChatPageState extends State<ChatPage> {
 
 
 
-    final newMessage = ChatMessage(uid: '123',texto: string,);
-
+    final newMessage = ChatMessage(uid: '123',texto: string,animationController: AnimationController(vsync: this,duration: Duration(milliseconds: 200)),);
+    
     _message.insert(0,newMessage);
-
+    newMessage.animationController.forward();
         setState(() {
       estaEscribiendo = false;
     });
