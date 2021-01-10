@@ -9,7 +9,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Char App',
       debugShowCheckedModeBanner: false,
-      initialRoute: 'loading',
+      theme: ThemeData(fontFamily: 'JosefinSans'),
+      initialRoute: 'login',
       routes: appRoutes,
     );
   }
