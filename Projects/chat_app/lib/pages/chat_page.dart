@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chat_app/widgets/chat_message.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,15 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   final textCtrl = new TextEditingController();
   final focusNode = new FocusNode();
+
+  List<ChatMessage> _message = [
+    ChatMessage(uid: '123',texto: 'Holasdasdasdasdasdadssssssssssssssssssssssssssssssssssssss sdadasdsadsadasdasdsadasdasd s asdas ad sa dsa das d asas da',),
+    ChatMessage(uid: '123',texto: 'Como',),
+    ChatMessage(uid: '123asdf',texto: 'Estas',),
+    ChatMessage(uid: '123sadf',texto: 'Espero',),
+    ChatMessage(uid: '123',texto: 'Que ',),
+    ChatMessage(uid: '123asdf',texto: 'Bien',),
+  ];
 
   bool estaEscribiendo = false;
 
@@ -38,8 +48,8 @@ class _ChatPageState extends State<ChatPage> {
             Flexible(
               child: ListView.builder(
                 physics: BouncingScrollPhysics(),
-                itemBuilder: (_, i) => Text('$i'),
-                itemCount: 50,
+                itemBuilder: (_, i) => _message[i],
+                itemCount: _message.length,
                 reverse: true,
               ),
             ),
@@ -100,12 +110,19 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   _handleSubmit(String string) {
-    print(string);
+    
     textCtrl.clear();
     focusNode.requestFocus();
 
-    setState(() {
+
+
+    final newMessage = ChatMessage(uid: '123',texto: string,);
+
+    _message.insert(0,newMessage);
+
+        setState(() {
       estaEscribiendo = false;
     });
+
   }
 }
