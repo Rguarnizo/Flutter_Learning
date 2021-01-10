@@ -40,7 +40,7 @@ class CustomInpt extends StatelessWidget {
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(30),
             ),
-            margin: EdgeInsets.symmetric(horizontal: 50,vertical: 10),
+            margin: EdgeInsets.symmetric(vertical: 10),            
           );
           
   }

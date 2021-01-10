@@ -1,3 +1,4 @@
+import 'package:chat_app/widgets/blue_botton.dart';
 import 'package:chat_app/widgets/custom_input.dart';
 import 'package:chat_app/widgets/labels.dart';
 import 'package:chat_app/widgets/logo.dart';
@@ -23,7 +24,6 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-
 class _From extends StatefulWidget {
   _From({Key key}) : super(key: key);
 
@@ -33,20 +33,33 @@ class _From extends StatefulWidget {
 
 class __FromState extends State<_From> {
   final emailCtrl = TextEditingController();
+  final passwordCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 40),
       child: Column(
         children: [
-          CustomInpt(icon: Icons.mail_outline,placeholder: 'Email',keyboardType: TextInputType.emailAddress,textController: emailCtrl,),
-          CustomInpt(icon: Icons.lock_open_outlined,placeholder: 'Password',keyboardType: TextInputType.emailAddress,textController: emailCtrl,isPassword: true,),
-          RaisedButton(onPressed: (){
-
-          }, child: null)
+          CustomInpt(
+            icon: Icons.mail_outline,
+            placeholder: 'Email',
+            keyboardType: TextInputType.emailAddress,
+            textController: emailCtrl,
+          ),
+          CustomInpt(
+            icon: Icons.lock_open_outlined,
+            placeholder: 'Password',
+            keyboardType: TextInputType.emailAddress,
+            textController: passwordCtrl,
+            isPassword: true,
+          ),
+          BlueButton(callBackFunction: (){
+            print('email: '+ emailCtrl.text);
+            print('password:'+passwordCtrl.text);
+          }, text: 'Ingrese')
         ],
       ),
     );
   }
 }
-
