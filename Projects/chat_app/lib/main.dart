@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       title: 'Char App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'JosefinSans'),
-      initialRoute: 'login',
+      initialRoute: 'usuarios',
       routes: appRoutes,
     );
   }
