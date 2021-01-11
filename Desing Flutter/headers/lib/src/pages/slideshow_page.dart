@@ -18,7 +18,7 @@ class SlideshowPage extends StatelessWidget {
           
         ],
         colorPrimario: Colors.purple,
-        colorSecundario: Colors.green,),
+        colorSecundario: Colors.blue,),
      ),
    );
   }
