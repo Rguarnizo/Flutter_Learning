@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import 'package:headers/src/models/slider_model.dart';
@@ -7,10 +6,16 @@ import 'package:headers/src/models/slider_model.dart';
 class SlideShow extends StatelessWidget {
 
   final List<Widget> slides;
+  final bool puntosArriba;
+  final Color colorPrimario;
+  final Color colorSecundario;
 
   const SlideShow({
     Key key,
     @required this.slides,
+    this.puntosArriba = false,
+    this.colorPrimario = Colors.blue,
+    this.colorSecundario = Colors.grey,
   }) : super(key: key);
   
 
@@ -18,14 +23,17 @@ class SlideShow extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => new SliderModel(),
-      child: Center(
+      child: SafeArea(
+            child: Center(
             child: Column(
-          children: [
-            Expanded(child: _Slides(this.slides)),
-            _Dots(length:this.slides.length),
-          ],
-        )
-        ),
+            children: [
+              if(this.puntosArriba) _Dots(length:this.slides.length,colorPrimario: this.colorPrimario,colorSecundario: this.colorSecundario,),
+              Expanded(child: _Slides(this.slides)),
+              if(! this.puntosArriba) _Dots(length:this.slides.length,colorPrimario: this.colorPrimario,colorSecundario: this.colorSecundario,),
+            ],
+          )
+          ),
+      ),
     );
     
   }
@@ -37,23 +45,25 @@ class SlideShow extends StatelessWidget {
 
 class _Dots extends StatelessWidget {
   final int length;
-  const _Dots({this.length, Key key}) : super(key: key);
+  final Color colorPrimario;
+  final Color colorSecundario;
+  const _Dots({this.length, Key key,this.colorPrimario,this.colorSecundario}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
-    final List<Widget> dots = [];
+    // final List<Widget> dots = [];
 
-    for (var i = 0; i < length; i++) {
-      dots.add(_Dot(i));
-    }
+    // for (var i = 0; i < length; i++) {
+    //   dots.add(_Dot(i,));
+    // }
 
     return Container(
       height: 70,
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(length, (index) => _Dot(index)),                
+        children: List.generate(length, (index) => _Dot(index: index,colorPrimario: this.colorPrimario,colorSecundario: this.colorSecundario,)),                
       ),
     );
   }
@@ -61,11 +71,15 @@ class _Dots extends StatelessWidget {
 
 class _Dot extends StatelessWidget {
   final int index;
+    final Color colorPrimario;
+  final Color colorSecundario;
 
   
-  const _Dot(
-    this.index, {
+  const _Dot({
     Key key,
+    this.index,
+    this.colorPrimario,
+    this.colorSecundario,
   }) : super(key: key);
 
   @override
@@ -77,7 +91,7 @@ class _Dot extends StatelessWidget {
       height: 12,
       margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
-        color: pageViewIndex >= index - 0.5 && pageViewIndex < index+0.5? Colors.blue:Colors.grey, 
+        color: pageViewIndex >= index - 0.5 && pageViewIndex < index+0.5? colorPrimario:colorSecundario, 
       shape: BoxShape.circle
       ),
     );
