@@ -8,13 +8,15 @@ class SlideShow extends StatelessWidget {
   final bool puntosArriba;
   final Color colorPrimario;
   final Color colorSecundario;
+  final double bulletPrimario;
+  final double bulletSecundario;
 
   const SlideShow({
     Key key,
     @required this.slides,
     this.puntosArriba = false,
     this.colorPrimario = Colors.blue,
-    this.colorSecundario = Colors.grey,
+    this.colorSecundario = Colors.grey, this.bulletPrimario, this.bulletSecundario,
   }) : super(key: key);
   
 
@@ -27,6 +29,8 @@ class SlideShow extends StatelessWidget {
             child: Builder(builder:(context) {
               Provider.of<_SlideshowModel>(context)._colorPrimario = this.colorPrimario;
               Provider.of<_SlideshowModel>(context)._colorSecundario = this.colorSecundario;
+              Provider.of<_SlideshowModel>(context)._bulletPrimario = this.bulletPrimario;
+              Provider.of<_SlideshowModel>(context)._bulletSecundario = this.bulletSecundario;
               
           return Column(
             children: [
@@ -90,8 +94,8 @@ class _Dot extends StatelessWidget {
     final ssModel = Provider.of<_SlideshowModel>(context);
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
-      width: 12,
-      height: 12,
+      width: ssModel.currentPage >= index - 0.5 && ssModel._currentPage < index+0.5? ssModel.bulletPrimario:ssModel.bulletSecundario,
+      height: ssModel.currentPage >= index - 0.5 && ssModel._currentPage < index+0.5? ssModel.bulletPrimario:ssModel.bulletSecundario,
       margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
         color: ssModel.currentPage >= index - 0.5 && ssModel._currentPage < index+0.5? ssModel._colorPrimario:ssModel._colorSecundario, 
@@ -156,6 +160,8 @@ class _SlideshowModel with ChangeNotifier{
   double _currentPage = 0;
   Color _colorPrimario = Colors.blue;
   Color _colorSecundario = Colors.grey;
+  double _bulletPrimario = 12;
+  double _bulletSecundario = 12;
 
   double get currentPage => this._currentPage;
   
@@ -176,6 +182,20 @@ class _SlideshowModel with ChangeNotifier{
 
   set colorSecundario(Color color){
     this._colorSecundario = color;
+    notifyListeners();
+  }
+
+  double get bulletPrimario => _bulletPrimario;
+
+  set bulletPrimario(double bulletPrimario){
+    this._bulletPrimario = bulletPrimario;
+    notifyListeners();
+  }
+
+  double get bulletSecundario => _bulletSecundario;
+
+  set bulletSecundario(double bulletSecundario){
+    this._bulletSecundario = bulletSecundario;
     notifyListeners();
   }
 }
