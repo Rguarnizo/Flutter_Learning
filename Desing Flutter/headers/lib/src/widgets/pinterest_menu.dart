@@ -4,33 +4,13 @@ import 'package:provider/provider.dart';
 class PinterestButton {
   final Function onPressed;
   final IconData icons;
+  
 
   PinterestButton({this.onPressed, this.icons});
 }
 
 class PinterestMenu extends StatelessWidget {
-  final List<PinterestButton> items = [
-    PinterestButton(
-        icons: Icons.pie_chart,
-        onPressed: () {
-          print('Icon pie');
-        }),
-    PinterestButton(
-        icons: Icons.search,
-        onPressed: () {
-          print('Icon search');
-        }),
-    PinterestButton(
-        icons: Icons.notification_important,
-        onPressed: () {
-          print('Icon notificacion');
-        }),
-    PinterestButton(
-        icons: Icons.supervised_user_circle,
-        onPressed: () {
-          print('Icon user');
-        }),
-  ];
+  final List<PinterestButton> items;
 
   final bool mostrar;
 
@@ -40,8 +20,9 @@ class PinterestMenu extends StatelessWidget {
 
   PinterestMenu({
     Key key,
+    this.items,
     this.mostrar,
-    this.backGroundColor = Colors.white, 
+    this.backGroundColor = Colors.white,
     this.activeColor = Colors.black,
     this.inactiveColor = Colors.blueGrey,
   }) : super(key: key);
