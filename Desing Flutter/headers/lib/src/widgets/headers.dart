@@ -390,3 +390,29 @@ class _HeaderWavesGradientPainter extends CustomPainter{
     }
 
 }
+
+
+
+class IconHeader extends StatelessWidget {
+  const IconHeader({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 300,
+      decoration: BoxDecoration(
+        
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(70)),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+          Color(0xff526bf6),
+          Color(0xff67acf2)
+          
+        ])
+      ),
+    );
+  }
+}
