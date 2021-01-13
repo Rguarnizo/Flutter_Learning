@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:headers/src/widgets/pinterest_menu.dart';
 
 
 class PinterestPage extends StatelessWidget {
@@ -8,7 +9,7 @@ class PinterestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child:PinterestGrid(),
+        child:PinterestMenu(),
      ),
    );
   }
