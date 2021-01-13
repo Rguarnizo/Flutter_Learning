@@ -34,23 +34,45 @@ class PinterestMenu extends StatelessWidget {
 
   final bool mostrar;
 
-  PinterestMenu({Key key, this.mostrar = true}) : super(key: key);
+  final Color backGroundColor;
+  final Color activeColor;
+  final Color inactiveColor;
+
+  PinterestMenu({
+    Key key,
+    this.mostrar,
+    this.backGroundColor = Colors.white, 
+    this.activeColor = Colors.black,
+    this.inactiveColor = Colors.blueGrey,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (BuildContext context) => new _MenuModel(),
-        child: AnimatedOpacity(
-              opacity: mostrar? 1:0,
-              duration: Duration(milliseconds: 200),
-              child: _PinterestMenuBackground(
-          child: _MenuItems(menuItems: items)),
+        child: Builder(          
+          builder: (context) {
+
+            final prov = Provider.of<_MenuModel>(context);
+            prov.backGroundColor = backGroundColor;
+            prov.activeColor = activeColor;
+            prov.inactiveColor = inactiveColor;
+            return AnimatedOpacity(
+                  opacity: mostrar? 1:0,
+                  duration: Duration(milliseconds: 200),
+                  child: _PinterestMenuBackground(
+              child: _MenuItems(menuItems: items)),
+            );
+          }
         ));
   }
 }
 
 class _MenuModel with ChangeNotifier {
   int _itemSeleccionado = 0;
+   Color backGroundColor;
+   Color activeColor;
+   Color inactiveColor;
 
   int get itemSeleccionado => this._itemSeleccionado;
 
@@ -58,6 +80,7 @@ class _MenuModel with ChangeNotifier {
     this._itemSeleccionado = index;
     notifyListeners();
   }
+
 }
 
 class _PinterestMenuBackground extends StatelessWidget {
@@ -69,12 +92,13 @@ class _PinterestMenuBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final prov = Provider.of<_MenuModel>(context);
     return Container(
       child: this.child,
       width: 250,
       height: 60,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: prov.backGroundColor,
           borderRadius: BorderRadius.circular(100),
           boxShadow: [
             BoxShadow(
@@ -113,7 +137,8 @@ class _PinterestMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final itemSeleccionado = Provider.of<_MenuModel>(context)._itemSeleccionado;
-
+    final prov = Provider.of<_MenuModel>(context);
+    
     return GestureDetector(
       onTap: () {
         Provider.of<_MenuModel>(context, listen: false).itemSeleccionado =
@@ -125,7 +150,7 @@ class _PinterestMenuButton extends StatelessWidget {
         child: Icon(
           item.icons,
           size: (itemSeleccionado == index) ? 35 : 25,
-          color: (itemSeleccionado == index) ? Colors.black : Colors.blueGrey,
+          color: (itemSeleccionado == index) ? prov.activeColor : prov.inactiveColor,
         ),
       ),
     );

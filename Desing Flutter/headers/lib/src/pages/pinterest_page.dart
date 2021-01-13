@@ -37,7 +37,7 @@ class _PinterestMenuLocation extends StatelessWidget {
         width: width,
           child: Align(
           alignment: Alignment.center,
-          child: PinterestMenu(mostrar: mostrar,),
+          child: PinterestMenu(mostrar: mostrar,activeColor: Colors.lightBlue,inactiveColor: Colors.red,),
           ),
       )
       );
@@ -64,7 +64,7 @@ class _PinterestGridState extends State<PinterestGrid> {
     super.initState();
     scrolLCtrl.addListener(() {
       
-      if(scrolLCtrl.offset > scrollAnterior){
+      if(scrolLCtrl.offset > scrollAnterior && scrolLCtrl.offset > 150){
         Provider.of<_MenuModel>(context,listen: false).mostrar = false;
       //TODO: Ocultar menú,
       }else{
@@ -83,6 +83,7 @@ class _PinterestGridState extends State<PinterestGrid> {
     return StaggeredGridView.countBuilder(
       controller: scrolLCtrl,
       crossAxisCount: 4,
+      physics: BouncingScrollPhysics(),
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) => _PinterestItem(index:index),
   staggeredTileBuilder: (int index) =>
