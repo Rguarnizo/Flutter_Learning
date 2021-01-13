@@ -33,9 +33,20 @@ class PinterestMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return _PinterestMenuBackground(child:_MenuItems(menuItems: items), );
+  }
+}
 
-      child: _MenuItems(menuItems: items),
+class _PinterestMenuBackground extends StatelessWidget {
+  final Widget child;
+  const _PinterestMenuBackground({
+    Key key, this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(      
+      child: this.child,
       width: 250,
       height: 60,
       decoration: BoxDecoration(
@@ -48,41 +59,44 @@ class PinterestMenu extends StatelessWidget {
                 blurRadius: 10,
                 spreadRadius: -5)
           ]),
-      
     );
   }
 }
 
-
 class _MenuItems extends StatelessWidget {
-
   final List<PinterestButton> menuItems;
 
   const _MenuItems({Key key, this.menuItems}) : super(key: key);
-  
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(List.generate(menuItems.length, (i) => _PinterestMenuButton(i,menuItems[i]))
-      )
-    );
+        child: Row(
+      children: List.generate(menuItems.length,
+          (i) => _PinterestMenuButton(index: i, item: menuItems[i])),
+    ));
   }
 }
 
-
-class PinterestMenuItem extends StatelessWidget {
-
+class _PinterestMenuButton extends StatelessWidget {
   final int index;
   final PinterestButton item;
 
-  const PinterestMenuItem({Key key, this.index, this.item}) : super(key: key);
-  
+  const _PinterestMenuButton({Key key, this.index, this.item})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Icon(item.icons),
+    return GestureDetector(
+      onTap: item.onPressed,
+      behavior: HitTestBehavior.translucent,
+      child: Container(
+        child: Icon(
+          item.icons,
+          size: 25,
+          color: Colors.blueGrey,
+        ),
+      ),
     );
   }
 }
