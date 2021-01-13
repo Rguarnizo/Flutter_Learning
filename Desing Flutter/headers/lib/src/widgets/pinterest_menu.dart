@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PinterestButton {
   final Function onPressed;
@@ -33,19 +34,35 @@ class PinterestMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _PinterestMenuBackground(child:_MenuItems(menuItems: items), );
+    return ChangeNotifierProvider(
+        create: (BuildContext context) => new _MenuModel(),
+        child: _PinterestMenuBackground(
+          child: _MenuItems(menuItems: items),
+        ));
+  }
+}
+
+class _MenuModel with ChangeNotifier {
+  int _itemSeleccionado = 0;
+
+  int get itemSeleccionado => this._itemSeleccionado;
+
+  set itemSeleccionado(int index) {
+    this._itemSeleccionado = index;
+    notifyListeners();
   }
 }
 
 class _PinterestMenuBackground extends StatelessWidget {
   final Widget child;
   const _PinterestMenuBackground({
-    Key key, this.child,
+    Key key,
+    this.child,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(      
+    return Container(
       child: this.child,
       width: 250,
       height: 60,
@@ -72,6 +89,7 @@ class _MenuItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: List.generate(menuItems.length,
           (i) => _PinterestMenuButton(index: i, item: menuItems[i])),
     ));
@@ -87,14 +105,21 @@ class _PinterestMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final itemSeleccionado = Provider.of<_MenuModel>(context)._itemSeleccionado;
+
+
     return GestureDetector(
-      onTap: item.onPressed,
+      onTap: (){
+        Provider.of<_MenuModel>(context,listen: false).itemSeleccionado = index;
+        item.onPressed();
+      },
       behavior: HitTestBehavior.translucent,
       child: Container(
         child: Icon(
           item.icons,
-          size: 25,
-          color: Colors.blueGrey,
+          size: (itemSeleccionado == index)? 35:25,
+          color: (itemSeleccionado == index)? Colors.black:Colors.blueGrey,
         ),
       ),
     );
