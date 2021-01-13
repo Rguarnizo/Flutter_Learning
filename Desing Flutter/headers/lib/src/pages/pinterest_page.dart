@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:headers/src/widgets/pinterest_menu.dart';
+import 'package:provider/provider.dart';
 
 
 class PinterestPage extends StatelessWidget {
@@ -9,14 +10,17 @@ class PinterestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     
     
-    return Scaffold(
-      body: Stack(
-        children: [
-          PinterestGrid(),
-          _PinterestMenuLocation(),          
-        ],
-      )
-   );
+    return ChangeNotifierProvider(
+      create: (context) => _MenuModel(),
+        child: Scaffold(
+        body: Stack(
+          children: [
+            PinterestGrid(),
+            _PinterestMenuLocation(),          
+          ],
+        )
+   ),
+    );
   }
 }
 
@@ -26,13 +30,14 @@ class _PinterestMenuLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final mostrar = Provider.of<_MenuModel>(context).mostrar;
     return Positioned(
       bottom: 30,
       child: Container(
         width: width,
           child: Align(
           alignment: Alignment.center,
-          child: PinterestMenu(),
+          child: PinterestMenu(mostrar: mostrar,),
           ),
       )
       );
@@ -49,6 +54,8 @@ class PinterestGrid extends StatefulWidget {
 class _PinterestGridState extends State<PinterestGrid> {
   final List items = List.generate(200, (i) => i);
   ScrollController scrolLCtrl = new ScrollController();
+  double scrollAnterior = 0;
+  
 
 
   @override
@@ -56,12 +63,16 @@ class _PinterestGridState extends State<PinterestGrid> {
     // TODO: implement initState
     super.initState();
     scrolLCtrl.addListener(() {
-      print('Scroll : ${scrolLCtrl.offset}');
-      if(scrolLCtrl > scrollAnterior){
+      
+      if(scrolLCtrl.offset > scrollAnterior){
+        Provider.of<_MenuModel>(context,listen: false).mostrar = false;
       //TODO: Ocultar menú,
       }else{
         //TODO: Mostrar menú,
+        Provider.of<_MenuModel>(context,listen: false).mostrar = true;
       }
+
+      scrollAnterior = scrolLCtrl.offset;
     });
   }
 
@@ -99,5 +110,19 @@ class _PinterestItem extends StatelessWidget {
         child: new Text('$index'),
       ),
     ));
+  }
+}
+
+
+class _MenuModel with ChangeNotifier{
+
+
+  bool _mostrar = true;
+
+  bool get mostrar => this._mostrar;
+
+  set mostrar(bool valor){
+    this._mostrar = valor;
+    notifyListeners();
   }
 }

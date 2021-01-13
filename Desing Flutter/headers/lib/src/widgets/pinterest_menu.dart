@@ -32,12 +32,19 @@ class PinterestMenu extends StatelessWidget {
         }),
   ];
 
+  final bool mostrar;
+
+  PinterestMenu({Key key, this.mostrar = true}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (BuildContext context) => new _MenuModel(),
-        child: _PinterestMenuBackground(
-          child: _MenuItems(menuItems: items),
+        child: AnimatedOpacity(
+              opacity: mostrar? 1:0,
+              duration: Duration(milliseconds: 200),
+              child: _PinterestMenuBackground(
+          child: _MenuItems(menuItems: items)),
         ));
   }
 }
@@ -105,21 +112,20 @@ class _PinterestMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final itemSeleccionado = Provider.of<_MenuModel>(context)._itemSeleccionado;
 
-
     return GestureDetector(
-      onTap: (){
-        Provider.of<_MenuModel>(context,listen: false).itemSeleccionado = index;
+      onTap: () {
+        Provider.of<_MenuModel>(context, listen: false).itemSeleccionado =
+            index;
         item.onPressed();
       },
       behavior: HitTestBehavior.translucent,
       child: Container(
         child: Icon(
           item.icons,
-          size: (itemSeleccionado == index)? 35:25,
-          color: (itemSeleccionado == index)? Colors.black:Colors.blueGrey,
+          size: (itemSeleccionado == index) ? 35 : 25,
+          color: (itemSeleccionado == index) ? Colors.black : Colors.blueGrey,
         ),
       ),
     );
