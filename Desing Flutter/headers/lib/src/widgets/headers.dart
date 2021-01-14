@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HeaderCuadrado extends StatelessWidget {
   const HeaderCuadrado({Key key}) : super(key: key);
@@ -32,317 +33,260 @@ class HeaderDiagonal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-    borderRadius: BorderRadius.only(
-        bottomLeft: Radius.circular(60), bottomRight: Radius.circular(60)),
-        //color: Color(0xff615AAB),     
-        ),
-        child: CustomPaint(
-          painter: _HeaderDiagonalPainter(),
-        ),
-      );
+      height: double.infinity,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(60), bottomRight: Radius.circular(60)),
+        //color: Color(0xff615AAB),
+      ),
+      child: CustomPaint(
+        painter: _HeaderDiagonalPainter(),
+      ),
+    );
   }
 }
 
-
-class _HeaderDiagonalPainter extends CustomPainter{
+class _HeaderDiagonalPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-      
-      //? Lapiz con el que dibujar
-      final paint = new Paint();
+    //? Lapiz con el que dibujar
+    final paint = new Paint();
 
-      //?Propiedades
-      paint.color = Color(0xff615AAB);
-      paint.style = PaintingStyle.fill;
-      paint.strokeWidth = 5;
+    //?Propiedades
+    paint.color = Color(0xff615AAB);
+    paint.style = PaintingStyle.fill;
+    paint.strokeWidth = 5;
 
-      final path = new Path();
+    final path = new Path();
 
+    //?Dibujar con el path y el lapiz
+    path.lineTo(0, size.height * 0.40);
+    path.lineTo(size.width, size.height * 0.35);
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
 
-      //?Dibujar con el path y el lapiz
-      path.lineTo(0, size.height*0.40);
-      path.lineTo(size.width,size.height*0.35);
-      path.lineTo(size.width,0);
-      path.lineTo(0,0);
-      
-
-      canvas.drawPath(path, paint);
-
-    }
-  
-    @override
-    bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    
-    return true;
+    canvas.drawPath(path, paint);
   }
 
-
-
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
 }
 
 class HeaderTriangular extends StatelessWidget {
-  
-
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-    borderRadius: BorderRadius.only(
-        bottomLeft: Radius.circular(60), bottomRight: Radius.circular(60)),
-        //color: Color(0xff615AAB),     
-        ),
-        child: CustomPaint(
-          painter: _HeaderTriangularPainter(),
-        ),
-      );
+      height: double.infinity,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(60), bottomRight: Radius.circular(60)),
+        //color: Color(0xff615AAB),
+      ),
+      child: CustomPaint(
+        painter: _HeaderTriangularPainter(),
+      ),
+    );
   }
 }
 
-
-class _HeaderTriangularPainter extends CustomPainter{
+class _HeaderTriangularPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-      
-      //? Lapiz con el que dibujar
-      final paint = new Paint();
+    //? Lapiz con el que dibujar
+    final paint = new Paint();
 
-      //?Propiedades
-      paint.color = Color(0xff615AAB);
-      paint.style = PaintingStyle.fill;
-      paint.strokeWidth = 5;
+    //?Propiedades
+    paint.color = Color(0xff615AAB);
+    paint.style = PaintingStyle.fill;
+    paint.strokeWidth = 5;
 
-      final path = new Path();
+    final path = new Path();
 
+    //?Dibujar con el path y el lapiz
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
 
-      //?Dibujar con el path y el lapiz
-      path.lineTo(size.width, size.height);
-      path.lineTo(0,size.height);
-      
-      
-
-      canvas.drawPath(path, paint);
-
-    }
-  
-    @override
-    bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    
-    return true;
+    canvas.drawPath(path, paint);
   }
 
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
 }
 
 class HeaderPicudo extends StatelessWidget {
-  
-
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-    borderRadius: BorderRadius.only(
-        bottomLeft: Radius.circular(60), bottomRight: Radius.circular(60)),
-        //color: Color(0xff615AAB),     
-        ),
-        child: CustomPaint(
-          painter: _HeaderPicudoPainter(),          
-          
-        ),
-      );
+      height: double.infinity,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(60), bottomRight: Radius.circular(60)),
+        //color: Color(0xff615AAB),
+      ),
+      child: CustomPaint(
+        painter: _HeaderPicudoPainter(),
+      ),
+    );
   }
 }
 
-
-class _HeaderPicudoPainter extends CustomPainter{
+class _HeaderPicudoPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-      
-      //? Lapiz con el que dibujar
-      final paint = new Paint();
+    //? Lapiz con el que dibujar
+    final paint = new Paint();
 
-      //?Propiedades
-      paint.color = Color(0xff615AAB);
-      paint.style = PaintingStyle.fill;
-      paint.strokeWidth = 5;
+    //?Propiedades
+    paint.color = Color(0xff615AAB);
+    paint.style = PaintingStyle.fill;
+    paint.strokeWidth = 5;
 
-      final path = new Path();
+    final path = new Path();
 
+    //?Dibujar con el path y el lapiz
+    path.lineTo(0, size.height * 0.3);
+    path.lineTo(size.width * 0.5, size.height * 0.35);
+    path.lineTo(size.width, size.height * 0.3);
+    path.lineTo(size.width, 0);
 
-      //?Dibujar con el path y el lapiz
-      path.lineTo(0, size.height*0.3);
-      path.lineTo(size.width*0.5, size.height*0.35);
-      path.lineTo(size.width, size.height*0.3);
-      path.lineTo(size.width,0);
-      
-      
-
-      canvas.drawPath(path, paint);
-
-    }
-  
-    @override
-    bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    
-    return true;
+    canvas.drawPath(path, paint);
   }
 
-
-
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
 }
 
 class HeaderCurvo extends StatelessWidget {
-  
-
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-    borderRadius: BorderRadius.only(
-        bottomLeft: Radius.circular(60), bottomRight: Radius.circular(60)),
-        //color: Color(0xff615AAB),     
-        ),
-        child: CustomPaint(
-          painter: _HeaderCurvoPainter(),          
-          
-        ),
-      );
+      height: double.infinity,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(60), bottomRight: Radius.circular(60)),
+        //color: Color(0xff615AAB),
+      ),
+      child: CustomPaint(
+        painter: _HeaderCurvoPainter(),
+      ),
+    );
   }
 }
 
-
-class _HeaderCurvoPainter extends CustomPainter{
+class _HeaderCurvoPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-      
-      //? Lapiz con el que dibujar
-      final paint = new Paint();
+    //? Lapiz con el que dibujar
+    final paint = new Paint();
 
-      //?Propiedades
-      paint.color = Color(0xff615AAB);
-      paint.style = PaintingStyle.fill;
-      paint.strokeWidth = 5;
+    //?Propiedades
+    paint.color = Color(0xff615AAB);
+    paint.style = PaintingStyle.fill;
+    paint.strokeWidth = 5;
 
-      final path = new Path();
+    final path = new Path();
 
+    //?Dibujar con el path y el lapiz
+    path.lineTo(0, size.height * 0.3);
+    //! Los primeros valores xy simbolizan el punto en donde tendrá que pasar la curvatura.
+    path.quadraticBezierTo(
+        size.width * 0.5, size.height * 0.35, size.width, size.height * 0.3);
+    path.lineTo(size.width, 0);
 
-      //?Dibujar con el path y el lapiz
-      path.lineTo(0, size.height*0.3);
-      //! Los primeros valores xy simbolizan el punto en donde tendrá que pasar la curvatura.
-      path.quadraticBezierTo(size.width*0.5, size.height*0.35,size.width, size.height*0.3);
-      path.lineTo(size.width, 0);
-      
-      
+    canvas.drawPath(path, paint);
+  }
 
-      canvas.drawPath(path, paint);
-
-    }
-  
-    @override
-    bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
   }
 }
 
-
-  class HeaderWaves extends StatelessWidget {
-  
-
+class HeaderWaves extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-    borderRadius: BorderRadius.only(
-        bottomLeft: Radius.circular(60), bottomRight: Radius.circular(60)),
-        //color: Color(0xff615AAB),     
-        ),
-        child: CustomPaint(
-          painter: _HeaderWavesPainter(),          
-          
-        ),
-      );
+      height: double.infinity,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(60), bottomRight: Radius.circular(60)),
+        //color: Color(0xff615AAB),
+      ),
+      child: CustomPaint(
+        painter: _HeaderWavesPainter(),
+      ),
+    );
   }
 }
 
-
-class _HeaderWavesPainter extends CustomPainter{
+class _HeaderWavesPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-      
-      //? Lapiz con el que dibujar
-      final paint = new Paint();
+    //? Lapiz con el que dibujar
+    final paint = new Paint();
 
-      //?Propiedades
-      paint.color = Color(0xff615AAB);
-      paint.style = PaintingStyle.fill;
-      paint.strokeWidth = 5;
+    //?Propiedades
+    paint.color = Color(0xff615AAB);
+    paint.style = PaintingStyle.fill;
+    paint.strokeWidth = 5;
 
-      final path = new Path();
+    final path = new Path();
 
+    path.lineTo(0, size.height * 0.3);
+    //! Los primeros valores xy simbolizan el punto en donde tendrá que pasar la curvatura.
+    path.quadraticBezierTo(size.width * 0.25, size.height * 0.35,
+        size.width * 0.5, size.height * 0.3);
+    path.quadraticBezierTo(
+        size.width * 0.75, size.height * 0.25, size.width, size.height * 0.3);
+    path.lineTo(size.width, 0);
 
-     path.lineTo(0, size.height*0.3);
-      //! Los primeros valores xy simbolizan el punto en donde tendrá que pasar la curvatura.
-      path.quadraticBezierTo(size.width*0.25, size.height*0.35,size.width*0.5, size.height*0.3);
-      path.quadraticBezierTo(size.width*0.75, size.height*0.25,size.width, size.height*0.3);
-      path.lineTo(size.width, 0);
+    canvas.drawPath(path, paint);
+  }
 
-      
-      
-
-      canvas.drawPath(path, paint);
-
-    }
-  
-    @override
-    bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
-    }
-
-}
-  class HeaderWavesGradient extends StatelessWidget {
-  
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-    borderRadius: BorderRadius.only(
-        bottomLeft: Radius.circular(60), bottomRight: Radius.circular(60)),
-        //color: Color(0xff615AAB),     
-        ),
-        child: CustomPaint(
-          painter: _HeaderWavesGradientPainter(),          
-          
-        ),
-      );
   }
 }
 
+class HeaderWavesGradient extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(60), bottomRight: Radius.circular(60)),
+        //color: Color(0xff615AAB),
+      ),
+      child: CustomPaint(
+        painter: _HeaderWavesGradientPainter(),
+      ),
+    );
+  }
+}
 
-class _HeaderWavesGradientPainter extends CustomPainter{
+class _HeaderWavesGradientPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-      
-      final Rect rect = new Rect.fromCircle(
-        center: Offset(0,155.0),
-        radius: 180,
-      );
+    final Rect rect = new Rect.fromCircle(
+      center: Offset(0, 155.0),
+      radius: 180,
+    );
 
-
-      final Gradient gradient = new LinearGradient(
+    final Gradient gradient = new LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         //! Los Colores del gradiente.
@@ -356,45 +300,75 @@ class _HeaderWavesGradientPainter extends CustomPainter{
           0.4,
           0.5,
           1.0
-        ]
-      );
+        ]);
 
-      //? Lapiz con el que dibujar
-      final paint = Paint()..shader = gradient.createShader(rect);
+    //? Lapiz con el que dibujar
+    final paint = Paint()..shader = gradient.createShader(rect);
 
-      //?Propiedades
-      
-      paint.style = PaintingStyle.fill;
-      paint.strokeWidth = 5;
+    //?Propiedades
 
-      final path = new Path();
+    paint.style = PaintingStyle.fill;
+    paint.strokeWidth = 5;
 
+    final path = new Path();
 
-     path.lineTo(0, size.height*0.3);
-      //! Los primeros valores xy simbolizan el punto en donde tendrá que pasar la curvatura.
-      path.quadraticBezierTo(size.width*0.25, size.height*0.35,size.width*0.5, size.height*0.3);
-      path.quadraticBezierTo(size.width*0.75, size.height*0.25,size.width, size.height*0.3);
-      path.lineTo(size.width, 0);
+    path.lineTo(0, size.height * 0.3);
+    //! Los primeros valores xy simbolizan el punto en donde tendrá que pasar la curvatura.
+    path.quadraticBezierTo(size.width * 0.25, size.height * 0.35,
+        size.width * 0.5, size.height * 0.3);
+    path.quadraticBezierTo(
+        size.width * 0.75, size.height * 0.25, size.width, size.height * 0.3);
+    path.lineTo(size.width, 0);
 
-      
-      
+    canvas.drawPath(path, paint);
+  }
 
-      canvas.drawPath(path, paint);
-
-    }
-  
-    @override
-    bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
-    }
-
+  }
 }
-
-
 
 class IconHeader extends StatelessWidget {
   const IconHeader({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var whiteColor = Colors.white.withOpacity(0.7);
+        return Stack(
+          children: [
+            _IconHeaderBackground(),
+            Positioned(
+              top: -50,
+              left: -70,
+              child: FaIcon(
+                FontAwesomeIcons.plus,
+                size: 250,
+                color: Colors.white.withOpacity(0.2),
+              ),          
+            ),
+            Column(
+              children: [
+                SizedBox(height: 80,width: double.infinity,),
+                Text('Haz Solicitado',style: TextStyle(fontSize: 20,color: whiteColor)),
+                SizedBox(height: 20,),
+                Text('Asistencia Medica',style: TextStyle(fontSize: 30,color: whiteColor,fontWeight: FontWeight.bold)),
+                FaIcon(
+                FontAwesomeIcons.plus,
+                size: 50,
+                color: whiteColor,
+              ),          
+          ],
+        )
+      ],
+    );
+  }
+}
+
+class _IconHeaderBackground extends StatelessWidget {
+  const _IconHeaderBackground({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -402,17 +376,11 @@ class IconHeader extends StatelessWidget {
       width: double.infinity,
       height: 300,
       decoration: BoxDecoration(
-        
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(70)),
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-          Color(0xff526bf6),
-          Color(0xff67acf2)
-          
-        ])
-      ),
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(70)),
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0xff526bf6), Color(0xff67acf2)])),
     );
   }
 }
