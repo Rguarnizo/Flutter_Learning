@@ -330,34 +330,62 @@ class _HeaderWavesGradientPainter extends CustomPainter {
 }
 
 class IconHeader extends StatelessWidget {
-  const IconHeader({Key key}) : super(key: key);
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color color1;
+  final Color color2;
+
+  const IconHeader(
+      {Key key,
+      this.icon = FontAwesomeIcons.ad,
+      this.title = 'Title',
+      this.subtitle = 'Subtitle',
+      this.color1= Colors.blueGrey,
+      this.color2 = Colors.blue})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var whiteColor = Colors.white.withOpacity(0.7);
-        return Stack(
+    return Stack(
+      children: [
+        _IconHeaderBackground(
+          color1: color1,
+          color2: color2,
+        ),
+        Positioned(
+          top: -50,
+          left: -70,
+          child: FaIcon(
+            icon,
+            size: 250,
+            color: Colors.white.withOpacity(0.2),
+          ),
+        ),
+        Column(
           children: [
-            _IconHeaderBackground(),
-            Positioned(
-              top: -50,
-              left: -70,
-              child: FaIcon(
-                FontAwesomeIcons.plus,
-                size: 250,
-                color: Colors.white.withOpacity(0.2),
-              ),          
+            SizedBox(
+              height: 80,
+              width: double.infinity,
             ),
-            Column(
-              children: [
-                SizedBox(height: 80,width: double.infinity,),
-                Text('Haz Solicitado',style: TextStyle(fontSize: 20,color: whiteColor)),
-                SizedBox(height: 20,),
-                Text('Asistencia Medica',style: TextStyle(fontSize: 30,color: whiteColor,fontWeight: FontWeight.bold)),
-                FaIcon(
-                FontAwesomeIcons.plus,
-                size: 50,
-                color: whiteColor,
-              ),          
+            Text(subtitle, style: TextStyle(fontSize: 20, color: whiteColor)),
+            SizedBox(
+              height: 20,
+            ),
+            Text(title,
+                style: TextStyle(
+                    fontSize: 30,
+                    color: whiteColor,
+                    fontWeight: FontWeight.bold)),
+            SizedBox(
+              height: 20,
+            ),
+            FaIcon(
+              icon,
+              size: 50,
+              color: whiteColor,
+            ),
           ],
         )
       ],
@@ -366,8 +394,13 @@ class IconHeader extends StatelessWidget {
 }
 
 class _IconHeaderBackground extends StatelessWidget {
+  final Color color1;
+  final Color color2;
+
   const _IconHeaderBackground({
     Key key,
+    @required this.color1,
+    @required this.color2,
   }) : super(key: key);
 
   @override
@@ -380,7 +413,7 @@ class _IconHeaderBackground extends StatelessWidget {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0xff526bf6), Color(0xff67acf2)])),
+              colors: [color1, color2])),
     );
   }
 }
