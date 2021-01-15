@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:headers/src/widgets/boton_gordo.dart';
@@ -43,13 +44,16 @@ class EmergencyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> itemMap = items
-        .map((e) => BotonGordo(
-              text: e.texto,
-              icon: e.icon,
-              primaryColor: e.color1,
-              secondaryColor: e.color2,
-              onPress: () => print(e.texto),
-            ))
+        .map((e) => FadeInLeft(
+                duration: Duration(milliseconds: 1050),
+                child: BotonGordo(
+                text: e.texto,
+                icon: e.icon,
+                primaryColor: e.color1,
+                secondaryColor: e.color2,
+                onPress: () => print(e.texto),
+              ),
+        ))
         .toList();
 
     return Scaffold(
