@@ -11,17 +11,22 @@ class EmergencyPage extends StatelessWidget {
       body: Column(
         children: [
           PageHeader(),
-          SingleChildScrollView(
-            child: Column(children: [
-              BotonGordo(),
-            ],)            
-          )
+          BotonGordo(
+            onPress        : (){
+              
+            },
+            icon           : FontAwesomeIcons.carCrash,
+            primaryColor   : Color(0xff6989F5),
+            secondaryColor : Color(0xff906EF5),          
+            text           : 'Motor Accident',),
+          
         ],
       ),
       
     );
   }
 }
+
 
 class PageHeader extends StatelessWidget {
   const PageHeader({
