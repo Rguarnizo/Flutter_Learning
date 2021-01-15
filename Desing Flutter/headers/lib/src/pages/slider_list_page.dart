@@ -37,26 +37,65 @@ class _MainScroll extends StatelessWidget {
     return CustomScrollView(
       physics: BouncingScrollPhysics(),
       slivers: [
-        SliverAppBar(          
-          backgroundColor: Colors.red,
-          title: Text('Hola Mundo'),
-          floating: true,
-        ),
+        // SliverAppBar(          
+        //   backgroundColor: Colors.red,
+        //   title: Text('Hola Mundo'),
+        //   floating: true,
+        // ),
+        //! Sliver Personalizado
+        SliverPersistentHeader(delegate: _SliverCustomHeaderDelegate(child: Container(color: Colors.white,child: _Titulo()),maxheigth: 250,minheigth: 200),floating: true,),
         SliverList(delegate: SliverChildListDelegate(
           [          
-    _ListItem( 'Orange', Color(0xffF08F66) ),
-    _ListItem( 'Family', Color(0xffF2A38A) ),
-    _ListItem( 'Subscriptions', Color(0xffF7CDD5) ),
-    _ListItem( 'Books', Color(0xffFCEBAF) ),
-    _ListItem( 'Orange', Color(0xffF08F66) ),
-    _ListItem( 'Family', Color(0xffF2A38A) ),
-    _ListItem( 'Subscriptions', Color(0xffF7CDD5) ),
-    _ListItem( 'Books', Color(0xffFCEBAF) ),
+        _ListItem( 'Orange', Color(0xffF08F66) ),
+        _ListItem( 'Family', Color(0xffF2A38A) ),
+        _ListItem( 'Subscriptions', Color(0xffF7CDD5) ),
+        _ListItem( 'Books', Color(0xffFCEBAF) ),
+        _ListItem( 'Orange', Color(0xffF08F66) ),
+        _ListItem( 'Family', Color(0xffF2A38A) ),
+        _ListItem( 'Subscriptions', Color(0xffF7CDD5) ),
+        _ListItem( 'Books', Color(0xffFCEBAF) ),
+        SizedBox(height: 150,),
           ]
         )),
       ],
     );
   }
+}
+
+class _SliverCustomHeaderDelegate extends SliverPersistentHeaderDelegate {
+  
+  final double minheigth;
+  final double maxheigth;
+  final Widget child;
+
+
+  _SliverCustomHeaderDelegate({
+    @required this.minheigth,
+    @required this.maxheigth,
+    @required this.child,
+  });
+
+
+  
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+      return SizedBox.expand(child: child,);
+    }
+  
+    @override
+    double get maxExtent => (minheigth>maxheigth)? minheigth:maxheigth;
+  
+    @override
+    double get minExtent => (minheigth < maxheigth)? maxheigth:minheigth;
+  
+    @override
+    bool shouldRebuild(_SliverCustomHeaderDelegate oldDelegate) {
+    return maxheigth != oldDelegate.maxExtent ||
+            minheigth != oldDelegate.minExtent ||
+            child != oldDelegate.child;
+  }
+
+
 }
 
 class _Titulo extends StatelessWidget {
