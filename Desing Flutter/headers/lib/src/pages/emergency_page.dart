@@ -13,7 +13,7 @@ class EmergencyPage extends StatelessWidget {
           PageHeader(),
           BotonGordo(
             onPress        : (){
-              
+                print('Hola');
             },
             icon           : FontAwesomeIcons.carCrash,
             primaryColor   : Color(0xff6989F5),

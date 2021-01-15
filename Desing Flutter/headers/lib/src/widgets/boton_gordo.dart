@@ -24,7 +24,7 @@ class BotonGordo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Stack(children: [
-        _botonGordoBackground(onPress: onPress,primaryColor: primaryColor,secundaryColor: secondaryColor),
+        _botonGordoBackground(onPress: onPress,primaryColor: primaryColor,secundaryColor: secondaryColor,icon: icon,),
         _buttonDecoration(text: text,icon: icon,),
       ]),
     );
@@ -36,6 +36,7 @@ class _botonGordoBackground extends StatelessWidget {
   final Function onPress;
   final Color primaryColor;
   final Color secundaryColor;
+  final IconData icon;
 
 
   const _botonGordoBackground({
@@ -43,6 +44,7 @@ class _botonGordoBackground extends StatelessWidget {
     this.onPress,
     this.primaryColor,
     this.secundaryColor,
+    this.icon,
   }) : super(key: key);
 
   @override
@@ -73,7 +75,7 @@ class _botonGordoBackground extends StatelessWidget {
               right: -20,
               top: -20,
                 child: FaIcon(
-              FontAwesomeIcons.carCrash,
+              icon,
               color: Colors.white.withOpacity(0.2),
               size: 150,
             )),
