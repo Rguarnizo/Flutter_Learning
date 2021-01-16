@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import 'navegacion_page.dart';
+
 
 class Pagina1Page extends StatelessWidget {
 
@@ -17,7 +19,7 @@ class Pagina1Page extends StatelessWidget {
           title: Text('Animate do'),
           actions: [
             IconButton(icon: FaIcon(FontAwesomeIcons.twitter), onPressed: ()=> Navigator.push(context,MaterialPageRoute(builder: (context) => TwitterPage()))),
-            IconButton(icon: Icon(Icons.navigate_next),onPressed: (){},)
+            IconButton(icon: Icon(Icons.navigate_next),onPressed: () => Navigator.push(context,MaterialPageRoute(builder: (_)=> NavegacionPage())))
           ],
         ),
         floatingActionButton: FloatingActionButton(

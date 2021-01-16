@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       debugShowCheckedModeBanner: false,
-      home: NavegacionPage(),
+      home: Pagina1Page(),
     );
   }
 }
