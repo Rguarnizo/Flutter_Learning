@@ -89,6 +89,8 @@ class BotonFlotante extends StatelessWidget {
 class _NotificationModel extends ChangeNotifier{
 
   int _numero = 0;
+
+  //! Exponer el animatedController para poder hacer el fordward
   AnimationController _bounceController;
 
 
