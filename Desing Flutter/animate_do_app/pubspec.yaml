@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   animate_do:
   font_awesome_flutter:
+  provider:
 
 dev_dependencies:
   flutter_test:
