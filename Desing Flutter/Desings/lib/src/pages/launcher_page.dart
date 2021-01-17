@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../routes/routes.dart';
 
 class LauncherPage extends StatelessWidget {
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,17 +25,18 @@ class _ListaOpciones extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         itemBuilder: (_, i) => ListTile(
               leading: FaIcon(
-                FontAwesomeIcons.slideshare,
+                pageRoutes[i].icon,
                 color: Colors.blue,
               ),
-              title: Text('Hola Mundo'),
+              title: Text(pageRoutes[i].titulo),
               trailing: Icon(Icons.chevron_right),
-              onTap: () => null,
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_)=> pageRoutes[i].page)),
+              
             ),
         separatorBuilder: (_, i) => Divider(
               color: Colors.blue,
             ),
-        itemCount: 10);
+        itemCount: pageRoutes.length);
   }
 }
 
