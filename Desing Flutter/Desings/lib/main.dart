@@ -5,6 +5,7 @@ import 'package:headers/src/labs/circular_progress_page.dart';
 import 'package:headers/src/pages/emergency_page.dart';
 import 'package:headers/src/pages/graficas_circulares_page.dart';
 import 'package:headers/src/pages/headers_page.dart';
+import 'package:headers/src/pages/launcher_page.dart';
 import 'package:headers/src/pages/pinterest_page.dart';
 import 'package:headers/src/pages/slider_list_page.dart';
 import 'package:headers/src/pages/slideshow_page.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: SliderPage(),
+      home: LauncherPage(),
     );
   }
 } 
