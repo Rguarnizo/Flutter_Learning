@@ -1,8 +1,10 @@
+import 'package:chat_app/services/auth_service.dart';
 import 'package:chat_app/widgets/blue_botton.dart';
 import 'package:chat_app/widgets/custom_input.dart';
 import 'package:chat_app/widgets/labels.dart';
 import 'package:chat_app/widgets/logo.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -43,6 +45,13 @@ class __FromState extends State<_From> {
 
   @override
   Widget build(BuildContext context) {
+
+
+
+    final authService = Provider.of<AuthService>(context,listen: false);
+
+
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40),
       child: Column(
@@ -60,9 +69,8 @@ class __FromState extends State<_From> {
             textController: passwordCtrl,
             isPassword: true,
           ),
-          BlueButton(callBackFunction: (){
-            print('email: '+ emailCtrl.text);
-            print('password: '+passwordCtrl.text);
+          BlueButton(callBackFunction: (){            
+            authService.login(emailCtrl.text, passwordCtrl.text);
           }, text: 'Login')
         ],
       ),

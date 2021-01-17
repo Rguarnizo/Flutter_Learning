@@ -1,8 +1,10 @@
+import 'package:chat_app/services/auth_service.dart';
 import 'package:chat_app/widgets/blue_botton.dart';
 import 'package:chat_app/widgets/custom_input.dart';
 import 'package:chat_app/widgets/labels.dart';
 import 'package:chat_app/widgets/logo.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
   @override
@@ -44,6 +46,9 @@ class __FromState extends State<_From> {
 
   @override
   Widget build(BuildContext context) {
+
+    final authService = Provider.of<AuthService>(context);
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40),
       child: Column(
@@ -70,6 +75,7 @@ class __FromState extends State<_From> {
           BlueButton(callBackFunction: (){
             print('email: '+ emailCtrl.text);
             print('password: '+passwordCtrl.text);
+            authService.createAccount(emailCtrl.text, passwordCtrl.text, nameCtrl.text);
           }, text: 'Register')
         ],
       ),
