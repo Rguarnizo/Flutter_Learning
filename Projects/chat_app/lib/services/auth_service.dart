@@ -7,14 +7,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService with ChangeNotifier {
-  
+
   Usuario usuario;
+  bool _autenticando = false;
+
+  bool get autenticando => this._autenticando;
+  set autenticando(bool valor){
+    this._autenticando = valor;
+    notifyListeners();
+  }
 
   Future login(String email, String password) async {
+
+
+    this.autenticando = true;
+
+
     final data = {
       'nombre': 'Rubén Darío',
-      'email': email,
-      'password': password
+      'email': email.trim(),
+      'password': password.trim(),
     };
 
     final resp = await http.post('${Enviroments.apiUrl}/login',
@@ -25,6 +37,8 @@ class AuthService with ChangeNotifier {
       final loginResponse = loginResponseFromJson(resp.body);
       this.usuario = loginResponse.usuario;
     }
+
+    this.autenticando = false;
   }
 
   Future createAccount(String email, String password,String name) async {

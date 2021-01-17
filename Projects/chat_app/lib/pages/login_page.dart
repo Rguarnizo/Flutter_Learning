@@ -48,7 +48,7 @@ class __FromState extends State<_From> {
 
 
 
-    final authService = Provider.of<AuthService>(context,listen: false);
+    final authService = Provider.of<AuthService>(context);
 
 
 
@@ -69,7 +69,10 @@ class __FromState extends State<_From> {
             textController: passwordCtrl,
             isPassword: true,
           ),
-          BlueButton(callBackFunction: (){            
+          BlueButton(callBackFunction:authService.autenticando? null: (){    
+            //? Quita el teclado en pantalla si esta puesto
+            FocusScope.of(context).unfocus();
+
             authService.login(emailCtrl.text, passwordCtrl.text);
           }, text: 'Login')
         ],
