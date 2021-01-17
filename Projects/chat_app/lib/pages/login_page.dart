@@ -1,3 +1,4 @@
+import 'package:chat_app/helpers/mostrar_alerta.dart';
 import 'package:chat_app/services/auth_service.dart';
 import 'package:chat_app/widgets/blue_botton.dart';
 import 'package:chat_app/widgets/custom_input.dart';
@@ -69,11 +70,19 @@ class __FromState extends State<_From> {
             textController: passwordCtrl,
             isPassword: true,
           ),
-          BlueButton(callBackFunction:authService.autenticando? null: (){    
+          BlueButton(callBackFunction:authService.autenticando? null: ()async{    
+            
             //? Quita el teclado en pantalla si esta puesto
             FocusScope.of(context).unfocus();
 
-            authService.login(emailCtrl.text, passwordCtrl.text);
+            final loginOk = await authService.login(emailCtrl.text, passwordCtrl.text);
+
+            if(loginOk){
+              //TODO: Navegar al Login etc...
+            }else{
+              //? Mostrar Alerta.
+              mostrarAlerta(context, 'Juumm Algo sucedio...', 'No se pudó iniciar sesion, revisa que todo este bien 🥺');
+            }
           }, text: 'Login')
         ],
       ),
