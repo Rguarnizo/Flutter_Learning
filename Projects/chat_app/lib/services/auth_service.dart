@@ -34,7 +34,7 @@ class AuthService with ChangeNotifier {
 
 
 
-  Future<bool> login(String email, String password) async {
+  Future login(String email, String password) async {
 
 
     this.autenticando = true;
@@ -57,7 +57,7 @@ class AuthService with ChangeNotifier {
     if(resp.statusCode == 200){
       final loginResponse = loginResponseFromJson(resp.body);
       this.usuario = loginResponse.usuario;
-      
+
       await _guardarToken(loginResponse.token);
 
       return true;
@@ -67,6 +67,9 @@ class AuthService with ChangeNotifier {
   }
 
   Future createAccount(String email, String password,String name) async {
+
+    autenticando = true;
+
     final data = {
       'nombre': name,
       'email': email,
@@ -77,7 +80,17 @@ class AuthService with ChangeNotifier {
         body: jsonEncode(data), 
         headers: {'Content-Type': 'application/json'});
 
+    autenticando = false;
     print(resp.body);
+    if(resp.statusCode == 200){
+      final loginResponse = loginResponseFromJson(resp.body);
+      this.usuario = loginResponse.usuario;
+
+      await _guardarToken(loginResponse.token);
+
+      return true;
+    }
+      return false;
   }
 
   Future _guardarToken(String token) async{

@@ -1,3 +1,4 @@
+import 'package:chat_app/helpers/mostrar_alerta.dart';
 import 'package:chat_app/services/auth_service.dart';
 import 'package:chat_app/widgets/blue_botton.dart';
 import 'package:chat_app/widgets/custom_input.dart';
@@ -15,13 +16,19 @@ class RegisterPage extends StatelessWidget {
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Container(
-            height: MediaQuery.of(context).size.height *0.95,
+            height: MediaQuery.of(context).size.height * 0.95,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Logo(title: 'Register here!',),
+                Logo(
+                  title: 'Register here!',
+                ),
                 _From(),
-                Labels(route: 'login',title: '¡Inicia Sesión!',subtitle: '¿Ya tienes cuenta?',),
+                Labels(
+                  route: 'login',
+                  title: '¡Inicia Sesión!',
+                  subtitle: '¿Ya tienes cuenta?',
+                ),
                 Text('Terminos y condiciones de uso')
               ],
             ),
@@ -46,7 +53,6 @@ class __FromState extends State<_From> {
 
   @override
   Widget build(BuildContext context) {
-
     final authService = Provider.of<AuthService>(context);
 
     return Container(
@@ -72,11 +78,25 @@ class __FromState extends State<_From> {
             textController: passwordCtrl,
             isPassword: true,
           ),
-          BlueButton(callBackFunction: (){
-            print('email: '+ emailCtrl.text);
-            print('password: '+passwordCtrl.text);
-            authService.createAccount(emailCtrl.text, passwordCtrl.text, nameCtrl.text);
-          }, text: 'Register')
+          authService.autenticando
+              ? CircularProgressIndicator(
+                  
+                )
+              : BlueButton(
+                  callBackFunction: () async{
+                    print('email: ' + emailCtrl.text);
+                    print('password: ' + passwordCtrl.text);
+                    final result = await authService.createAccount(
+                        emailCtrl.text, passwordCtrl.text, nameCtrl.text);
+
+                        if(result == true){
+                          //TODO: Connectar al Socket Server.
+                          Navigator.pushReplacementNamed(context, 'usuarios');
+                        }else{
+                          mostrarAlerta(context, 'Algo ha pasado', 'Ya tienes este correo registrado o acaso lo escribiste mal? 🤔');
+                        }
+                  },
+                  text: 'Register')
         ],
       ),
     );
