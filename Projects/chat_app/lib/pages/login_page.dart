@@ -1,5 +1,6 @@
 import 'package:chat_app/helpers/mostrar_alerta.dart';
 import 'package:chat_app/services/auth_service.dart';
+import 'package:chat_app/services/socket_service.dart';
 import 'package:chat_app/widgets/blue_botton.dart';
 import 'package:chat_app/widgets/custom_input.dart';
 import 'package:chat_app/widgets/labels.dart';
@@ -50,6 +51,7 @@ class __FromState extends State<_From> {
 
 
     final authService = Provider.of<AuthService>(context);
+    final socketService = Provider.of<SocketService>(context);
 
 
 
@@ -78,7 +80,7 @@ class __FromState extends State<_From> {
             final loginOk = await authService.login(emailCtrl.text, passwordCtrl.text);
 
             if(loginOk){
-              //TODO: Navegar al Login,Conectar al Socket Server.
+              socketService.connect();
               Navigator.pushNamed(context, 'usuarios');
             }else{
               //? Mostrar Alerta.

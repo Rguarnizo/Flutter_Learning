@@ -1,3 +1,4 @@
+import 'package:chat_app/global/environment.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
@@ -13,19 +14,16 @@ class SocketService with ChangeNotifier{
   IO.Socket _socket;
   Function get emit => this._socket.emit;
 
-  SocketService( ){
-    this._initConfig();
-  }
+  
 
   IO.Socket get socket => _socket;
   ServerStatus get serverStatus => this._serverStatus;
 
-  void _initConfig(){
-      _socket = IO.io('https://flutter-socket-server-band.herokuapp.com/',
-      IO.OptionBuilder().setTransports(['websocket'])
+  void connect(){
+      _socket = IO.io('${Enviroments.socketUrl},',
+      IO.OptionBuilder().setTransports(['websocket']).enableForceNew()
       .build());
-
-      _socket.connect();
+      
 
       _socket.onConnect((_){
       print('connect');
@@ -46,6 +44,10 @@ class SocketService with ChangeNotifier{
     _socket.on('mensaje',(payload){
       print('Mensaje: ' + payload['admin']);
     });
+  }
+
+  void disconnect(){
+    this._socket.disconnect();
   }
 
 
