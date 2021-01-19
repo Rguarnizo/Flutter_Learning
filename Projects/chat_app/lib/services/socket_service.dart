@@ -20,7 +20,7 @@ class SocketService with ChangeNotifier{
   ServerStatus get serverStatus => this._serverStatus;
 
   void connect(){
-      _socket = IO.io('${Enviroments.socketUrl},',
+      _socket = IO.io(Enviroments.socketUrl,
       IO.OptionBuilder().setTransports(['websocket']).enableForceNew()
       .build());
       
