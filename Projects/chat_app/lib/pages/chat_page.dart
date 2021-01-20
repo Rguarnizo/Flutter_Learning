@@ -28,9 +28,24 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin{
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    socketService.socket.on('mensaje-personal0', _escucharMensaje);
     
   }
 
+  _escucharMensaje(dynamic payload){
+    
+    ChatMessage message = new ChatMessage(
+      texto: payload['mensaje'],
+      uid:payload['de'],
+      animationController: AnimationController(vsync: this,duration: Duration(milliseconds: 200)),
+
+    );
+
+    _message.insert(0, message);
+    message.animationController.forward();
+    
+  }
 
   @override
   Widget build(BuildContext context) {
