@@ -90,9 +90,9 @@ class _UsuariosPageState extends State<UsuariosPage> {
 
   ListTile _usuarioListTile(Usuario usuario) {
     return ListTile(
-      title: Text(usuario.nombre),
+      title: Text(usuario.nombre,style: TextStyle(fontWeight: FontWeight.bold),),
       leading: CircleAvatar(
-        child: Text(usuario.nombre.substring(0, 2)),
+        child: Text(usuario.nombre.substring(0, 2),style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       trailing: Container(
         width: 10,
