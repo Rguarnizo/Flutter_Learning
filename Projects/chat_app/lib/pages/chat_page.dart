@@ -28,8 +28,11 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin{
   void initState() {
     // TODO: implement initState
     super.initState();
+    chatService = Provider.of<ChatService>(context,listen: false);
+    socketService = Provider.of<SocketService>(context,listen:false);
+    authService = Provider.of<AuthService>(context,listen:false);
 
-    socketService.socket.on('mensaje-personal0', _escucharMensaje);
+    socketService.socket.on('mensaje-personal', _escucharMensaje);
     
   }
 
@@ -44,14 +47,15 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin{
 
     _message.insert(0, message);
     message.animationController.forward();
-    
+    setState(() {
+      
+    });
+
   }
 
   @override
   Widget build(BuildContext context) {
-    chatService = Provider.of<ChatService>(context,listen: false);
-    socketService = Provider.of<SocketService>(context,listen:false);
-    authService = Provider.of<AuthService>(context,listen:false);
+    
     
     final usuario = chatService.usuarioPara;
 

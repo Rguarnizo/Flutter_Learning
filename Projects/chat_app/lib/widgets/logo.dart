@@ -17,7 +17,7 @@ class Logo extends StatelessWidget {
           children: [
             Image(
               image: AssetImage('assets/images/loginLogo.jpg'),
-              height: 250,
+              height: 0,
               width: 250,
             ),
             SizedBox(
