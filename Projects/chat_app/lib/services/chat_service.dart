@@ -6,7 +6,9 @@ class ChatService with ChangeNotifier{
 
   Usuario usuarioPara;
 
-  
+  Future getChat(String usuarioID)async{
+    
+  }
 
 
 
