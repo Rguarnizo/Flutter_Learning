@@ -26,7 +26,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   bool estaEscribiendo = false;
 
   @override
-  void initState() {
+  void initState(){
     // TODO: implement initState
     super.initState();
     chatService = Provider.of<ChatService>(context, listen: false);
@@ -174,13 +174,14 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  Future<void> _cargarHistorial(String uid) async {
+  void _cargarHistorial(String uid) async {
     List<Mensaje> chat = await chatService.getChat(uid);
+    
     final history = chat
         .map((e) => ChatMessage(
               texto: e.mensaje,
               uid: e.de,
-              animationController: new AnimationController(vsync: this,duration: Duration(milliseconds: 0)),
+              animationController: new AnimationController(vsync: this,duration: Duration(milliseconds: 0))..forward(),
             ))
         .toList();
 

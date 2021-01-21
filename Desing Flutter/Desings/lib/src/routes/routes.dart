@@ -18,21 +18,16 @@ final pageRoutes = <_Route>[
   _Route(FontAwesomeIcons.pinterest,'Pinterest',PinterestPage()),
   _Route(FontAwesomeIcons.mobile,'Slivers',SliderPage()),
 
-
-
 ];
 
 
 
 class _Route{
 
-
   final IconData icon;
   final String titulo;
   final Widget page;
 
   _Route(this.icon, this.titulo, this.page);
-
-
 
 }
