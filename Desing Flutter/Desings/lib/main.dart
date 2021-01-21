@@ -12,7 +12,12 @@ void main() => runApp(ChangeNotifierProvider(
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+
+    final themeData = Provider.of<ThemeChanger>(context);
+
+
+    return MaterialApp(      
+      theme: themeData.currentTheme,
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       home: LauncherPage(),
