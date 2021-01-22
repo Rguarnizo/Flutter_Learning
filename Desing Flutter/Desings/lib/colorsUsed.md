@@ -1,0 +1,5 @@
+#Propiedades usuadas.
+
+
+* accentColor
+* primaryColorLight

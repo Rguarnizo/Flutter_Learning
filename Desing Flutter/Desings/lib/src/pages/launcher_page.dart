@@ -23,12 +23,16 @@ class LauncherPage extends StatelessWidget {
 class _ListaOpciones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context);
+
+
     return ListView.separated(
         physics: BouncingScrollPhysics(),
         itemBuilder: (_, i) => ListTile(
               leading: FaIcon(
                 pageRoutes[i].icon,
-                color: Colors.blue,
+                color: appTheme.currentTheme.accentColor
               ),
               title: Text(pageRoutes[i].titulo),
               trailing: Icon(Icons.chevron_right),
@@ -73,14 +77,14 @@ class _MenuPrincipal extends StatelessWidget {
               child: _ListaOpciones(),
             ),
             ListTile(
-              leading: Icon(Icons.lightbulb_outline,color:Colors.blue),
+              leading: Icon(Icons.lightbulb_outline,color: appTheme.currentTheme.accentColor),
               title:Text('Dark Mode'),
               trailing: Switch.adaptive(value: appTheme.darkTheme, onChanged: (value){
                 appTheme.darkTheme = value;
               }),
             ),
             ListTile(
-              leading: Icon(Icons.dashboard_customize,color:Colors.blue),
+              leading: Icon(Icons.dashboard_customize,color: appTheme.currentTheme.accentColor),
               title:Text('Custom Theme'),
               trailing: Switch.adaptive(value: appTheme.customTheme, onChanged: (value){
                 appTheme.customTheme = value;
