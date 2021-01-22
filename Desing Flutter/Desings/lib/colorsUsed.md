@@ -3,3 +3,4 @@
 
 * accentColor
 * primaryColorLight
+* ScaffoldBackGroundColor
