@@ -31,13 +31,13 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
             TableRow(              
               children: [
                 Center(child: CustomRadialProgress(porcentaje: porcentaje,color: Colors.brown,)),
-                Center(child: CustomRadialProgress(porcentaje: porcentaje,color: Colors.cyan)),
+                Center(child: CustomRadialProgress(porcentaje: porcentaje*1.2,color: Colors.cyan)),
               ]
             ),
             TableRow(
               children: [
-                Center(child: CustomRadialProgress(porcentaje: porcentaje,color:Colors.amber)),
-                Center(child: CustomRadialProgress(porcentaje: porcentaje,color: Colors.deepPurple)),
+                Center(child: CustomRadialProgress(porcentaje: porcentaje*1.4,color:Colors.amber)),
+                Center(child: CustomRadialProgress(porcentaje: porcentaje*1.6,color: Colors.deepPurple)),
               ]
             ),
             TableRow(
