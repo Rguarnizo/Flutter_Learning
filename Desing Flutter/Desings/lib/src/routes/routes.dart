@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:headers/src/pages/animaciones_page.dart';
 import 'package:headers/src/pages/graficas_circulares_page.dart';
 import 'package:headers/src/pages/pinterest_page.dart';
-import 'package:headers/src/pages/slider_list_page.dart';
+import 'package:headers/src/pages/sliver_list_page.dart';
 import '../pages/slideshow_page.dart';
 import '../pages/emergency_page.dart';
 import '../pages/headers_page.dart';
