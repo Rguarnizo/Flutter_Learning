@@ -16,9 +16,17 @@ class Pagina1Page extends StatelessWidget {
         onPressed: () => Navigator.pushNamed(context, 'pagina2'),
       ),
       
-      body: usuarioService.existeUsuario? Center(
-        child: InformacionUsuario(usuarioService.usuario)
-     ) : Center(child: Text('No hay información de usuario'),)
+      body: StreamBuilder(
+        stream: usuarioService.usuarioStream ,
+        
+        builder: (BuildContext context, AsyncSnapshot snapshot){
+          return Container(
+            child: snapshot.hasData? Center(
+              child: InformacionUsuario(snapshot.data)
+              ) : Center(child: Text('No hay información de usuario'),),
+          );
+        },
+      ),
    );
   }
 }
