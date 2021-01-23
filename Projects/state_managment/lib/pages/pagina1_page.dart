@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:state_managment/pages/models/usuario.dart';
 import 'package:state_managment/pages/sevices/usuario_service.dart';
 
 
@@ -12,11 +13,11 @@ class Pagina1Page extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.accessibility_new),
-        onPressed: () => Navigator.pushNamed(context, 'pagina 2'),
+        onPressed: () => Navigator.pushNamed(context, 'pagina2'),
       ),
       
       body: usuarioService.existeUsuario? Center(
-        child: InformacionUsuario(),
+        child: InformacionUsuario(usuarioService.usuario)
      ) : Center(child: Text('No hay información de usuario'),)
    );
   }
@@ -24,6 +25,11 @@ class Pagina1Page extends StatelessWidget {
 
 
 class InformacionUsuario extends StatelessWidget {
+  
+  final Usuario usuario;
+  
+  InformacionUsuario(this.usuario);
+
   
 
   @override
@@ -37,8 +43,8 @@ class InformacionUsuario extends StatelessWidget {
 
         Text('General',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         Divider(),
-        ListTile(title: Text('Nombre: '),),
-        ListTile(title: Text('Edad: '),),
+        ListTile(title: Text('Nombre: ${usuario.nombre}'),),
+        ListTile(title: Text('Edad: ${usuario.edad}'),),
         
         Text('General',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         Divider(),

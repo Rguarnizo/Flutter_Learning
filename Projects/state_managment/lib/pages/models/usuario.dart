@@ -1,13 +1,13 @@
-class Usuario {
+import 'package:meta/meta.dart';
 
+class Usuario {
   String nombre;
   int edad;
   List<String> profesiones;
-  
-  Usuario({
-    this.nombre,
-    this.edad,
-    this.profesiones,
-  });
 
+  Usuario({
+    @required this.nombre,
+    @required this.edad,
+    @required this.profesiones,
+  }) : assert(nombre != null);
 }
