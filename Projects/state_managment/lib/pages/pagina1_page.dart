@@ -30,8 +30,15 @@ class Pagina1Page extends StatelessWidget {
 class InformacionUsuario extends StatelessWidget {
   
 
+
+
   @override
   Widget build(BuildContext context) {
+
+
+    final usuarioService = Provider.of<UsuarioService>(context);
+    final usuario = usuarioService.usuario;
+
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -41,8 +48,8 @@ class InformacionUsuario extends StatelessWidget {
 
         Text('General',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         Divider(),
-        ListTile(title: Text('Nombre: '),),
-        ListTile(title: Text('Edad: '),),
+        ListTile(title: Text('Nombre: ${usuario.nombre}'),),
+        ListTile(title: Text('Edad: ${usuario.edad}'),),
         
         Text('General',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         Divider(),
