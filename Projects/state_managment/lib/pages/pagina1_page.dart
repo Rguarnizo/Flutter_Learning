@@ -11,7 +11,7 @@ class Pagina1Page extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.accessibility_new),
-        onPressed: () => Navigator.pushNamed(context, 'pagina 2'),
+        onPressed: () => Navigator.pushNamed(context, 'pagina2'),
       ),
       
       body: Center(
