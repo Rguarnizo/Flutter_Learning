@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:state_managment/pages/sevices/usuario_service.dart';
 
 
 class Pagina1Page extends StatelessWidget {
@@ -14,9 +15,9 @@ class Pagina1Page extends StatelessWidget {
         onPressed: () => Navigator.pushNamed(context, 'pagina 2'),
       ),
       
-      body: Center(
+      body: usuarioService.existeUsuario? Center(
         child: InformacionUsuario(),
-     ),
+     ) : Center(child: Text('No hay información de usuario'),)
    );
   }
 }
