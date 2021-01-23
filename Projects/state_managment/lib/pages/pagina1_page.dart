@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:state_managment/pages/services/usuarios_service.dart';
 
 
 class Pagina1Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final usuarioService = Provider.of<UsuarioService>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Pagina1'),
@@ -14,9 +19,9 @@ class Pagina1Page extends StatelessWidget {
         onPressed: () => Navigator.pushNamed(context, 'pagina2'),
       ),
       
-      body: Center(
+      body:usuarioService.existeUsuario? Center(
         child: InformacionUsuario(),
-     ),
+     ): Center(child: Text('No hay Información del usuario'),)
    );
   }
 }
