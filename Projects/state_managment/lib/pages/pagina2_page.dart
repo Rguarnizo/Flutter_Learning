@@ -8,7 +8,12 @@ class Pagina2Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pagina 2'),
+        title: StreamBuilder<Usuario>(
+          stream: usuarioService.usuarioStream,
+          builder: (context, snapshot) {
+            return snapshot.hasData? Text(snapshot.data.nombre):Text('Pagina2');
+          }
+        ),
       ),
       body: Center(
           child: Column(

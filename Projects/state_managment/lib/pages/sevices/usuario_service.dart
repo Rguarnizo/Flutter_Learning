@@ -5,7 +5,8 @@ import 'package:state_managment/pages/models/usuario.dart';
 class _UsuarioService{
 
   Usuario _usuario;
-  StreamController<Usuario> _usuarioStreamController = new StreamController<Usuario>();
+  
+  StreamController<Usuario> _usuarioStreamController = new StreamController<Usuario>.broadcast();
 
   Stream<Usuario> get usuarioStream => _usuarioStreamController.stream;
 
@@ -21,6 +22,10 @@ class _UsuarioService{
   void cambiarEdad(int edad){
     this._usuario.edad = edad;
     this._usuarioStreamController.add(this._usuario);
+  }
+
+  dispose(){
+    _usuarioStreamController.close();
   }
 
 }
