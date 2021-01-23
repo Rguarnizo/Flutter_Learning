@@ -13,6 +13,11 @@ class Pagina1Page extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Pagina1'),
+        actions: [
+          IconButton(icon: Icon(Icons.exit_to_app), onPressed: (){
+            usuarioService.removerUsuario();
+          })
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.accessibility_new),
@@ -54,10 +59,7 @@ class InformacionUsuario extends StatelessWidget {
         Text('General',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         Divider(),
 
-        ListTile(title: Text('Profesion 1'),),
-        ListTile(title: Text('Profesion 1'),),
-        ListTile(title: Text('Profesion 1'),),
-
+        ...usuario.profesiones.map((e) => ListTile(title: Text(e),))
       ],),
     );
   }

@@ -8,11 +8,12 @@ class Pagina2Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final usuarioService = Provider.of<UsuarioService>(context,listen: false);
+    final usuarioService = Provider.of<UsuarioService>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pagina 2'),
+        title: usuarioService.existeUsuario?Text('${usuarioService.usuario.nombre}'):Text('Pagina2'),
+        
       ),
       body: Center(
           child: Column(
@@ -26,12 +27,14 @@ class Pagina2Page extends StatelessWidget {
             child: Text('Establecer Usuario'),
           ),
           MaterialButton(
-            onPressed: () {},
+            onPressed: () => usuarioService.cambiarEdad(30),
             color: Colors.blue,
             child: Text('Establecer Edad'),
           ),
           MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              usuarioService.anadirProfesion('Developer');
+            },
             color: Colors.blue,
             child: Text('Añadir Profesion'),
           ),
