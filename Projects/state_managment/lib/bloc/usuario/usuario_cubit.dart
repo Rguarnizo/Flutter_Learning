@@ -6,13 +6,10 @@ import 'package:meta/meta.dart';
 
 part 'usuario_state.dart';
 
-class UsuarioCubit extends Cubit<int>{
+class UsuarioCubit extends Cubit<UsuarioState>{
 
-  UsuarioCubit():super(0);
-  
-  
-  
 
+  UsuarioCubit() : super(UsuarioInitial());
 
 
 }
