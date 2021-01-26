@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:state_managment/bloc/usuario/usuario_cubit.dart';
+import 'package:state_managment/models/usuario.dart';
 
-import 'models/usuario.dart';
 
 
 class Pagina1Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final usuarioCubit = context.read<UsuarioCubit>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Pagina1'),
+        actions: [
+          IconButton(icon: Icon(Icons.exit_to_app), onPressed: (){
+            usuarioCubit.borrarUsuario();
+          })
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.accessibility_new),

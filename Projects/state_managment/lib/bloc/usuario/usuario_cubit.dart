@@ -16,11 +16,25 @@ class UsuarioCubit extends Cubit<UsuarioState>{
 
   void cambiarEdad(int edad){
     final currentState = state;
-    if(currentState is UsuarioActivo){ 
-      
-      emit(UsuarioActivo(currentState.usuario));
+    if(currentState is UsuarioActivo){       
+      emit(UsuarioActivo(currentState.usuario.copiarUsuario(edad: 30)));
     }
     
+  }
+
+  void addProfesion(String prof){
+    final currentState = state;
+    if(currentState is UsuarioActivo){
+      final newProfesiones = [
+        ...currentState.usuario.profesiones,
+        prof
+      ];
+      emit(UsuarioActivo(currentState.usuario.copiarUsuario(profesiones: newProfesiones)));     
+    }
+  }
+  
+  void borrarUsuario(){
+    emit(UsuarioInitial());
   }
 
 }

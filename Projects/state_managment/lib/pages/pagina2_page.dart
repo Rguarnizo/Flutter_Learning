@@ -44,7 +44,9 @@ class Pagina2Page extends StatelessWidget {
             child: Text('Establecer Edad'),
           ),
           MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              usuarioCubit.addProfesion('Flutter Developer');
+            },
             color: Colors.blue,
             child: Text('Añadir Profesion'),
           ),
@@ -52,4 +54,6 @@ class Pagina2Page extends StatelessWidget {
       )),
     );
   }
+
+  void addProfesion(String s) {}
 }
