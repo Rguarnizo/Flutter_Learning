@@ -1,8 +1,8 @@
 class Usuario {
 
-  String nombre;
-  int edad;
-  List<String> profesiones;
+  final String nombre;
+  final int edad;
+  final List<String> profesiones;
   
   Usuario({
     this.nombre,
