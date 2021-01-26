@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:state_managment/bloc/usuario/usuario_cubit.dart';
-import 'package:state_managment/pages/models/usuario.dart';
+import 'package:state_managment/models/usuario.dart';
+
 
 class Pagina2Page extends StatelessWidget {
   @override
