@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:headers/src/pages/slideshow_page.dart';
 import 'package:headers/src/theme/theme.dart';
 import 'package:provider/provider.dart';
 import '../routes/routes.dart';
@@ -19,7 +20,24 @@ class LauncherTabletPage extends StatelessWidget {
         backgroundColor: appTheme.currentTheme.accentColor,
       ),
       drawer: _MenuPrincipal(),
-      body: _ListaOpciones(),
+      body: Row(
+        children: [
+          Container(
+            width:300,
+            height: double.infinity,
+            child: _ListaOpciones(),
+          ),
+          Container(
+            width: 1,
+            height: double.infinity,
+            color: appTheme.darkTheme? Colors.grey:appTheme.currentTheme.accentColor,
+          ),
+          Expanded(child: 
+          SlideshowPage(),
+          )
+          
+        ],
+      ),
     );
   }
 }
