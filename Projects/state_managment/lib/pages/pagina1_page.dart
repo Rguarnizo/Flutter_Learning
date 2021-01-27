@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:state_managment/bloc/usuario/usuario_bloc.dart';
+import 'package:state_managment/models/usuario.dart';
 
 class Pagina1Page extends StatelessWidget {
   @override
@@ -17,7 +18,7 @@ class Pagina1Page extends StatelessWidget {
           builder: (context, state) {
             if (state.existeUsuario) {
               return Center(
-                child: InformacionUsuario(),
+                child: InformacionUsuario(usuario: state.usuario),
               );
             }else{
               return Center(child: Text('No hay un usuario seleccionado'),);
@@ -28,6 +29,12 @@ class Pagina1Page extends StatelessWidget {
 }
 
 class InformacionUsuario extends StatelessWidget {
+
+  final Usuario usuario;
+
+  const InformacionUsuario({Key key, this.usuario}) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,25 +49,17 @@ class InformacionUsuario extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            title: Text('Nombre: '),
+            title: Text('Nombre: ${usuario.nombre}'),
           ),
           ListTile(
-            title: Text('Edad: '),
+            title: Text('Edad: ${usuario.edad}'),
           ),
           Text(
             'General',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           Divider(),
-          ListTile(
-            title: Text('Profesion 1'),
-          ),
-          ListTile(
-            title: Text('Profesion 1'),
-          ),
-          ListTile(
-            title: Text('Profesion 1'),
-          ),
+          ...usuario.profesiones.map((e) => ListTile(title: Text(e),)),
         ],
       ),
     );
