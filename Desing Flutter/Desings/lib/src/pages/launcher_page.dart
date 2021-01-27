@@ -10,9 +10,13 @@ class LauncherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Diseños Flutter'),
+        backgroundColor: appTheme.currentTheme.accentColor,
       ),
       drawer: _MenuPrincipal(),
       body: _ListaOpciones(),

@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: themeData.currentTheme,
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: LauncherPage(),
+      home: OrientationBuilder(builder: (_,orientation) => LauncherPage()),
     );
   }
 } 
