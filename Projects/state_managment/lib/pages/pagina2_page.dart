@@ -39,7 +39,9 @@ class Pagina2Page extends StatelessWidget {
             child: Text('Establecer Edad'),
           ),
           MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              usuarioBloc.add(AnadirProfesion('Flutter  Developer'));
+            },
             color: Colors.blue,
             child: Text('Añadir Profesion'),
           ),

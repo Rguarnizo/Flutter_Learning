@@ -21,6 +21,13 @@ class CambiarEdad extends UsuarioEvent{
 
   CambiarEdad(this.edad);
 
-  
+
+}
+
+class AnadirProfesion extends UsuarioEvent{
+
+  final String profesion;
+
+  AnadirProfesion(this.profesion);
 
 }
