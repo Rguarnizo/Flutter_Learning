@@ -7,6 +7,7 @@ class Pagina2Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    // ignore: close_sinks
     final usuarioBloc = BlocProvider.of<UsuarioBloc>(context);
 
     return Scaffold(
@@ -31,7 +32,9 @@ class Pagina2Page extends StatelessWidget {
             child: Text('Establecer Usuario'),
           ),
           MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              usuarioBloc.add(CambiarEdad(21));
+            },
             color: Colors.blue,
             child: Text('Establecer Edad'),
           ),

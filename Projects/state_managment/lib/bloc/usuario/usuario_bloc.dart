@@ -18,6 +18,7 @@ class UsuarioBloc extends Bloc<UsuarioEvent,UsuarioState>{
   Stream<UsuarioState> mapEventToState(UsuarioEvent event) async *{
     
     if(event is ActivarUsuario) yield UsuarioState(user: event.usuario);
+    if(event is CambiarEdad)    yield UsuarioState(user: state.usuario.copyWith(edad: event.edad));
     
     
   }
