@@ -6,9 +6,17 @@ import 'package:state_managment/models/usuario.dart';
 class Pagina1Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    final userBloc = BlocProvider.of<UsuarioBloc>(context);
+
     return Scaffold(
         appBar: AppBar(
           title: Text('Pagina1'),
+          actions: [
+            IconButton(icon: Icon(Icons.delete),onPressed: (){
+              userBloc.add(DeleteUser());
+            },)
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.accessibility_new),

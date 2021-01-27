@@ -31,3 +31,9 @@ class AnadirProfesion extends UsuarioEvent{
   AnadirProfesion(this.profesion);
 
 }
+
+class DeleteUser extends UsuarioEvent{
+  
+  DeleteUser();
+  
+}
