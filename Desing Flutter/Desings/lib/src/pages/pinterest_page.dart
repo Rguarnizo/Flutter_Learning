@@ -23,9 +23,18 @@ class PinterestPage extends StatelessWidget {
 class _PinterestMenuLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     final mostrar = Provider.of<_MenuModel>(context).mostrar;
     final appTheme = Provider.of<ThemeChanger>(context);
+
+        bool isLarge;
+      if(MediaQuery.of(context).size.height>500){
+        isLarge = true;
+      }else{
+        isLarge = false;
+      }
+
+
 
     return Positioned(
         bottom: 30,
@@ -95,15 +104,24 @@ class _PinterestGridState extends State<PinterestGrid> {
 
   @override
   Widget build(BuildContext context) {
+
+    int count;
+    if(MediaQuery.of(context).size.width>500){
+        count = 3;
+      }else{
+        count = 2;
+      }
+
+
     return StaggeredGridView.countBuilder(
       controller: scrolLCtrl,
-      crossAxisCount: 4,
+      crossAxisCount: count,
       physics: BouncingScrollPhysics(),
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) =>
           _PinterestItem(index: index),
       staggeredTileBuilder: (int index) =>
-          new StaggeredTile.count(2, index.isEven ? 2 : 3),
+          new StaggeredTile.count(1, index.isEven ? 2 : 3),
       mainAxisSpacing: 4.0,
       crossAxisSpacing: 4.0,
     );
