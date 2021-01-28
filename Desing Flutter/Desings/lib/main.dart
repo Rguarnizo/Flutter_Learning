@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:headers/src/models/layout_model.dart';
 import 'package:headers/src/pages/launcher_page.dart';
 import 'package:headers/src/pages/launcher_tablet_page.dart';
 
@@ -6,9 +7,15 @@ import 'package:headers/src/theme/theme.dart';
 import 'package:provider/provider.dart';
  
 void main() => runApp(ChangeNotifierProvider(
-  create: (_) => new ThemeChanger(2),
-  child: MyApp()
-  ));
+  create: (context) => new LayoutModel(),
+  child:   ChangeNotifierProvider(
+  
+    create: (_) => new ThemeChanger(2),
+  
+    child: MyApp()
+  
+    ),
+));
  
 class MyApp extends StatelessWidget {
   @override

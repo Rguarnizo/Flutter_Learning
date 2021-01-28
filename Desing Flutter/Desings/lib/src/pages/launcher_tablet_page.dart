@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:headers/src/models/layout_model.dart';
 import 'package:headers/src/pages/slideshow_page.dart';
 import 'package:headers/src/theme/theme.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,7 @@ class LauncherTabletPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final appTheme = Provider.of<ThemeChanger>(context);
+    final layout = Provider.of<LayoutModel>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -33,7 +35,7 @@ class LauncherTabletPage extends StatelessWidget {
             color: appTheme.darkTheme? Colors.grey:appTheme.currentTheme.accentColor,
           ),
           Expanded(child: 
-          SlideshowPage(),
+          layout.currentPage
           )
           
         ],
@@ -47,6 +49,8 @@ class _ListaOpciones extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final appTheme = Provider.of<ThemeChanger>(context);
+     final layout = Provider.of<LayoutModel>(context);
+
 
 
     return ListView.separated(
@@ -58,7 +62,7 @@ class _ListaOpciones extends StatelessWidget {
               ),
               title: Text(pageRoutes[i].titulo),
               trailing: Icon(Icons.chevron_right),
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_)=> pageRoutes[i].page)),
+              onTap: () => layout.currentPage = pageRoutes[i].page,
               
             ),
         separatorBuilder: (_, i) => Divider(
