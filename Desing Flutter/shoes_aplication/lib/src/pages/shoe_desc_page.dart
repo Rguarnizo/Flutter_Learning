@@ -9,7 +9,12 @@ class ShoeDescPage extends StatelessWidget {
     return Scaffold(
         body: Column(
       children: [
-        ShoePreview(fullScreen: true),
+        Stack(
+          children: [
+            ShoePreview(fullScreen: true),
+            _BackButton()
+          ],
+        ),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
@@ -20,13 +25,89 @@ class ShoeDescPage extends StatelessWidget {
                       "The Nike Air Max 720 goes bigger than ever before with Nike's taller Air unit yet, offering more air underfoot for unimaginable, all-day comfort. Has Air Max gone too far? We hope so.\n \n El Nike Air Max 97 sigue pisando fuerte con los mismos detalles de diseño que lo hicieron famoso: líneas ondulantes, detalles reflectantes y amortiguación Max Air de largo completo.",
                 ),
                 AddCarButton(price: 180, scale: 0.5),
-                _Colors()
+                _Colors(),
+                _ActionsButtons()
               ],
             ),
           ),
         )
       ],
     ));
+  }
+}
+
+class _BackButton extends StatelessWidget {
+  const _BackButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 40,
+      child: FloatingActionButton(
+        onPressed: () => Navigator.pop(context),
+        child: Icon(
+          Icons.chevron_left,
+          color: Colors.white,
+          size: 45,
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+    );
+  }
+}
+
+class _ActionsButtons extends StatelessWidget {
+  const _ActionsButtons({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 15),
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _ActionButton(
+            icon: Icons.favorite,
+            iconColor: Colors.red,
+          ),
+          _ActionButton(icon: Icons.ac_unit),
+          _ActionButton(icon: Icons.phone),
+        ],
+      ),
+    );
+  }
+}
+
+class _ActionButton extends StatelessWidget {
+  final IconData icon;
+  final Color iconColor;
+
+  const _ActionButton({
+    Key key,
+    @required this.icon,
+    this.iconColor = Colors.grey,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 45,
+      height: 45,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black12)],
+          shape: BoxShape.circle),
+      child: Icon(
+        icon,
+        color: iconColor,
+      ),
+    );
   }
 }
 
@@ -45,12 +126,14 @@ class _Colors extends StatelessWidget {
               child: Stack(
             children: [
               _CircleButton(color: Color(0xffC6F646)),
-              Positioned(left: 20,child: _CircleButton(color: Color(0xff364D56))),
-              Positioned(left: 40,child: _CircleButton(color: Color(0xffFFAD29))),
-              Positioned(left: 60,child: _CircleButton(color: Color(0xff2099F1))),
+              Positioned(
+                  left: 20, child: _CircleButton(color: Color(0xff364D56))),
+              Positioned(
+                  left: 40, child: _CircleButton(color: Color(0xffFFAD29))),
+              Positioned(
+                  left: 60, child: _CircleButton(color: Color(0xff2099F1))),
             ],
           )),
-          
           OrangeButton(
               scale: 0.7,
               text: 'More item related',
