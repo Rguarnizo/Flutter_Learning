@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class OrangeButton extends StatelessWidget {
 
   final String text;
+  final double scale;
 
   const OrangeButton({
     Key key,
     this.text,
+    this.scale = 1,
   }) : super(key: key);
 
   @override
@@ -19,7 +21,7 @@ class OrangeButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
         color: Colors.orange
       ),
-      child: Text('$text',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+      child: Text('$text',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 16),),
     );
   }
 }
