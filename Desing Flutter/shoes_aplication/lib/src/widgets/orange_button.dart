@@ -4,11 +4,13 @@ class OrangeButton extends StatelessWidget {
 
   final String text;
   final double scale;
+  final Color color;
 
   const OrangeButton({
     Key key,
     this.text,
     this.scale = 1,
+    this.color = Colors.orange,
   }) : super(key: key);
 
   @override
@@ -19,7 +21,7 @@ class OrangeButton extends StatelessWidget {
       height: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
-        color: Colors.orange
+        color: color,
       ),
       child: Text('$text',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 16),),
     );
