@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shoes_aplication/src/models/shoe_model.dart';
 
 class ShoePreview extends StatelessWidget {
   final bool fullScreen;
@@ -46,7 +48,7 @@ class _ShoeSizes extends StatelessWidget {
         _ShoeSizesBox(number: 7.5,),
         _ShoeSizesBox(number: 8,),
         _ShoeSizesBox(number: 8.5,),
-        _ShoeSizesBox(number: 9,isSelected: true,),
+        _ShoeSizesBox(number: 9),
         _ShoeSizesBox(number: 9.5,),
         
       ],
@@ -58,36 +60,41 @@ class _ShoeSizes extends StatelessWidget {
 class _ShoeSizesBox extends StatelessWidget {
 
   final double number;
-  final bool isSelected;
 
   const _ShoeSizesBox({
     Key key,
     @required this.number,
-    this.isSelected = false,
+    
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      width: 45,
-      height: 45,
-      decoration: BoxDecoration(
-        color: isSelected? Color(0xffEB8C00):Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: isSelected? [
-          BoxShadow(color: Colors.black26,blurRadius: 10),
-        ]
-        :[],
+
+    final shoeProv = Provider.of<ShoeModel>(context);
+
+    return GestureDetector(
+      onTap: () => shoeProv.talla = number,
+      child: Container(
+        alignment: Alignment.center,
+        width: 45,
+        height: 45,
+        decoration: BoxDecoration(
+          color: shoeProv.talla == number? Color(0xffEB8C00):Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow:shoeProv.talla == number? [
+            BoxShadow(color: Colors.black26,blurRadius: 10),
+          ]
+          :[],
+
+        ),
+
+        child: Text('${number.toString().replaceAll('.0', '')}',style: TextStyle(
+          color: shoeProv.talla == number? Colors.white:Color(0xffF1A23A),
+          fontSize: 16,
+          fontWeight: FontWeight.bold
+        )),
 
       ),
-
-      child: Text('${number.toString().replaceAll('.0', '')}',style: TextStyle(
-        color: isSelected? Colors.white:Color(0xffF1A23A),
-        fontSize: 16,
-        fontWeight: FontWeight.bold
-      )),
-
     );
   }
 }
