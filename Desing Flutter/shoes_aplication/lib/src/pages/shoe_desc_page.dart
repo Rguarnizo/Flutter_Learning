@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 import 'package:shoes_aplication/src/widgets/custom_widgets.dart';
@@ -11,7 +12,7 @@ class ShoeDescPage extends StatelessWidget {
       children: [
         Stack(
           children: [
-            ShoePreview(fullScreen: true),
+            Hero(tag: 'shoe',child: ShoePreview(fullScreen: true),),
             _BackButton()
           ],
         ),
@@ -24,7 +25,7 @@ class ShoeDescPage extends StatelessWidget {
                   descripcion:
                       "The Nike Air Max 720 goes bigger than ever before with Nike's taller Air unit yet, offering more air underfoot for unimaginable, all-day comfort. Has Air Max gone too far? We hope so.\n \n El Nike Air Max 97 sigue pisando fuerte con los mismos detalles de diseño que lo hicieron famoso: líneas ondulantes, detalles reflectantes y amortiguación Max Air de largo completo.",
                 ),
-                AddCarButton(price: 180, scale: 0.5),
+                Bounce(child: AddCarButton(price: 180, scale: 0.5),from: 10,),
                 _Colors(),
                 _ActionsButtons()
               ],
@@ -125,13 +126,13 @@ class _Colors extends StatelessWidget {
           Expanded(
               child: Stack(
             children: [
-              _CircleButton(color: Color(0xffC6F646)),
+
+              _CircleButton(color: Color(0xff364D56),index: 0,),
               Positioned(
-                  left: 20, child: _CircleButton(color: Color(0xff364D56))),
+                  left: 30, child: _CircleButton(color: Color(0xff2099F1),index: 1,)),
               Positioned(
-                  left: 40, child: _CircleButton(color: Color(0xffFFAD29))),
-              Positioned(
-                  left: 60, child: _CircleButton(color: Color(0xff2099F1))),
+                  left: 60, child: _CircleButton(color: Color(0xffFFAD29),index: 2,)),
+              Positioned(left: 90,child: _CircleButton(color: Color(0xffC6F646),index: 3,)),
             ],
           )),
           OrangeButton(
@@ -146,18 +147,24 @@ class _Colors extends StatelessWidget {
 
 class _CircleButton extends StatelessWidget {
   final Color color;
+  final int index;
 
   const _CircleButton({
     Key key,
     @required this.color,
+    this.index,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 45,
-      height: 45,
-      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+    return FadeInLeft(
+      delay: Duration(milliseconds: this.index*100),
+      duration: Duration(milliseconds: 400),
+      child: Container(
+        width: 45,
+        height: 45,
+        decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+      ),
     );
   }
 }
