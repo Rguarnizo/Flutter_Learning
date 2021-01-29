@@ -12,7 +12,7 @@ class ShoePage extends StatelessWidget {
       Column(
         children: [
           CustomAppBar(title: 'For you',),
-          SizedBox(height: 20,),
+          
           ShoePreview(),
         ],
       ),
