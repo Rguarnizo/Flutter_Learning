@@ -44,7 +44,7 @@ class _ShoeSizes extends StatelessWidget {
         _ShoeSizesBox(number: 7.5,),
         _ShoeSizesBox(number: 8,),
         _ShoeSizesBox(number: 8.5,),
-        _ShoeSizesBox(number: 9,),
+        _ShoeSizesBox(number: 9,isSelected: true,),
         _ShoeSizesBox(number: 9.5,),
         
       ],
@@ -56,10 +56,12 @@ class _ShoeSizes extends StatelessWidget {
 class _ShoeSizesBox extends StatelessWidget {
 
   final double number;
+  final bool isSelected;
 
   const _ShoeSizesBox({
     Key key,
-    this.number,
+    @required this.number,
+    this.isSelected = false,
   }) : super(key: key);
 
   @override
@@ -69,13 +71,17 @@ class _ShoeSizesBox extends StatelessWidget {
       width: 45,
       height: 45,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10)
+        color: isSelected? Color(0xffEB8C00):Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: isSelected? [
+          BoxShadow(color: Colors.black26,blurRadius: 10),
+        ]
+        :[],
 
       ),
 
       child: Text('${number.toString().replaceAll('.0', '')}',style: TextStyle(
-        color: Color(0xffF1A23A),
+        color: isSelected? Colors.white:Color(0xffF1A23A),
         fontSize: 16,
         fontWeight: FontWeight.bold
       )),
