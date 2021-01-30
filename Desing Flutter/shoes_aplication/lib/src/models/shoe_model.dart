@@ -8,7 +8,7 @@ class ShoeModel with ChangeNotifier{
   String _assetImage = 'assets/imgs/azul.png';
   double _talla = 9.0;
 
-  String get assetImage => this.assetImage;
+  String get assetImage => this._assetImage;
 
 
   set assetImage(String valor){

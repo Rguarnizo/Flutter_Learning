@@ -1,5 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shoes_aplication/src/models/shoe_model.dart';
 
 import 'package:shoes_aplication/src/widgets/custom_widgets.dart';
 import 'package:shoes_aplication/src/widgets/orange_button.dart';
@@ -127,12 +129,12 @@ class _Colors extends StatelessWidget {
               child: Stack(
             children: [
 
-              _CircleButton(color: Color(0xff364D56),index: 0,),
+              _CircleButton(color: Color(0xff364D56),index: 0, path: 'assets/imgs/negro.png',),
               Positioned(
-                  left: 30, child: _CircleButton(color: Color(0xff2099F1),index: 1,)),
+                  left: 30, child: _CircleButton(color: Color(0xff2099F1),index: 1, path: 'assets/imgs/azul.png')),
               Positioned(
-                  left: 60, child: _CircleButton(color: Color(0xffFFAD29),index: 2,)),
-              Positioned(left: 90,child: _CircleButton(color: Color(0xffC6F646),index: 3,)),
+                  left: 60, child: _CircleButton(color: Color(0xffFFAD29),index: 2, path: 'assets/imgs/amarillo.png')),
+              Positioned(left: 90,child: _CircleButton(color: Color(0xffC6F646),index: 3, path: 'assets/imgs/verde.png')),
             ],
           )),
           OrangeButton(
@@ -148,22 +150,31 @@ class _Colors extends StatelessWidget {
 class _CircleButton extends StatelessWidget {
   final Color color;
   final int index;
+  final String path;
 
   const _CircleButton({
     Key key,
     @required this.color,
     this.index,
+    @required this.path,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FadeInLeft(
-      delay: Duration(milliseconds: this.index*100),
-      duration: Duration(milliseconds: 400),
-      child: Container(
-        width: 45,
-        height: 45,
-        decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+
+    final shoeProv = Provider.of<ShoeModel>(context);
+
+
+    return GestureDetector(
+      onTap: ()=> shoeProv.assetImage = path,
+      child: FadeInLeft(
+        delay: Duration(milliseconds: this.index*100),
+        duration: Duration(milliseconds: 400),
+        child: Container(
+          width: 45,
+          height: 45,
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        ),
       ),
     );
   }
