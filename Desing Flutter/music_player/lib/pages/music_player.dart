@@ -12,11 +12,36 @@ class MusicPlayerPage extends StatelessWidget {
           children: [
             CustomAppBar(),
 
-            DiscoImageDuration()
+            DiscoImageDuration(),
+
+            TitleoPlay()
           ],
         ),
       )
    );
+  }
+}
+
+class TitleoPlay extends StatelessWidget {
+  const TitleoPlay({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 40),
+      margin: EdgeInsets.only(top:40),
+      child: Row(
+        children: [
+          Column(children: [
+            Text('Far away',style: TextStyle(fontSize: 30,color:Colors.white.withOpacity(0.8),fontWeight: FontWeight.bold),),
+            Text('-Breaking Benjamin-',style: TextStyle(fontSize: 15,color:Colors.white.withOpacity(0.8)),),
+
+          ],)
+        ],
+      ),
+    );
   }
 }
 
@@ -32,10 +57,10 @@ class DiscoImageDuration extends StatelessWidget {
       margin: EdgeInsets.only(top: 70),
       child: Row(
         children: [
-          //TODO: Disco,
+          
           ImageDisco(),
           SizedBox(width: 20,),
-          //TODO: Barra Progreso.
+          
           _ProgressSong(),
           
         ],
