@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shoes_aplication/src/models/shoe_model.dart';
 import 'package:shoes_aplication/src/pages/shoe_desc_page.dart';
 import 'package:shoes_aplication/src/pages/shoe_page.dart';
+import 'package:flutter/services.dart' as services;
  
 void main() => runApp(MyApp());
  
@@ -13,15 +14,22 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => ShoeModel())
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        
-        title: 'Shoes App',
-        routes: {
-          'initPage': (_) => ShoePage(),
-          'descPage': (_) => ShoeDescPage(),
+      child: Builder(
+        builder: (context) {
+
+          services.SystemChrome.setSystemUIOverlayStyle(services.SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+
+          return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              
+              title: 'Shoes App',
+              routes: {
+                'initPage': (_) => ShoePage(),
+                'descPage': (_) => ShoeDescPage(),
+              },
+              home: ShoePage(),
+            );
         },
-        home: ShoePage(),
       ),
     );
   }
