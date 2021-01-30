@@ -7,10 +7,48 @@ class MusicPlayerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Column(
-        children: [CustomAppBar(), DiscoImageDuration(), TitleoPlay(), Expanded(child: Lyrics())],
+      child: Stack(
+        children: [
+          _Background(),
+          Column(
+            children: [
+              CustomAppBar(),
+              DiscoImageDuration(),
+              TitleoPlay(),
+              Expanded(child: Lyrics())
+            ],
+          ),
+        ],
       ),
     ));
+  }
+}
+
+class _Background extends StatelessWidget {
+  const _Background({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    final screenSize = MediaQuery.of(context).size;
+
+    return Container(
+      height:screenSize.height *0.65,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(60)),
+        gradient: LinearGradient(
+          colors: [
+            Color(0xff33333E),
+            Color(0xff201E28)
+          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.center
+        ),
+      ),
+    );
   }
 }
 
@@ -21,10 +59,20 @@ class Lyrics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final lyrics = getLyrics();
     return Container(
-      child: ListWheelScrollView(itemExtent: 42, children: lyrics.map((e) => Text(e,style: TextStyle(fontSize: 20,color:Colors.white.withOpacity(0.5)),)).toList(),diameterRatio: 1.5,physics: BouncingScrollPhysics(),),
+      child: ListWheelScrollView(
+        itemExtent: 42,
+        children: lyrics
+            .map((e) => Text(
+                  e,
+                  style: TextStyle(
+                      fontSize: 20, color: Colors.white.withOpacity(0.5)),
+                ))
+            .toList(),
+        diameterRatio: 1.5,
+        physics: BouncingScrollPhysics(),
+      ),
     );
   }
 }
@@ -59,11 +107,12 @@ class TitleoPlay extends StatelessWidget {
           ),
           Spacer(),
           FloatingActionButton(
-              onPressed: () {},
-              backgroundColor: Color(0xffF8CB51),
-              child: Icon(Icons.play_arrow),
-              elevation: 0,
-              highlightElevation: 0,),
+            onPressed: () {},
+            backgroundColor: Color(0xffF8CB51),
+            child: Icon(Icons.play_arrow),
+            elevation: 0,
+            highlightElevation: 0,
+          ),
         ],
       ),
     );
