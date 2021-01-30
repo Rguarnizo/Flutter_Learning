@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shoes_aplication/src/helpers/helpers.dart';
 import 'package:shoes_aplication/src/models/shoe_model.dart';
 
 import 'package:shoes_aplication/src/widgets/custom_widgets.dart';
@@ -49,7 +50,10 @@ class _BackButton extends StatelessWidget {
     return Positioned(
       top: 40,
       child: FloatingActionButton(
-        onPressed: () => Navigator.pop(context),
+        onPressed: (){ 
+          cambiarStatusDark();
+          Navigator.pop(context);
+          },
         child: Icon(
           Icons.chevron_left,
           color: Colors.white,
@@ -163,7 +167,8 @@ class _CircleButton extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final shoeProv = Provider.of<ShoeModel>(context);
-
+    
+    cambiarStatusLight();
 
     return GestureDetector(
       onTap: ()=> shoeProv.assetImage = path,

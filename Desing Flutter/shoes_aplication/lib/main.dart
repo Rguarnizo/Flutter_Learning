@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        
         title: 'Shoes App',
         routes: {
           'initPage': (_) => ShoePage(),
