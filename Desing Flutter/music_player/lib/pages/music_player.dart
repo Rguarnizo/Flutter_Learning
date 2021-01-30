@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:music_player/widgets/custom_appbar.dart';
 
-
 class MusicPlayerPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            CustomAppBar(),
-
-            DiscoImageDuration(),
-
-            TitleoPlay()
-          ],
-        ),
-      )
-   );
+        body: SafeArea(
+      child: Column(
+        children: [CustomAppBar(), DiscoImageDuration(), TitleoPlay()],
+      ),
+    ));
   }
 }
 
@@ -30,15 +21,33 @@ class TitleoPlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 40),
-      margin: EdgeInsets.only(top:40),
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      margin: EdgeInsets.only(top: 40),
       child: Row(
         children: [
-          Column(children: [
-            Text('Far away',style: TextStyle(fontSize: 30,color:Colors.white.withOpacity(0.8),fontWeight: FontWeight.bold),),
-            Text('-Breaking Benjamin-',style: TextStyle(fontSize: 15,color:Colors.white.withOpacity(0.8)),),
-
-          ],)
+          Column(
+            children: [
+              Text(
+                'Far away',
+                style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.white.withOpacity(0.8),
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '-Breaking Benjamin-',
+                style: TextStyle(
+                    fontSize: 15, color: Colors.white.withOpacity(0.8)),
+              ),
+            ],
+          ),
+          Spacer(),
+          FloatingActionButton(
+              onPressed: () {},
+              backgroundColor: Color(0xffF8CB51),
+              child: Icon(Icons.play_arrow),
+              elevation: 0,
+              highlightElevation: 0,),
         ],
       ),
     );
@@ -57,12 +66,11 @@ class DiscoImageDuration extends StatelessWidget {
       margin: EdgeInsets.only(top: 70),
       child: Row(
         children: [
-          
           ImageDisco(),
-          SizedBox(width: 20,),
-          
+          SizedBox(
+            width: 20,
+          ),
           _ProgressSong(),
-          
         ],
       ),
     );
@@ -77,18 +85,30 @@ class _ProgressSong extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textStyle = TextStyle(color: Colors.white.withOpacity(0.4));
-        
-        return Container(
-          child: Column(
+
+    return Container(
+      child: Column(
+        children: [
+          Text(
+            '00:00',
+            style: textStyle,
+          ),
+          Stack(
             children: [
-              Text('00:00',style: textStyle,),
-              Stack(
-                children: [
-                  Container(width: 3,height: 230,color: Colors.white.withOpacity(0.1)),
-                  Positioned(bottom: 0,child: Container(width: 3,height: 100,color: Colors.white.withOpacity(0.8)))
-                ],
-              ),
-              Text('00:00',style: textStyle,)
+              Container(
+                  width: 3, height: 230, color: Colors.white.withOpacity(0.1)),
+              Positioned(
+                  bottom: 0,
+                  child: Container(
+                      width: 3,
+                      height: 100,
+                      color: Colors.white.withOpacity(0.8)))
+            ],
+          ),
+          Text(
+            '00:00',
+            style: textStyle,
+          )
         ],
       ),
     );
@@ -107,20 +127,18 @@ class ImageDisco extends StatelessWidget {
       width: 250,
       height: 250,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          colors: [
-          Color(0xff484750),
-          Color(0xff1e1c24)
-        ]),
-        borderRadius: BorderRadius.circular(200)
-      ),
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              colors: [Color(0xff484750), Color(0xff1e1c24)]),
+          borderRadius: BorderRadius.circular(200)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(200),
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Image(image: AssetImage('assets/aurora.jpg'),),
+            Image(
+              image: AssetImage('assets/aurora.jpg'),
+            ),
             Container(
               width: 25,
               height: 25,
@@ -128,7 +146,6 @@ class ImageDisco extends StatelessWidget {
                 color: Colors.black38,
                 borderRadius: BorderRadius.circular(100),
               ),
-              
             ),
             Container(
               width: 18,
@@ -137,7 +154,6 @@ class ImageDisco extends StatelessWidget {
                 color: Color(0xff1C1C25),
                 borderRadius: BorderRadius.circular(100),
               ),
-              
             )
           ],
         ),
