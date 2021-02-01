@@ -77,10 +77,19 @@ class Lyrics extends StatelessWidget {
   }
 }
 
-class TitleoPlay extends StatelessWidget {
+class TitleoPlay extends StatefulWidget {
   const TitleoPlay({
     Key key,
   }) : super(key: key);
+
+  @override
+  _TitleoPlayState createState() => _TitleoPlayState();
+}
+
+class _TitleoPlayState extends State<TitleoPlay> {
+
+  bool isPlaying = false;
+
 
   @override
   Widget build(BuildContext context) {
