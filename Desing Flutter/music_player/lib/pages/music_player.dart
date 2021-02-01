@@ -106,6 +106,10 @@ class _TitleoPlayState extends State<TitleoPlay>
 
   @override
   Widget build(BuildContext context) {
+
+    final audioPlayer = Provider.of<AudioPlayerModel>(context);
+
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 30),
       margin: EdgeInsets.only(top: 40),
@@ -132,10 +136,12 @@ class _TitleoPlayState extends State<TitleoPlay>
             onPressed: () {
               if(this.isPlaying){
                 playAnimation.reverse();
+                audioPlayer.controller.stop();
                 this.isPlaying = false;
               }else{
                 playAnimation.forward();
                 this.isPlaying = true;
+                audioPlayer.controller.repeat();
               }
             },
             backgroundColor: Color(0xffF8CB51),
