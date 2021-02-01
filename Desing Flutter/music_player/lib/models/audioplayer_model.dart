@@ -16,4 +16,16 @@ class AudioPlayerModel with ChangeNotifier{
 
   AnimationController get controller => this._controller;
 
+  get songDuration => this._songDuration;
+  get songCurrentDuration => this._songCurrentDuration;
+
+  set songDuration (Duration duration){
+    this._songDuration;
+  }
+
+  
+  set songCurrentDuration (Duration duration){
+    this._songCurrentDuration;
+  }
+
 }
