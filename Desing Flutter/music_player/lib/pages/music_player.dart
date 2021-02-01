@@ -86,10 +86,26 @@ class TitleoPlay extends StatefulWidget {
   _TitleoPlayState createState() => _TitleoPlayState();
 }
 
-class _TitleoPlayState extends State<TitleoPlay> {
+class _TitleoPlayState extends State<TitleoPlay> with SingleTickerProviderStateMixin{
 
   bool isPlaying = false;
+  AnimationController playAnimation;
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    playAnimation = AnimationController(vsync: this,duration: Duration(milliseconds: 500));
+    
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    playAnimation.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
