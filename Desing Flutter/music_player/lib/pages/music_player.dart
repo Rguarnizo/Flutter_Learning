@@ -1,7 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:music_player/helpers/helpers.dart';
+import 'package:music_player/models/audioplayer_model.dart';
 import 'package:music_player/widgets/custom_appbar.dart';
+import 'package:provider/provider.dart';
 
 class MusicPlayerPage extends StatelessWidget {
   @override
@@ -218,6 +220,10 @@ class ImageDisco extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final audioPlayer = Provider.of<AudioPlayerModel>(context);
+
+
     return Container(
       padding: EdgeInsets.all(20),
       width: 250,
@@ -234,6 +240,8 @@ class ImageDisco extends StatelessWidget {
           children: [
             SpinPerfect(
               duration: Duration(seconds: 10),
+              manualTrigger: true,
+              controller: (animationController) => audioPlayer.controller = animationController,
               infinite: true,
               child: Image(
                 image: AssetImage('assets/aurora.jpg'),
