@@ -31,22 +31,17 @@ class _Background extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final screenSize = MediaQuery.of(context).size;
 
     return Container(
-      height:screenSize.height *0.65,
+      height: screenSize.height * 0.65,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(60)),
         gradient: LinearGradient(
-          colors: [
-            Color(0xff33333E),
-            Color(0xff201E28)
-          ],
-          begin: Alignment.centerLeft,
-          end: Alignment.center
-        ),
+            colors: [Color(0xff33333E), Color(0xff201E28)],
+            begin: Alignment.centerLeft,
+            end: Alignment.center),
       ),
     );
   }
@@ -86,18 +81,17 @@ class TitleoPlay extends StatefulWidget {
   _TitleoPlayState createState() => _TitleoPlayState();
 }
 
-class _TitleoPlayState extends State<TitleoPlay> with SingleTickerProviderStateMixin{
-
+class _TitleoPlayState extends State<TitleoPlay>
+    with SingleTickerProviderStateMixin {
   bool isPlaying = false;
   AnimationController playAnimation;
-
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    playAnimation = AnimationController(vsync: this,duration: Duration(milliseconds: 500));
-    
+    playAnimation =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
   }
 
   @override
@@ -132,9 +126,20 @@ class _TitleoPlayState extends State<TitleoPlay> with SingleTickerProviderStateM
           ),
           Spacer(),
           FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              if(this.isPlaying){
+                playAnimation.reverse();
+                this.isPlaying = false;
+              }else{
+                playAnimation.forward();
+                this.isPlaying = true;
+              }
+            },
             backgroundColor: Color(0xffF8CB51),
-            child: Icon(Icons.play_arrow),
+            child: AnimatedIcon(
+              icon: AnimatedIcons.play_pause,
+              progress: playAnimation,
+            ),
             elevation: 0,
             highlightElevation: 0,
           ),
