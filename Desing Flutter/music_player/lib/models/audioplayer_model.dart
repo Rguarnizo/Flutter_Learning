@@ -8,6 +8,8 @@ class AudioPlayerModel with ChangeNotifier{
   AnimationController _controller;
   Duration _songDuration = new Duration(milliseconds: 0);
   Duration _songCurrentDuration = new Duration(milliseconds: 0);
+
+  double get porcentaje => (this._songCurrentDuration.inSeconds > 0)? this._songCurrentDuration.inSeconds /this._songDuration.inSeconds: 0;
   
 
   set controller(AnimationController controller){
@@ -35,6 +37,20 @@ class AudioPlayerModel with ChangeNotifier{
   set playing(bool playing){
     this._playing = playing;
     notifyListeners();
+  }
+
+  String printDuration(Duration duration){
+
+    String twoDigits(int n){
+      if(n >=10) return "$n";
+      return "0$n";
+    }
+
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+
+
+    return '$twoDigitMinutes:$twoDigitSeconds';
   }
 
 }
