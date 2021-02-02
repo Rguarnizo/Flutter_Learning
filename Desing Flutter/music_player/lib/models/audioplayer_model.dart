@@ -10,6 +10,9 @@ class AudioPlayerModel with ChangeNotifier{
   Duration _songCurrentDuration = new Duration(milliseconds: 0);
 
   double get porcentaje => (this._songCurrentDuration.inSeconds > 0)? this._songCurrentDuration.inSeconds /this._songDuration.inSeconds: 0;
+
+  String get songTotalDuration => this.printDuration(_songDuration);
+  String get currentDuration => this.printDuration(_songCurrentDuration);
   
 
   set controller(AnimationController controller){
