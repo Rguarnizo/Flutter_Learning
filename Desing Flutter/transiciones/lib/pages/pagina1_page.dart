@@ -24,7 +24,7 @@ class Pagina1Page extends StatelessWidget {
   Route _crearRuta() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => Pagina2Page(),
-      //transitionDuration: Duration(seconds: 2),
+      transitionDuration: Duration(seconds: 2),
       transitionsBuilder: (context, animation, secondaryAnimation, child){
         
         final curveAnimation = CurvedAnimation(parent: animation, curve: Curves.easeInOut);
