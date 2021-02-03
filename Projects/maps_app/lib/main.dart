@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'map': (_) => MapPage(),
         'gps':(_)=> GpsAccessPage(),
+        'loading': (_) => LoadingPage(),
       },
     );
   }
