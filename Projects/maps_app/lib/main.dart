@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: LoadingPage(),
+      home: GpsAccessPage(),
       routes: {
         'map': (_) => MapPage(),
         'gps':(_)=> GpsAccessPage(),

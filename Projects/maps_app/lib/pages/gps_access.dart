@@ -9,7 +9,33 @@ class GpsAccessPage extends StatefulWidget {
   _GpsAccessPageState createState() => _GpsAccessPageState();
 }
 
-class _GpsAccessPageState extends State<GpsAccessPage> {
+class _GpsAccessPageState extends State<GpsAccessPage>  with WidgetsBindingObserver{
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {    
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async{
+    super.didChangeAppLifecycleState(state);
+    if(state == AppLifecycleState.resumed){
+      if(await Permission.location.isGranted){
+         Navigator.pushReplacementNamed(context, 'loading');
+      }
+    }
+
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +70,7 @@ class _GpsAccessPageState extends State<GpsAccessPage> {
      switch(status){
        
        case PermissionStatus.granted:
-         Navigator.pushReplacementNamed(context, 'mapa');
+         Navigator.pushReplacementNamed(context, 'map');
          break;
        case PermissionStatus.denied:         
          break;
