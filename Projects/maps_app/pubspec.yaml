@@ -31,7 +31,8 @@ dependencies:
   geolocator:
   animate_do:
   google_maps_flutter:
-  
+  flutter_bloc: 
+
 
 dev_dependencies:
   flutter_test:
