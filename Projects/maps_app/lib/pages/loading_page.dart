@@ -6,17 +6,58 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'map_page.dart';
 
-class LoadingPage extends StatelessWidget {
+class LoadingPage extends StatefulWidget {
+
+  
+  @override
+  _LoadingPageState createState() => _LoadingPageState();
+}
+
+class _LoadingPageState extends State<LoadingPage> with WidgetsBindingObserver{
+
+
+
+ @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state)async {    
+    super.didChangeAppLifecycleState(state);
+
+    if(state == AppLifecycleState.resumed){
+      if(await Geolocator.isLocationServiceEnabled()){
+        Navigator.pushReplacementNamed(context, 'map');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
           future: this.checkGpsLocation(context),
           builder: (context, snapshot) {
-            return Center(
+            if (snapshot.hasData) return Center(child: Text('${snapshot.data}'),);
+            else return Center(
                 child: CircularProgressIndicator(
               strokeWidth: 2,
             ));
+           
+           
+            
+            
+            
           }),
     );
   }
@@ -29,8 +70,8 @@ class LoadingPage extends StatelessWidget {
 
     await Future.delayed(Duration(milliseconds: 100));
     if (gpsActive && gpsPermission) {
-      Navigator.pushReplacement(context, navegarMapFadeIn(context, MapPage()));
-      return '';
+      //Navigator.pushReplacement(context, navegarMapFadeIn(context, MapPage()));
+      return 'Todo Bien!';
     } else if(!gpsActive){      
       return 'Active el GPS';
     }else if(!gpsPermission){

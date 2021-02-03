@@ -70,7 +70,7 @@ class _GpsAccessPageState extends State<GpsAccessPage>  with WidgetsBindingObser
      switch(status){
        
        case PermissionStatus.granted:
-         Navigator.pushReplacementNamed(context, 'map');
+         Navigator.pushReplacementNamed(context, 'loading');
          break;
        case PermissionStatus.denied:         
          break;
