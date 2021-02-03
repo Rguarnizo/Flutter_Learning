@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maps_app/helpers/helpers.dart';
+import 'package:maps_app/pages/gps_access.dart';
 
 import 'map_page.dart';
 
@@ -21,9 +22,10 @@ class LoadingPage extends StatelessWidget {
   }
   
   Future checkGpsLocation(BuildContext context) async {
-     await Future.delayed(Duration(milliseconds: 1000));
+     await Future.delayed(Duration(milliseconds: 100));
 
-     Navigator.pushReplacement(context,navegarMapFadeIn(context, MapPage()));
+     //Navigator.pushReplacement(context,navegarMapFadeIn(context, MapPage()));
+     Navigator.pushReplacement(context,navegarMapFadeIn(context, GpsAccessPage()));
    }
 
 }
