@@ -33,6 +33,7 @@ dependencies:
   google_maps_flutter:
   dio:
   flutter_bloc: 
+  permission_handler:
 
 
 dev_dependencies:
