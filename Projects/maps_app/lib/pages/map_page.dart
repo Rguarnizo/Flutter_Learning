@@ -20,28 +20,24 @@ class MapPage extends StatelessWidget {
           permissionBloc.add(PermissionCheck());
 
           if (state is PermissionGpsDenied)            
-            return Container(
-              width: 500,
-              height: 500,
-              color: Colors.red,
-              child: PermissionsPage(),
-            );
+            return PermissionsPage();
           if (state is GpsDissable)
-            return Container(
-              alignment: Alignment.center,
-              width: 500,
-              height: 500,
-              color: Colors.red,
-              child: Text('GPS Is needed to use the app'),
-            );
+            return Center(child: Text('Gps Is needed to use the app'),);
           if (state is PermissionsAccepted)
-            return Container(
-              width: 500,
-              height: 500,
-              color: Colors.green,
-            );
+            return MainMap();
         },
       ),
     );
+  }
+}
+
+class MainMap extends StatelessWidget {
+  const MainMap({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: Colors.green,width: 200,height: 200,);
   }
 }
