@@ -12,6 +12,8 @@ class PermissionsAccepted extends PermissionState{
 }
 
 class PermissionGpsDenied extends PermissionState{
+  final status;
+  PermissionGpsDenied(this.status);
   
 }
 

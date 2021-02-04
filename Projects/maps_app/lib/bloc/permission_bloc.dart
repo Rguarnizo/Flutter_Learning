@@ -19,7 +19,7 @@ class PermissionBloc extends Bloc<PermissionEvent, PermissionState> {
     if(event is PermissionInit)  yield PermissionInit(); this.add(PermissionCheck());
     if(event is PermissionCheck){
       if(! await event.gpsActive) yield GpsDissable(); else
-      if(! await event.gpsPermission) yield PermissionGpsDenied(); else
+      if(! await event.gpsPermission) yield PermissionGpsDenied(event.permissionStatus); else
       yield PermissionsAccepted();
     }
 

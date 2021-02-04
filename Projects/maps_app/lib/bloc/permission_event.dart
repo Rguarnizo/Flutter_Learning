@@ -4,8 +4,10 @@ part of 'permission_bloc.dart';
 abstract class PermissionEvent {}
 
 class PermissionCheck extends PermissionEvent{
+
+  final permissionStatus;
   
-  PermissionCheck();
+  PermissionCheck({this.permissionStatus});
 
   Future<bool> get gpsActive async  => await Geolocator.isLocationServiceEnabled();
   Future<bool> get gpsPermission async  => await Permission.location.isGranted ;
