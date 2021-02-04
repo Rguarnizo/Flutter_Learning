@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:maps_app/bloc/permission_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 
@@ -6,6 +8,10 @@ class PermissionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+    final permissionBloc = BlocProvider.of<PermissionBloc>(context);
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -24,8 +30,10 @@ class PermissionsPage extends StatelessWidget {
               onPressed: () async{
                
                final status = await Permission.location.request();
-               print(status);
-          
+               if(status == PermissionStatus.granted){
+                 permissionBloc.add(PermissionCheck());                 
+               }
+                                                                 
               },
             )
           ],

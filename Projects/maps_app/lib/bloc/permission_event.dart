@@ -1,23 +1,12 @@
 part of 'permission_bloc.dart';
 
 @immutable
-abstract class PermissionEvent {
+abstract class PermissionEvent {}
 
+class PermissionCheck extends PermissionEvent{
+  
+  PermissionCheck();
 
-}
-
-
-class PermissionAcepted extends PermissionEvent{
-  final gpsPermission;
-  final gpsActive;
-
-  PermissionAcepted({this.gpsPermission, this.gpsActive});  
-}
-
-
-class PermissionDenied extends PermissionEvent{
-  final gpsPermission;
-  final gpsActive;
-
-  PermissionDenied({this.gpsPermission, this.gpsActive});  
+  Future<bool> get gpsActive async  => await Geolocator.isLocationServiceEnabled();
+  Future<bool> get gpsPermission async  => await Permission.location.isGranted ;
 }
