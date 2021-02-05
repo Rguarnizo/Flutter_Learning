@@ -66,7 +66,7 @@ class _MainMapState extends State<MainMap> {
     if (!state.existLocation) return Text('Ubicando...');
 
     final initialPosition = CameraPosition(target: location, zoom: 15);
-
+    mapBloc.add(OnLocationUpdate(initialPosition.target));
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [

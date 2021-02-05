@@ -42,6 +42,7 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
   ) async* {
     
     if(event is OnMapReady) yield state.copyWith(mapReady: true);
+    if(event is OnLocationUpdate) print(event.ubication);
 
   }
 }
