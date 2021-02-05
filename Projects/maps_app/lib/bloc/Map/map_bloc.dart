@@ -18,7 +18,7 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
 
     if(!state.mapReady){
       this._mapController = controller;
-      this._mapController.setMapStyle(jsonEncode(assassinsCreedIV));
+      this._mapController.setMapStyle(jsonEncode(nightGoogle));
       //TODO: Change map style.
 
       add(OnMapReady());
