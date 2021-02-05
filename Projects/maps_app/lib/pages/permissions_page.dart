@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:maps_app/bloc/permission_bloc.dart';
+import 'package:maps_app/bloc/Permissions/permission_bloc.dart';
 import 'package:maps_app/helpers/helpers.dart';
 import 'package:permission_handler/permission_handler.dart';
 

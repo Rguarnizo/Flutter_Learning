@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:maps_app/pages/permissions_page.dart';
-import 'package:permission_handler/permission_handler.dart';
-import '../bloc/permission_bloc.dart';
+import '../bloc/Permissions/permission_bloc.dart';
 
 class MapPage extends StatelessWidget {
   @override
@@ -25,6 +23,8 @@ class MapPage extends StatelessWidget {
             return Center(child: Text('Gps Is needed to use the app'),);
           if (state is PermissionsAccepted)
             return MainMap();
+            
+          return Container();
         },
       ),
     );
