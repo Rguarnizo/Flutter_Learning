@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:maps_app/bloc/Location/location_bloc.dart';
 import 'package:maps_app/pages/permissions_page.dart';
 import '../bloc/Permissions/permission_bloc.dart';
 
@@ -31,13 +32,39 @@ class MapPage extends StatelessWidget {
   }
 }
 
-class MainMap extends StatelessWidget {
+class MainMap extends StatefulWidget {
   const MainMap({
     Key key,
   }) : super(key: key);
 
   @override
+  _MainMapState createState() => _MainMapState();
+}
+
+class _MainMapState extends State<MainMap> {
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    final locationBloc = BlocProvider.of<LocationBloc>(context);    
+    locationBloc.initFollow();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
+  
     return Container(color: Colors.green,width: 200,height: 200,);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    final locationBloc = BlocProvider.of<LocationBloc>(context);
+    locationBloc.finishFollow();    
+    
   }
 }
