@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:maps_app/themes/map_styles_themes.dart';
 import 'package:meta/meta.dart';
 
 part 'map_event.dart';
@@ -16,7 +18,7 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
 
     if(!state.mapReady){
       this._mapController = controller;
-
+      this._mapController.setMapStyle(jsonEncode(assassinsCreedIV));
       //TODO: Change map style.
 
       add(OnMapReady());
