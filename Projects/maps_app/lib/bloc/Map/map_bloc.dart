@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:maps_app/themes/map_styles_themes.dart';
 import 'package:meta/meta.dart';
@@ -53,6 +54,18 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
 
       yield state.copyWith(polylines: currentPolyLines);
 
+    }else
+    if(event is OnMarkRoute) {
+      if(!state.drawTravel){
+        this._myRoute = this._myRoute.copyWith(colorParam: Colors.redAccent);
+      }else{
+        this._myRoute = this._myRoute.copyWith(colorParam: Colors.transparent);
+      }
+
+      final currentPolyLines = state.polylines;
+      currentPolyLines['mi_ruta'] = this._myRoute;
+
+      yield state.copyWith(polylines: currentPolyLines,drawTravel: !state.drawTravel);
     }
 
   }

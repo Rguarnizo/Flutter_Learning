@@ -7,6 +7,11 @@ class OnMapReady extends MapEvent{
 
 }
 
+class OnMarkRoute extends MapEvent{
+
+}
+
+
 class OnLocationUpdate extends MapEvent{
   final LatLng ubication;
 

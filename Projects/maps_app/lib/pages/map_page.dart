@@ -67,8 +67,8 @@ class _MainMapState extends State<MainMap> {
 
     final initialPosition = CameraPosition(target: location, zoom: 15);
     mapBloc.add(OnLocationUpdate(initialPosition.target));
-    return Stack(
-      alignment: Alignment.bottomCenter,
+    return Stack(      
+      alignment: Alignment.bottomRight,
       children: [
         GoogleMap(
           initialCameraPosition: initialPosition,          
@@ -103,7 +103,7 @@ class BottomActions extends StatelessWidget {
         if(state is PermissionsAccepted) return Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            MyRouteButton(onPress:() => null),
+            MyRouteButton(onPress:() => mapBloc.add(OnMarkRoute())),
             MyLocationButton(onPress: () => mapBloc.moveCam(blocLocation.state.location),),
           ],
         );
