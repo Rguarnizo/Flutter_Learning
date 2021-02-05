@@ -88,10 +88,15 @@ class BottomActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final blocLocation = BlocProvider.of<LocationBloc>(context);
+    final mapBloc = BlocProvider.of<MapBloc>(context);
+
     return BlocBuilder<PermissionBloc, PermissionState>(
       builder: (context, state) {
+        //TODO: Create a widget for gps error.
         if(state is GpsDissable) return Container(color: Colors.red, width: 50,height: 50,);
-        if(state is PermissionsAccepted) return MyLocationButton();
+        if(state is PermissionsAccepted) return MyLocationButton(onPress: () => mapBloc.moveCam(blocLocation.state.location),);
       },
     );
   }

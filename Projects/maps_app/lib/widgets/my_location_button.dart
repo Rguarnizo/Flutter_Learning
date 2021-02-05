@@ -1,8 +1,11 @@
+
+
 part of 'widgets.dart';
 
-
 class MyLocationButton extends StatelessWidget {
-  
+  final onPress;
+
+  const MyLocationButton({Key key, @required this.onPress}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +15,8 @@ class MyLocationButton extends StatelessWidget {
         backgroundColor: Colors.white,
         maxRadius: 25,
         child: IconButton(
-          icon: Icon(Icons.my_location,color:Colors.black87),
-          onPressed: (){  },
+          icon: Icon(Icons.my_location, color: Colors.black87),
+          onPressed: onPress,
         ),
       ),
     );
