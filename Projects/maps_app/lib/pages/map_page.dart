@@ -71,6 +71,7 @@ class _MainMapState extends State<MainMap> {
         GoogleMap(
           initialCameraPosition: initialPosition,          
           onMapCreated: mapBloc.initMap,
+          zoomControlsEnabled: false,
           buildingsEnabled: false,
           polylines: mapBloc.state.polylines.values.toSet(),
         ),
