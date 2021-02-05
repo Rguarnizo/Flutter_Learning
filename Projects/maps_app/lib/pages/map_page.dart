@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:maps_app/bloc/Location/location_bloc.dart';
 import 'package:maps_app/pages/permissions_page.dart';
 import '../bloc/Permissions/permission_bloc.dart';
@@ -67,7 +68,10 @@ class _MainMapState extends State<MainMap> {
     final location = state.location;
 
     if(!state.existLocation) return Text('Ubicando...');
-    return Text('${location.latitude}, ${location.longitude}');
+    
+    final initialPosition = CameraPosition(target: location,zoom: 15);
+
+    return GoogleMap(initialCameraPosition: initialPosition,myLocationEnabled: true);
   }
 
 }

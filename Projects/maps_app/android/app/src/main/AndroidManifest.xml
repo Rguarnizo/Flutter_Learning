@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.maps_app">
 
-
+    
 
       <!-- Permissions options for the `location` group -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -13,6 +13,12 @@
    <application
         android:label="maps_app"
         android:icon="@mipmap/ic_launcher">
+
+        <!-- Api Key Android   -->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyB88eg4t2PDXaWzlZRrjUifPR0PEj5OuTI"/>
+
+               
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
