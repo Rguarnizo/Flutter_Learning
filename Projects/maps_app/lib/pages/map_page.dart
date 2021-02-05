@@ -11,12 +11,10 @@ class MapPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final permissionBloc = BlocProvider.of<PermissionBloc>(context);
-
+    permissionBloc.add(PermissionCheck());
     return Scaffold(
       body: BlocBuilder<PermissionBloc, PermissionState>(
-        builder: (context, state) {
-          permissionBloc.add(PermissionCheck());
-
+        builder: (context, state) {                    
           if (state is PermissionGpsDenied) return PermissionsPage();
           return MainMap();
         },
@@ -71,9 +69,10 @@ class _MainMapState extends State<MainMap> {
       alignment: Alignment.bottomCenter,
       children: [
         GoogleMap(
-          initialCameraPosition: initialPosition,
-          myLocationEnabled: true,
+          initialCameraPosition: initialPosition,          
           onMapCreated: mapBloc.initMap,
+          buildingsEnabled: false,
+          polylines: mapBloc.state.polylines.values.toSet(),
         ),
         BottomActions(),
       ],
