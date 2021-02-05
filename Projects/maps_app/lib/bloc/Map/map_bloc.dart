@@ -43,7 +43,7 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
     MapEvent event,
   ) async* {
     
-    if(event is OnMapReady) yield state.copyWith(mapReady: true);
+    if(event is OnMapReady) yield state.copyWith(mapReady: true); else
     if(event is OnLocationUpdate){
       List<LatLng> points = [...this._myRoute.points,event.ubication];
       this._myRoute = this._myRoute.copyWith(pointsParam: points);
@@ -52,7 +52,7 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
       currentPolyLines['mi_ruta'] = this._myRoute;
 
       yield state.copyWith(polylines: currentPolyLines);
-      
+
     }
 
   }

@@ -13,7 +13,7 @@ class MyRouteButton extends StatelessWidget {
         backgroundColor: Colors.white,
         maxRadius: 25,
         child: IconButton(
-          icon: Icon(Icons.my_location, color: Colors.black87),
+          icon: Icon(Icons.more_horiz, color: Colors.black87),
           onPressed: onPress,
         ),
       ),

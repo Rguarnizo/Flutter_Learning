@@ -10,11 +10,13 @@ import '../bloc/Permissions/permission_bloc.dart';
 class MapPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final permissionBloc = BlocProvider.of<PermissionBloc>(context);
-    permissionBloc.add(PermissionCheck());
-    return Scaffold(
+    final permissionBloc = BlocProvider.of<PermissionBloc>(context);    
+    return Scaffold(      
       body: BlocBuilder<PermissionBloc, PermissionState>(
         builder: (context, state) {                    
+
+          permissionBloc.add(PermissionCheck());
+
           if (state is PermissionGpsDenied) return PermissionsPage();
           return MainMap();
         },
@@ -70,9 +72,11 @@ class _MainMapState extends State<MainMap> {
       children: [
         GoogleMap(
           initialCameraPosition: initialPosition,          
-          onMapCreated: mapBloc.initMap,
+          myLocationEnabled: true,
+          onMapCreated: mapBloc.initMap,        
           zoomControlsEnabled: false,
-          buildingsEnabled: false,
+          compassEnabled: false,
+          myLocationButtonEnabled: false,
           polylines: mapBloc.state.polylines.values.toSet(),
         ),
         BottomActions(),
@@ -96,7 +100,13 @@ class BottomActions extends StatelessWidget {
       builder: (context, state) {
         //TODO: Create a widget for gps error.
         if(state is GpsDissable) return Container(color: Colors.red, width: 50,height: 50,);
-        if(state is PermissionsAccepted) return MyLocationButton(onPress: () => mapBloc.moveCam(blocLocation.state.location),);
+        if(state is PermissionsAccepted) return Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            MyRouteButton(onPress:() => null),
+            MyLocationButton(onPress: () => mapBloc.moveCam(blocLocation.state.location),),
+          ],
+        );
       },
     );
   }

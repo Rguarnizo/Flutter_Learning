@@ -15,7 +15,7 @@ class MapInitial {
   }) : this.polylines = polylines ?? new Map();
 
   MapInitial copyWith({bool mapReady, bool drawTravel,Map<String, Polyline> polylines,}) => MapInitial(
-      mapReady: mapReady ?? mapReady,
+      mapReady: mapReady ?? this.mapReady,
       drawTravel: drawTravel ?? this.drawTravel,
       polylines: polylines ?? this.polylines,);
 }
