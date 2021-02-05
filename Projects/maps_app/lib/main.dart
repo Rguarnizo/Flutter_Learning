@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:maps_app/bloc/Map/map_bloc.dart';
 import 'package:maps_app/pages/map_page.dart';
 import 'package:maps_app/pages/permissions_page.dart';
 import 'bloc/Location/location_bloc.dart';
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => PermissionBloc()),
         BlocProvider(create: (_) => LocationBloc()),
+        BlocProvider(create: (_) => MapBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

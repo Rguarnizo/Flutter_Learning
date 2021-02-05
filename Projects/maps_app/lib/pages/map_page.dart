@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:maps_app/bloc/Location/location_bloc.dart';
+import 'package:maps_app/bloc/Map/map_bloc.dart';
 import 'package:maps_app/pages/permissions_page.dart';
 import '../bloc/Permissions/permission_bloc.dart';
 
@@ -49,7 +50,7 @@ class _MainMapState extends State<MainMap> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LocationBloc, MyLocation>(
-      builder: (_, state) {        
+      builder: (_, state) {
         return createMap(state);
       },
     );
@@ -63,15 +64,18 @@ class _MainMapState extends State<MainMap> {
     locationBloc.finishFollow();
   }
 
-  Widget createMap(MyLocation state){
+  Widget createMap(MyLocation state) {
+    
+    final mapBloc = BlocProvider.of<MapBloc>(context);
+    
 
     final location = state.location;
 
-    if(!state.existLocation) return Text('Ubicando...');
-    
-    final initialPosition = CameraPosition(target: location,zoom: 15);
+    if (!state.existLocation) return Text('Ubicando...');
 
-    return GoogleMap(initialCameraPosition: initialPosition,myLocationEnabled: true);
+    final initialPosition = CameraPosition(target: location, zoom: 15);
+
+    return GoogleMap(
+        initialCameraPosition: initialPosition, myLocationEnabled: true,onMapCreated: mapBloc.initMap,);
   }
-
 }
