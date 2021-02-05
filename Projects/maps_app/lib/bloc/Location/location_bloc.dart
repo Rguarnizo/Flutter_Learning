@@ -8,27 +8,31 @@ import 'package:meta/meta.dart';
 part 'location_event.dart';
 part 'location_state.dart';
 
-class LocationBloc extends Bloc<LocationEvent, LocationState> {
-  LocationBloc() : super(MyLocation());
+class LocationBloc extends Bloc<LocationEvent, MyLocation> {
+  LocationBloc() : super(MyLocation(location: LatLng(0,0)));
 
   StreamSubscription<Position> _positionSubscription;
   
 
   @override
-  Stream<LocationState> mapEventToState(
+  Stream<MyLocation> mapEventToState(
     LocationEvent event,
   ) async* {
+    if(event is OnLocationChange){ 
+      yield state.copyWith(location: event.location,existLocation: true);
+    }
     
   }
 
   void initFollow(){
     
-    this._positionSubscription = 
+    _positionSubscription = 
     GeolocatorPlatform.instance.getPositionStream(
-      desiredAccuracy : LocationAccuracy.bestForNavigation,
+      desiredAccuracy : LocationAccuracy.best,
       distanceFilter: 10,
-    ).listen((position) {
-      print(position);
+    ).listen((position) {      
+      final location = new LatLng(position.latitude, position.longitude);
+      add(OnLocationChange(location));
     });
   }
 
