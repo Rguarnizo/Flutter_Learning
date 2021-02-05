@@ -58,7 +58,7 @@ class _MainMapState extends State<MainMap> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    
     super.dispose();
     final locationBloc = BlocProvider.of<LocationBloc>(context);
     locationBloc.finishFollow();
