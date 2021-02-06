@@ -39,6 +39,12 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
 
   }
 
+
+
+
+
+
+
   @override
   Stream<MapInitial> mapEventToState(
     MapEvent event,
@@ -49,6 +55,10 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
     if(event is OnMarkRoute)      yield* this.onMarkRoute(event);
 
   }
+
+
+
+
 
   Stream<MapInitial> onLocationUpdate(OnLocationUpdate event)async* {
     List<LatLng> points = [...this._myRoute.points,event.ubication];
