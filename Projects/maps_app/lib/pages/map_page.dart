@@ -103,8 +103,8 @@ class BottomActions extends StatelessWidget {
         if(state is PermissionsAccepted) return Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            MyFollowLocationButton(onPress:() => null),
             MyLocationButton(onPress: () => mapBloc.moveCam(blocLocation.state.location),),
+            MyFollowLocationButton(onPress:() => mapBloc.add(OnFollowLocation())),
             MyRouteButton(onPress: () => mapBloc.add(OnMarkRoute())),
           ],
         );
