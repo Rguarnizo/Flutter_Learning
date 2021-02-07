@@ -5,10 +5,31 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      width: 150,
-      height: 150,
+    final size = MediaQuery.of(context).size;
+
+    return SafeArea(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30),
+        width: size.width,        
+        child: GestureDetector(
+          onTap: (){
+            
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+            alignment: Alignment.centerLeft,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black12, blurRadius: 5, offset: Offset(0, 5))
+                ]),
+                child: Text('¿A dónde iremos hoy?',style: TextStyle(color: Colors.black87, ),),
+          ),
+        ),
+      ),
     );
   }
 }
