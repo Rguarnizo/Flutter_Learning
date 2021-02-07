@@ -79,6 +79,7 @@ class _MainMapState extends State<MainMap> {
           myLocationButtonEnabled: false,
           polylines: mapBloc.state.polylines.values.toSet(),
           onCameraMove: (position) => mapBloc.add(OnMoveMap(position.target)),
+          
         ),
         BottomActions(),
       ],
