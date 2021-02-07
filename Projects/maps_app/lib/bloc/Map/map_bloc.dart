@@ -53,7 +53,8 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
     if(event is OnMapReady)       yield state.copyWith(mapReady: true); 
     if(event is OnLocationUpdate) yield* this.onLocationUpdate(event);  
     if(event is OnMarkRoute)      yield* this.onMarkRoute(event);       
-    if(event is OnFollowLocation) yield* this.onFollowLocation(event);  
+    if(event is OnFollowLocation) yield* this.onFollowLocation(event);
+    if(event is OnMoveMap){        print('event: ${event.ubication}'); yield state.copyWith(centralLocation: event.ubication); }
 
   }
 

@@ -10,6 +10,13 @@ class OnMapReady extends MapEvent{
 class OnMarkRoute extends MapEvent{
 
 }
+class OnMoveMap extends MapEvent{
+
+  final LatLng ubication;
+
+  OnMoveMap(this.ubication);
+
+}
 
 class OnFollowLocation extends MapEvent{
 
