@@ -26,7 +26,13 @@ class SearchBar extends StatelessWidget {
                   BoxShadow(
                       color: Colors.black12, blurRadius: 5, offset: Offset(0, 5))
                 ]),
-                child: Text('¿A dónde iremos hoy?',style: TextStyle(color: Colors.black87, ),),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text('¿A dónde iremos hoy?',style: TextStyle(color: Colors.black87, ),),
+                    Icon(Icons.search)
+                  ],
+                ),
           ),
         ),
       ),
