@@ -10,7 +10,7 @@ class MyLocationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.symmetric(vertical: 10,horizontal: 5),
       child: CircleAvatar(
         backgroundColor: Colors.white,
         maxRadius: 25,

@@ -68,7 +68,7 @@ class _MainMapState extends State<MainMap> {
     final initialPosition = CameraPosition(target: location, zoom: 15);
     mapBloc.add(OnLocationUpdate(initialPosition.target));
     return Stack(      
-      alignment: Alignment.bottomRight,
+      alignment: Alignment.bottomCenter,
       children: [
         GoogleMap(
           initialCameraPosition: initialPosition,          
@@ -81,6 +81,7 @@ class _MainMapState extends State<MainMap> {
           onCameraMove: (position) => mapBloc.add(OnMoveMap(position.target)),
           
         ),
+        Positioned(top: 20,child: SearchBar()),
         BottomActions(),
       ],
     );
@@ -102,8 +103,8 @@ class BottomActions extends StatelessWidget {
       builder: (context, state) {
         //TODO: Create a widget for gps error.
         if(state is GpsDissable) return Container(color: Colors.red, width: 50,height: 50,);
-        if(state is PermissionsAccepted) return Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+        if(state is PermissionsAccepted) return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             MyLocationButton(onPress: () => mapBloc.moveCam(blocLocation.state.location),),
             MyFollowLocationButton(onPress:() => mapBloc.add(OnFollowLocation())),
