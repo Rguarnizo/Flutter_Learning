@@ -82,6 +82,7 @@ class _MainMapState extends State<MainMap> {
           
         ),
         Positioned(top: 20,child: SearchBar()),
+        ManualMarker(),
         BottomActions(),
       ],
     );
