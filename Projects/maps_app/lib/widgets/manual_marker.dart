@@ -25,6 +25,9 @@ class _BuildMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final blocSearch = BlocProvider.of<SearchBloc>(context);
+
     return Stack(
       children: [
         Positioned(
@@ -38,7 +41,7 @@ class _BuildMarker extends StatelessWidget {
                 Icons.arrow_back,
                 color: Colors.black45,
               ),
-              onPressed: () {},
+              onPressed: () => blocSearch.add(OnDeactiveManualMarker()),
             ),
           ),
         ),
@@ -56,7 +59,7 @@ class _BuildMarker extends StatelessWidget {
           left: 40,
           child: MaterialButton(
             minWidth: size.width - 120,
-            onPressed: () {},
+            onPressed: () => null,
             child: Text(
               'Confirmar destino',
               style: TextStyle(color: Colors.black),
