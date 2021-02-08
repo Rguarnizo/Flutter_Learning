@@ -48,3 +48,4 @@ class SearchBar extends StatelessWidget {
     if(result.cancel) return ;
   }
 }
+ 
