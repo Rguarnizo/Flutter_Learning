@@ -29,6 +29,7 @@ class _BuildMarker extends StatelessWidget {
     final blocSearch = BlocProvider.of<SearchBloc>(context);
 
     return Stack(
+      alignment: Alignment.bottomCenter,
       children: [
         Positioned(
           top: 70,
@@ -55,18 +56,18 @@ class _BuildMarker extends StatelessWidget {
               ),
             )),
         Positioned(
-          bottom: 70,
-          left: 40,
-          child: MaterialButton(
-            minWidth: size.width - 120,
-            onPressed: () => null,
-            child: Text(
-              'Confirmar destino',
-              style: TextStyle(color: Colors.black),
+          bottom: 80,
+          child: MaterialButton(          
+              minWidth: size.width - 120,
+              onPressed: () => null,
+              child: Text(
+                'Confirmar destino',
+                style: TextStyle(color: Colors.black),
+              ),
+              color: Colors.white,
             ),
-            color: Colors.white,
-          ),
-        )
+        ),
+        
       ],
     );
   }
