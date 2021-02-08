@@ -7,6 +7,24 @@ class ManualMarker extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
+    return BlocBuilder<SearchBloc, SearchState>(
+      builder: (context, state) {
+        return state.seleccionManual? _BuildMarker(size: size):Container();
+      },
+    );
+  }
+}
+
+class _BuildMarker extends StatelessWidget {
+  const _BuildMarker({
+    Key key,
+    @required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
     return Stack(
       children: [
         Positioned(

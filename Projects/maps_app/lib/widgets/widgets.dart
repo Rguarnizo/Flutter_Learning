@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maps_app/bloc/Map/map_bloc.dart';
+import 'package:maps_app/bloc/Search/search_bloc.dart';
 import 'package:maps_app/models/search_result.dart';
 import 'package:maps_app/search/search_destination.dart';
 
