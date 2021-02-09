@@ -34,38 +34,46 @@ class _BuildMarker extends StatelessWidget {
         Positioned(
           top: 70,
           left: 20,
-          child: CircleAvatar(
-            maxRadius: 25,
-            backgroundColor: Colors.white,
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.black45,
+          child: FadeInLeft(
+            duration: Duration(milliseconds: 500),
+            child: CircleAvatar(
+              maxRadius: 25,
+              backgroundColor: Colors.white,
+              child: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black45,
+                ),
+                onPressed: () => blocSearch.add(OnDeactiveManualMarker()),
               ),
-              onPressed: () => blocSearch.add(OnDeactiveManualMarker()),
             ),
           ),
         ),
         Transform.translate(
             offset: Offset(0, -15),
             child: Center(
-              child: Icon(
-                Icons.location_on,
-                size: 50,
-                color: Colors.white,
+              child: BounceInDown(
+                child: Icon(
+                  Icons.location_on,
+                  size: 50,
+                  color: Colors.white,
+                ),
               ),
             )),
         Positioned(
           bottom: 80,
-          child: MaterialButton(          
-              minWidth: size.width - 120,
-              onPressed: () => null,
-              child: Text(
-                'Confirmar destino',
-                style: TextStyle(color: Colors.black),
+          child: FadeIn(
+            duration: Duration(milliseconds: 500),
+            child: MaterialButton(          
+                minWidth: size.width - 120,
+                onPressed: () => null,
+                child: Text(
+                  'Confirmar destino',
+                  style: TextStyle(color: Colors.black),
+                ),
+                color: Colors.white,
               ),
-              color: Colors.white,
-            ),
+          ),
         ),
         
       ],
