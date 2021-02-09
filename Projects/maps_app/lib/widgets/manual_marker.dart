@@ -100,6 +100,9 @@ class _BuildMarker extends StatelessWidget {
 
       final List<LatLng> routeCoords = points.map((e) => LatLng(e[0], e[1])).toList();
 
+
+      blocMap.add(OnCreateRouteStartEnd(distance: distance,duration: duration,routeCoords: routeCoords));
+
       
     
   }
