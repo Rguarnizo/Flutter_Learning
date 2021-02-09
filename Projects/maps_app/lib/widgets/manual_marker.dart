@@ -80,7 +80,7 @@ class _BuildMarker extends StatelessWidget {
     );
   }
 
-  void calcularDestino(BuildContext context){
+  void calcularDestino(BuildContext context) async {
 
     final blocMyLocation = BlocProvider.of<LocationBloc>(context);
     final blocMap = BlocProvider.of<MapBloc>(context);
@@ -90,7 +90,9 @@ class _BuildMarker extends StatelessWidget {
     final start = blocMyLocation.state.location;
     final end   = blocMap.state.centralLocation;
 
-    trafficService.getCoordsStartAndEnd(start, end);
+      final trafficReponse = await trafficService.getCoordsStartAndEnd(start, end);
+
+      //Decode polylines 
     
   }
 
