@@ -66,7 +66,7 @@ class _BuildMarker extends StatelessWidget {
             duration: Duration(milliseconds: 500),
             child: MaterialButton(          
                 minWidth: size.width - 120,
-                onPressed: () => null,
+                onPressed: () => this.calcularDestino(context),
                 child: Text(
                   'Confirmar destino',
                   style: TextStyle(color: Colors.black),
@@ -79,4 +79,19 @@ class _BuildMarker extends StatelessWidget {
       ],
     );
   }
+
+  void calcularDestino(BuildContext context){
+
+    final blocMyLocation = BlocProvider.of<LocationBloc>(context);
+    final blocMap = BlocProvider.of<MapBloc>(context);
+
+
+    final trafficService = TrafficService();
+    final start = blocMyLocation.state.location;
+    final end   = blocMap.state.centralLocation;
+
+    trafficService.getCoordsStartAndEnd(start, end);
+    
+  }
+
 }
