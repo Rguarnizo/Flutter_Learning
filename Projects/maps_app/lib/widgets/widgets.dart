@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:maps_app/bloc/Location/location_bloc.dart';
 import 'package:maps_app/bloc/Map/map_bloc.dart';
 import 'package:maps_app/bloc/Search/search_bloc.dart';

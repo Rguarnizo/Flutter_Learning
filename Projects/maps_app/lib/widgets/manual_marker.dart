@@ -98,6 +98,8 @@ class _BuildMarker extends StatelessWidget {
       //Decode polylines 
       final points = Poly.Polyline.Decode(encodedString: geometry,precision: 6).decodedCoords;
 
+      final List<LatLng> routeCoords = points.map((e) => LatLng(e[0], e[1])).toList();
+
       
     
   }

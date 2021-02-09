@@ -28,3 +28,15 @@ class OnLocationUpdate extends MapEvent{
 
   OnLocationUpdate(this.ubication);
 }
+
+class OnCreateRouteStartEnd extends MapEvent {
+  final List<LatLng> routeCoords;
+  final double distance;
+  final double duration;
+
+  OnCreateRouteStartEnd({
+    this.routeCoords,
+    this.distance,
+    this.duration,
+  });
+}
