@@ -23,7 +23,7 @@ class TrafficService {
   final baseUrl = 'https://api.mapbox.com/directions/v5';
   final _apiKey = 'pk.eyJ1Ijoicmd1YXJuaXpvIiwiYSI6ImNrZGRvNjZqYjRnNm8ycXFyZHF4bWc4emUifQ.H6TLyn05-MVNFIzOJCu1aw';
 
-  Future getCoordsStartAndEnd(LatLng start,LatLng end) async {
+  Future<RouteResponse> getCoordsStartAndEnd(LatLng start,LatLng end) async {
 
     final coordSting = '${start.longitude},${start.latitude};${end.longitude},${end.latitude}';
     final url = '$baseUrl/mapbox/driving/$coordSting';

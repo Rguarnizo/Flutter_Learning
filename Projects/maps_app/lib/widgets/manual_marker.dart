@@ -91,8 +91,14 @@ class _BuildMarker extends StatelessWidget {
     final end   = blocMap.state.centralLocation;
 
       final trafficReponse = await trafficService.getCoordsStartAndEnd(start, end);
+      final geometry = trafficReponse.routes[0].geometry;
+      final duration = trafficReponse.routes[0].duration;
+      final distance = trafficReponse.routes[0].distance;
 
       //Decode polylines 
+      Poly.Polyline.Decode(encodedString: geometry,precision: 6);
+
+      
     
   }
 
