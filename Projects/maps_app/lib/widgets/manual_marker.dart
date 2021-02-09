@@ -96,7 +96,7 @@ class _BuildMarker extends StatelessWidget {
       final distance = trafficReponse.routes[0].distance;
 
       //Decode polylines 
-      Poly.Polyline.Decode(encodedString: geometry,precision: 6);
+      final points = Poly.Polyline.Decode(encodedString: geometry,precision: 6).decodedCoords;
 
       
     
