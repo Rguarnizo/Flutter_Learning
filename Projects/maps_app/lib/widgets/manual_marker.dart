@@ -82,6 +82,8 @@ class _BuildMarker extends StatelessWidget {
 
   void calcularDestino(BuildContext context) async {
 
+    calculateAlert(context);
+
     final blocMyLocation = BlocProvider.of<LocationBloc>(context);
     final blocMap = BlocProvider.of<MapBloc>(context);
 
@@ -103,7 +105,7 @@ class _BuildMarker extends StatelessWidget {
 
       blocMap.add(OnCreateRouteStartEnd(distance: distance,duration: duration,routeCoords: routeCoords));
 
-      
+      Navigator.pop(context);
     
   }
 
