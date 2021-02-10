@@ -45,6 +45,7 @@ class TrafficService {
   }
 
   Future<SearchResponse> getResultQueryParam(String search,LatLng proximity) async {
+    
 
     final url = '${this.baseUrlGeo}/$search.json';
 

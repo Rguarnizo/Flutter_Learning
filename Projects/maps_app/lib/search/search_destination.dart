@@ -50,6 +50,9 @@ class SearchDestination extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+
+    if(this.query.isEmpty){
+
     return ListView(
       children: [
         ListTile(
@@ -63,9 +66,17 @@ class SearchDestination extends SearchDelegate {
         )
       ],
     );
+      
+    }
+
+    return this._buildSuggestionsResult(context);
+
   }
 
   Widget _buildSuggestionsResult(BuildContext context) {
+
+    if(this.query.isEmpty) return Container();
+
     final blocLocation = BlocProvider.of<LocationBloc>(context);
 
     return FutureBuilder(
