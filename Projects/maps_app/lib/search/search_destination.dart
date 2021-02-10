@@ -79,10 +79,10 @@ class SearchDestination extends SearchDelegate {
 
     final blocLocation = BlocProvider.of<LocationBloc>(context);
 
-    return FutureBuilder(
-      future: this
-          ._trafficService
-          .getResultQueryParam(this.query.trim(), blocLocation.state.location),
+    this._trafficService.getSugerenciasPorQuery(this.query.trim(),blocLocation.state.location);
+
+    return StreamBuilder(
+      stream: this._trafficService.suggestStream,          
       builder: (context, AsyncSnapshot<SearchResponse> snapshot) {
         if (!snapshot.hasData) {
           return Center(child: CircularProgressIndicator());
