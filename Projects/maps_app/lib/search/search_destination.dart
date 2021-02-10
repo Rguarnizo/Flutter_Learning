@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:maps_app/bloc/Location/location_bloc.dart';
 import 'package:maps_app/models/search_result.dart';
+import 'package:maps_app/services/traffic_service.dart';
 
 class SearchDestination extends SearchDelegate {
   @override
   final String searchFieldLabel;
+  final TrafficService _trafficService;
 
-  SearchDestination() : this.searchFieldLabel = 'Buscar...';
+  SearchDestination() : this.searchFieldLabel = 'Buscar...', this._trafficService = new TrafficService();
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -34,6 +38,13 @@ class SearchDestination extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+
+
+    final blocLocation = BlocProvider.of<LocationBloc>(context);
+
+    this._trafficService.getResultQueryParam(this.query.trim(),blocLocation.state.location);
+
+
     return Text('Build Results');
   }
 
