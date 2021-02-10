@@ -86,6 +86,7 @@ class _BuildMarker extends StatelessWidget {
 
     final blocMyLocation = BlocProvider.of<LocationBloc>(context);
     final blocMap = BlocProvider.of<MapBloc>(context);
+    final blocSearch = BlocProvider.of<SearchBloc>(context);
 
 
     final trafficService = TrafficService();
@@ -106,6 +107,9 @@ class _BuildMarker extends StatelessWidget {
       blocMap.add(OnCreateRouteStartEnd(distance: distance,duration: duration,routeCoords: routeCoords));
 
       Navigator.pop(context);
+
+
+      blocSearch.add(OnDeactiveManualMarker());
     
   }
 
