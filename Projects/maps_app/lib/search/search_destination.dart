@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maps_app/bloc/Location/location_bloc.dart';
+import 'package:maps_app/models/search_response.dart';
 import 'package:maps_app/models/search_result.dart';
 import 'package:maps_app/services/traffic_service.dart';
 
@@ -9,7 +10,9 @@ class SearchDestination extends SearchDelegate {
   final String searchFieldLabel;
   final TrafficService _trafficService;
 
-  SearchDestination() : this.searchFieldLabel = 'Buscar...', this._trafficService = new TrafficService();
+  SearchDestination()
+      : this.searchFieldLabel = 'Buscar...',
+        this._trafficService = new TrafficService();
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -24,9 +27,7 @@ class SearchDestination extends SearchDelegate {
 
   @override
   Widget buildLeading(BuildContext context) {
-
     final searchResult = SearchResult(cancel: true);
-
 
     return IconButton(
       icon: Icon(Icons.chevron_left),
@@ -38,14 +39,13 @@ class SearchDestination extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-
-
     final blocLocation = BlocProvider.of<LocationBloc>(context);
 
-    this._trafficService.getResultQueryParam(this.query.trim(),blocLocation.state.location);
+    this
+        ._trafficService
+        .getResultQueryParam(this.query.trim(), blocLocation.state.location);
 
-
-    return Text('Build Results');
+    return _buildSuggestionsResult(context);
   }
 
   @override
@@ -58,10 +58,33 @@ class SearchDestination extends SearchDelegate {
           ),
           title: Text('Colocar ubicación Manualmente'),
           onTap: () {
-            this.close(context, SearchResult(cancel: false,manual: true));
+            this.close(context, SearchResult(cancel: false, manual: true));
           },
         )
       ],
+    );
+  }
+
+  Widget _buildSuggestionsResult(BuildContext context) {
+    final blocLocation = BlocProvider.of<LocationBloc>(context);
+
+    return FutureBuilder(
+      future: this
+          ._trafficService
+          .getResultQueryParam(this.query.trim(), blocLocation.state.location),
+      builder: (context, AsyncSnapshot<SearchResponse> snapshot) {
+        if (!snapshot.hasData) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        final places = snapshot.data.features;
+
+        return ListView.separated(
+          separatorBuilder: (_, i) => Divider(),
+          itemCount: places.length,
+          itemBuilder: (context, i) => ListTile(title: Text(places[i].placeName),leading: Icon(Icons.place),subtitle: Text(places[i].placeName),onTap: () => print(places[i])),
+        );
+      },
     );
   }
 }
