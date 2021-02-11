@@ -11,3 +11,11 @@ class OnActiveManualMarker extends SearchEvent{
 class OnDeactiveManualMarker extends SearchEvent{
   
 }
+
+class OnAddHistorial extends SearchEvent{
+
+  final SearchResult _searchResult;
+
+  OnAddHistorial(this._searchResult);
+  
+}
