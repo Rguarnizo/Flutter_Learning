@@ -10,8 +10,9 @@ class SearchDestination extends SearchDelegate {
   @override
   final String searchFieldLabel;
   final TrafficService _trafficService;
+  final List<SearchResult> historial;
 
-  SearchDestination()
+  SearchDestination(this.historial)
       : this.searchFieldLabel = 'Buscar...',
         this._trafficService = new TrafficService();
 
@@ -62,7 +63,19 @@ class SearchDestination extends SearchDelegate {
             onTap: () {
               this.close(context, SearchResult(cancel: false, manual: true));
             },
-          )
+          ),
+          ...this
+              .historial
+              .map((e) => ListTile(
+                    leading: Icon(Icons.history),
+                    title: Text(e.nombreDestino),
+                    subtitle: Text(e.description),
+                    onTap: () {
+                               this.close(
+                      context,e);  
+                    },
+                  ))
+              .toList(),
         ],
       );
     }

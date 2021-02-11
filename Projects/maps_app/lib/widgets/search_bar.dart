@@ -23,8 +23,9 @@ class SearchBar extends StatelessWidget {
           width: size.width,
           child: GestureDetector(
             onTap: () async {
+              final historial = context.read<SearchBloc>().state.historial;
               final result = await showSearch(
-                  context: context, delegate: SearchDestination());
+                  context: context, delegate: SearchDestination(historial));
               returnSearch(context, result);
             },
             child: Container(
@@ -86,6 +87,11 @@ class SearchBar extends StatelessWidget {
     final List<LatLng> routeCoord = points.decodedCoords.map((e) => LatLng(e[0],e[1])).toList();
 
     mapaBloc.add(OnCreateRouteStartEnd(distance: distance,duration: duration,routeCoords: routeCoord));
+
+   final  searchBloc =  BlocProvider.of<SearchBloc>(context);
+
+   searchBloc.add(OnAddHistorial(result));
+
 
 
     
