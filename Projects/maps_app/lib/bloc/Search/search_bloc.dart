@@ -17,6 +17,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     if(event is OnActiveManualMarker) yield state.copyWith(seleccionManual: true);
     if(event is OnDeactiveManualMarker) yield state.copyWith(seleccionManual: false);
+    if(event is OnAddHistorial) state.historial.add(event._searchResult); yield state.copyWith(historial: state.historial);
 
 
   }
