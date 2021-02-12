@@ -40,6 +40,7 @@ class _MainMapState extends State<MainMap> {
   void initState() {
     super.initState();
     final locationBloc = BlocProvider.of<LocationBloc>(context);
+    //* Active Stream Position subscription to emit the position if this change
     locationBloc.initFollow();
   }
 
