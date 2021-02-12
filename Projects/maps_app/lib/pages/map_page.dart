@@ -86,7 +86,7 @@ class _MainMapState extends State<MainMap> {
           polylines: mapBloc.state.polylines.values.toSet(),
           //* Add markers to a map 
           markers: mapBloc.state.markers.values.toSet(),
-          
+          //* Always the app knows the central ubication of cam
           onCameraMove: (position) => mapBloc.add(OnMoveMap(position.target)),
           
         ),
