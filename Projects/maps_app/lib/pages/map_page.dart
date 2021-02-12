@@ -117,6 +117,7 @@ class BottomActions extends StatelessWidget {
         if(state is PermissionsAccepted) return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            //* This button move the cam of current ubication of gps
             MyLocationButton(onPress: () => mapBloc.moveCam(blocLocation.state.location),),
             MyFollowLocationButton(onPress:() => mapBloc.add(OnFollowLocation())),
             MyRouteButton(onPress: () => mapBloc.add(OnMarkRoute())),
