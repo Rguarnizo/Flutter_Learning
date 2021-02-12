@@ -112,6 +112,7 @@ class BottomActions extends StatelessWidget {
     return BlocBuilder<PermissionBloc, PermissionState>(
       builder: (context, state) {
         //TODO: Create a widget for gps error.
+        //* If gps is dissable actionButtons not show
         if(state is GpsDissable) return Container(color: Colors.red, width: 50,height: 50,);
         if(state is PermissionsAccepted) return Row(
           mainAxisAlignment: MainAxisAlignment.center,
