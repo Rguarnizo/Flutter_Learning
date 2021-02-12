@@ -57,6 +57,7 @@ class _MainMapState extends State<MainMap> {
   void dispose() {
     super.dispose();
     final locationBloc = BlocProvider.of<LocationBloc>(context);
+    //* When widget is dispose, cancel the subscription to stream.
     locationBloc.finishFollow();
   }
 
