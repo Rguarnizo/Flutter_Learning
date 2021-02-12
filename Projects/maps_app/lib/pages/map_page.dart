@@ -64,10 +64,12 @@ class _MainMapState extends State<MainMap> {
   Widget createMap(MyLocation state) {
     final mapBloc = BlocProvider.of<MapBloc>(context);
 
+    //* Read the location and save it to create a map and focus in this position
     final location = state.location;
 
     if (!state.existLocation) return Text('Ubicando...');
 
+    //* Set the camera position in the actual location 
     final initialPosition = CameraPosition(target: location, zoom: 15);
     mapBloc.add(OnLocationUpdate(initialPosition.target));
     return Stack(      
