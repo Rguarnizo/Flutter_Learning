@@ -14,9 +14,10 @@ class MapPage extends StatelessWidget {
     return Scaffold(      
       body: BlocBuilder<PermissionBloc, PermissionState>(
         builder: (context, state) {                    
-
+          //* ADD EVENT TO BLOC TO CHECK IF ALL PERMISIONS IS GARANTED
           permissionBloc.add(PermissionCheck());
 
+          //* Check permissions, if not garanted send it to a page to garanted permissions
           if (state is PermissionGpsDenied) return PermissionsPage();
           return MainMap();
         },
