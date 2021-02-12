@@ -82,6 +82,7 @@ class _MainMapState extends State<MainMap> {
           zoomControlsEnabled: false,
           compassEnabled: false,
           myLocationButtonEnabled: false,
+          //* Polylines to draw lines in map
           polylines: mapBloc.state.polylines.values.toSet(),
           markers: mapBloc.state.markers.values.toSet(),
           onCameraMove: (position) => mapBloc.add(OnMoveMap(position.target)),
