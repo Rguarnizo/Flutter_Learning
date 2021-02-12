@@ -119,6 +119,7 @@ class BottomActions extends StatelessWidget {
           children: [
             //* This button move the cam of current ubication of gps
             MyLocationButton(onPress: () => mapBloc.moveCam(blocLocation.state.location),),
+            //* This button ennable/dissable follow if gps is moving 
             MyFollowLocationButton(onPress:() => mapBloc.add(OnFollowLocation())),
             MyRouteButton(onPress: () => mapBloc.add(OnMarkRoute())),
           ],
