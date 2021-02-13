@@ -10,10 +10,10 @@ import '../bloc/Permissions/permission_bloc.dart';
 class MapPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final permissionBloc = BlocProvider.of<PermissionBloc>(context);    
-    return Scaffold(      
+    final permissionBloc = BlocProvider.of<PermissionBloc>(context);
+    return Scaffold(
       body: BlocBuilder<PermissionBloc, PermissionState>(
-        builder: (context, state) {                    
+        builder: (context, state) {
           //* ADD EVENT TO BLOC TO CHECK IF ALL PERMISIONS IS GARANTED
           permissionBloc.add(PermissionCheck());
 
@@ -69,28 +69,32 @@ class _MainMapState extends State<MainMap> {
 
     if (!state.existLocation) return Text('Ubicando...');
 
-    //* Set the camera position in the actual location 
+    //* Set the camera position in the actual location
     final initialPosition = CameraPosition(target: location, zoom: 15);
     mapBloc.add(OnLocationUpdate(initialPosition.target));
-    return Stack(      
+    return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        GoogleMap(
-          initialCameraPosition: initialPosition,          
-          myLocationEnabled: true,
-          onMapCreated: mapBloc.initMap,        
-          zoomControlsEnabled: false,
-          compassEnabled: false,
-          myLocationButtonEnabled: false,
-          //* Polylines to draw lines in map
-          polylines: mapBloc.state.polylines.values.toSet(),
-          //* Add markers to a map 
-          markers: mapBloc.state.markers.values.toSet(),
-          //* Always the app knows the central ubication of cam
-          onCameraMove: (position) => mapBloc.add(OnMoveMap(position.target)),
-          
+        BlocBuilder<MapBloc,MapInitial>(
+          builder: (context, state) {
+            return GoogleMap(
+              initialCameraPosition: initialPosition,
+              myLocationEnabled: true,
+              onMapCreated: mapBloc.initMap,
+              zoomControlsEnabled: false,
+              compassEnabled: false,
+              myLocationButtonEnabled: false,
+              //* Polylines to draw lines in map
+              polylines: mapBloc.state.polylines.values.toSet(),
+              //* Add markers to a map
+              markers: mapBloc.state.markers.values.toSet(),
+              //* Always the app knows the central ubication of cam
+              onCameraMove: (position) =>
+                  mapBloc.add(OnMoveMap(position.target)),
+            );
+          },
         ),
-        Positioned(top: 20,child: SearchBar()),
+        Positioned(top: 20, child: SearchBar()),
         ManualMarker(),
         BottomActions(),
       ],
@@ -105,7 +109,6 @@ class BottomActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final blocLocation = BlocProvider.of<LocationBloc>(context);
     final mapBloc = BlocProvider.of<MapBloc>(context);
 
@@ -113,18 +116,27 @@ class BottomActions extends StatelessWidget {
       builder: (context, state) {
         //TODO: Create a widget for gps error.
         //* If gps is dissable actionButtons not show
-        if(state is GpsDissable) return Container(color: Colors.red, width: 50,height: 50,);
-        if(state is PermissionsAccepted) return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            //* This button move the cam of current ubication of gps
-            MyLocationButton(onPress: () => mapBloc.moveCam(blocLocation.state.location),),
-            //* This button ennable/dissable follow if gps is moving 
-            MyFollowLocationButton(onPress:() => mapBloc.add(OnFollowLocation())),
-            
-            MyRouteButton(onPress: () => mapBloc.add(OnMarkRoute())),
-          ],
-        );
+        if (state is GpsDissable)
+          return Container(
+            color: Colors.red,
+            width: 50,
+            height: 50,
+          );
+        if (state is PermissionsAccepted)
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //* This button move the cam of current ubication of gps
+              MyLocationButton(
+                onPress: () => mapBloc.moveCam(blocLocation.state.location),
+              ),
+              //* This button ennable/dissable follow if gps is moving
+              MyFollowLocationButton(
+                  onPress: () => mapBloc.add(OnFollowLocation())),
+
+              MyRouteButton(onPress: () => mapBloc.add(OnMarkRoute())),
+            ],
+          );
       },
     );
   }

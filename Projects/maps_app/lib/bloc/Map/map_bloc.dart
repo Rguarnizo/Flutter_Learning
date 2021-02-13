@@ -15,8 +15,12 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
 
   GoogleMapController _mapController;
 
+  //* POLYLINES
   Polyline _myRoute = new Polyline(polylineId: PolylineId('mi_ruta'),width: 4,color: Colors.white);
   Polyline _routeStartEnd = new Polyline(polylineId: PolylineId('mi_ruta_destino'),width: 4,color: Colors.white);
+
+  
+  
 
   void initMap(GoogleMapController controller){
 
@@ -109,7 +113,17 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
     final currentPolylines = state.polylines;
     currentPolylines['mi_ruta_destino'] = this._routeStartEnd;
 
+    final startMarker = new Marker(
+    markerId: MarkerId('start'),
+    position: event.routeCoords[0],
+  );
 
-    yield state.copyWith(polylines: currentPolylines);
+    final newMarkers = {...state.markers};
+    newMarkers['start'] = startMarker;
+
+
+
+
+    yield state.copyWith(polylines: currentPolylines,markers: newMarkers);
   }
 }

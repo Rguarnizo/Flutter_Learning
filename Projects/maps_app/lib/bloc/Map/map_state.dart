@@ -19,7 +19,7 @@ class MapInitial {
     this.drawTravel = true,
     this.followLocation = false,
   })  : this.polylines = polylines ?? new Map(),
-         this.markers = markers ?? new Map(),
+       this.markers = markers ?? new Map(),
        this.centralLocation = centralLocation ?? new LatLng(0, 0);
 
   MapInitial copyWith(
@@ -27,11 +27,14 @@ class MapInitial {
           bool drawTravel,
           bool followLocation,
           Map<String, Polyline> polylines,
+          Map<String, Marker> markers,
           LatLng centralLocation}) =>
       MapInitial(
           mapReady: mapReady ?? this.mapReady,
           drawTravel: drawTravel ?? this.drawTravel,
           polylines: polylines ?? this.polylines,
           followLocation: followLocation ?? this.followLocation,
-          centralLocation: centralLocation ?? this.centralLocation);
+          centralLocation: centralLocation ?? this.centralLocation,
+          markers: markers ?? this.markers,          
+          );
 }
