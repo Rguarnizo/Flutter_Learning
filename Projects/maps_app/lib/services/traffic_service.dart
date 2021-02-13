@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:maps_app/helpers/debouncer.dart';
+import 'package:maps_app/models/reverse_query_response.dart';
 import 'package:maps_app/models/route_response.dart';
 import 'package:maps_app/models/search_response.dart';
 
@@ -96,6 +97,8 @@ class TrafficService {
       'language'    : 'es'
     }
     );
+
+    final data = reverseQueryResponseToJson(resp.data);
 
     
 
