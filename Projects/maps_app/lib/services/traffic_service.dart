@@ -101,7 +101,7 @@ class TrafficService {
     final data = reverseQueryResponseToJson(resp.data);
 
     
-
+    return data;
 
   }
 
