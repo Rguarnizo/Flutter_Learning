@@ -87,5 +87,19 @@ class TrafficService {
 
 }
 
+  Future getCoordsInfo(LatLng proximity) async {
+    final url = '${this.baseUrlGeo}/${proximity.longitude},${proximity.latitude}.json';
+
+    final resp = await this._dio.get(url,
+    queryParameters: {
+      'access_token': this._apiKey,
+      'language'    : 'es'
+    }
+    );
+
+    
+
+
+  }
 
 }
