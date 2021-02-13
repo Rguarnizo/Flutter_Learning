@@ -115,7 +115,7 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
 
     final startMarker = new Marker(
     markerId: MarkerId('start'),
-    position: event.routeCoords[0],
+    position: event.routeCoords[0],    
     infoWindow: InfoWindow(
       title: 'My House',
       snippet: 'This is a start point of route',
