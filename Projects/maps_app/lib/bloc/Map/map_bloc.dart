@@ -116,10 +116,16 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
     final startMarker = new Marker(
     markerId: MarkerId('start'),
     position: event.routeCoords[0],
+    );
+
+  final endMarker = new Marker(
+    markerId: MarkerId('end'),
+    position: event.routeCoords[event.routeCoords.length-1],
   );
 
     final newMarkers = {...state.markers};
     newMarkers['start'] = startMarker;
+    newMarkers['end'] = endMarker;
 
 
 
