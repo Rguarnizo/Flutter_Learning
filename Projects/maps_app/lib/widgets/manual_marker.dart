@@ -103,8 +103,13 @@ class _BuildMarker extends StatelessWidget {
 
       final List<LatLng> routeCoords = points.map((e) => LatLng(e[0], e[1])).toList();
 
+      final reverseQuery = await trafficService.getCoordsInfo(end);
+      final destinationName = reverseQuery.features[0].text;
 
-      blocMap.add(OnCreateRouteStartEnd(distance: distance,duration: duration,routeCoords: routeCoords));
+
+      blocMap.add(OnCreateRouteStartEnd(distance: distance,duration: duration,routeCoords: routeCoords,destination: destinationName));
+
+      
 
       Navigator.pop(context);
 

@@ -16,127 +16,120 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
   GoogleMapController _mapController;
 
   //* POLYLINES
-  Polyline _myRoute = new Polyline(polylineId: PolylineId('mi_ruta'),width: 4,color: Colors.white);
-  Polyline _routeStartEnd = new Polyline(polylineId: PolylineId('mi_ruta_destino'),width: 4,color: Colors.white);
+  Polyline _myRoute = new Polyline(
+      polylineId: PolylineId('mi_ruta'), width: 4, color: Colors.white);
+  Polyline _routeStartEnd = new Polyline(
+      polylineId: PolylineId('mi_ruta_destino'), width: 4, color: Colors.white);
 
-  
-  
-
-  void initMap(GoogleMapController controller){
-
-    if(!state.mapReady){
+  void initMap(GoogleMapController controller) {
+    if (!state.mapReady) {
       this._mapController = controller;
       this._mapController.setMapStyle(jsonEncode(nightGoogle));
       //TODO: Change map style.
 
       add(OnMapReady());
     }
-
   }
 
-
-  void moveCam(LatLng destination){
-
-    final cameraUpdate = CameraUpdate.newCameraPosition(CameraPosition(target: destination,zoom: 15));
+  void moveCam(LatLng destination) {
+    final cameraUpdate = CameraUpdate.newCameraPosition(
+        CameraPosition(target: destination, zoom: 15));
 
     this._mapController?.animateCamera(cameraUpdate);
-
-
   }
-
-
-
-
-
-
 
   @override
   Stream<MapInitial> mapEventToState(
     MapEvent event,
   ) async* {
-    
-    if(event is OnMapReady)       yield state.copyWith(mapReady: true); 
-    if(event is OnLocationUpdate) yield* this.onLocationUpdate(event);  
-    if(event is OnMarkRoute)      yield* this.onMarkRoute(event);       
-    if(event is OnFollowLocation) yield* this.onFollowLocation(event);
-    if(event is OnMoveMap){        print('event: ${event.ubication}'); yield state.copyWith(centralLocation: event.ubication); }
-    if(event is OnCreateRouteStartEnd) yield* this._onCreateRouteStartEnd(event);
-
+    if (event is OnMapReady) yield state.copyWith(mapReady: true);
+    if (event is OnLocationUpdate) yield* this.onLocationUpdate(event);
+    if (event is OnMarkRoute) yield* this.onMarkRoute(event);
+    if (event is OnFollowLocation) yield* this.onFollowLocation(event);
+    if (event is OnMoveMap) {
+      print('event: ${event.ubication}');
+      yield state.copyWith(centralLocation: event.ubication);
+    }
+    if (event is OnCreateRouteStartEnd)
+      yield* this._onCreateRouteStartEnd(event);
   }
 
+  Stream<MapInitial> onLocationUpdate(OnLocationUpdate event) async* {
+    List<LatLng> points = [...this._myRoute.points, event.ubication];
+    this._myRoute = this._myRoute.copyWith(pointsParam: points);
 
+    if (state.followLocation) {
+      moveCam(event.ubication);
+    }
 
+    final currentPolyLines = state.polylines;
+    currentPolyLines['mi_ruta'] = this._myRoute;
 
-
-  Stream<MapInitial> onLocationUpdate(OnLocationUpdate event)async* {
-    List<LatLng> points = [...this._myRoute.points,event.ubication];
-      this._myRoute = this._myRoute.copyWith(pointsParam: points);
-
-      if(state.followLocation){
-        moveCam(event.ubication);
-      }
-
-      final currentPolyLines = state.polylines;
-      currentPolyLines['mi_ruta'] = this._myRoute;
-
-      yield state.copyWith(polylines: currentPolyLines);
-
+    yield state.copyWith(polylines: currentPolyLines);
   }
 
   Stream<MapInitial> onMarkRoute(OnMarkRoute event) async* {
-    if(!state.drawTravel){
-        this._myRoute = this._myRoute.copyWith(colorParam: Colors.redAccent);
-      }else{
-        this._myRoute = this._myRoute.copyWith(colorParam: Colors.transparent);
-      }
+    if (!state.drawTravel) {
+      this._myRoute = this._myRoute.copyWith(colorParam: Colors.redAccent);
+    } else {
+      this._myRoute = this._myRoute.copyWith(colorParam: Colors.transparent);
+    }
 
-      final currentPolyLines = state.polylines;
-      currentPolyLines['mi_ruta'] = this._myRoute;
+    final currentPolyLines = state.polylines;
+    currentPolyLines['mi_ruta'] = this._myRoute;
 
-      yield state.copyWith(polylines: currentPolyLines,drawTravel: !state.drawTravel);
+    yield state.copyWith(
+        polylines: currentPolyLines, drawTravel: !state.drawTravel);
   }
 
   Stream<MapInitial> onFollowLocation(OnFollowLocation event) async* {
-
-    if(state.followLocation) this.moveCam(this._myRoute.points[this._myRoute.points.length -1]);
+    if (state.followLocation)
+      this.moveCam(this._myRoute.points[this._myRoute.points.length - 1]);
 
     yield state.copyWith(followLocation: !state.followLocation);
-
   }
 
-  Stream<MapInitial> _onCreateRouteStartEnd(OnCreateRouteStartEnd event) async*{
-
+  Stream<MapInitial> _onCreateRouteStartEnd(
+      OnCreateRouteStartEnd event) async* {
     this._routeStartEnd = this._routeStartEnd.copyWith(
-      pointsParam: event.routeCoords,
-    );
+          pointsParam: event.routeCoords,
+        );
 
     final currentPolylines = state.polylines;
     currentPolylines['mi_ruta_destino'] = this._routeStartEnd;
 
     final startMarker = new Marker(
-    markerId: MarkerId('start'),
-    position: event.routeCoords[0],    
-    infoWindow: InfoWindow(
-      title: 'My House',
-      snippet: 'This is a start point of route',
-      anchor: Offset(0.5,0),
-      onTap: () => print('Info window tap'),
-
-    )
-    );
+        markerId: MarkerId('start'),
+        position: event.routeCoords[0],
+        infoWindow: InfoWindow(
+          title: 'My House',
+          snippet:
+              'Duración del recorrido: ${(event.duration / 60).floor()} minutos',
+          anchor: Offset(0.5, 0),
+          onTap: () => print('Info window tap'),
+        ));
 
     final endMarker = new Marker(
       markerId: MarkerId('end'),
-      position: event.routeCoords[event.routeCoords.length-1],    
+      position: event.routeCoords[event.routeCoords.length - 1],
+      infoWindow: InfoWindow(
+          snippet:
+              'Kilimetros del recorrido: ${(event.distance / 1000).toStringAsFixed(2)} km',
+          title: '${event.destination}'),
     );
 
     final newMarkers = {...state.markers};
     newMarkers['start'] = startMarker;
     newMarkers['end'] = endMarker;
 
+    Future.delayed(Duration(milliseconds: 300)).then(
+        (value){
+          _mapController.showMarkerInfoWindow(MarkerId('start'));
+          _mapController.showMarkerInfoWindow(MarkerId('end'));
 
 
+        });
 
-    yield state.copyWith(polylines: currentPolylines,markers: newMarkers);
+    yield state.copyWith(polylines: currentPolylines, markers: newMarkers);
   }
 }

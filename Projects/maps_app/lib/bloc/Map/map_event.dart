@@ -33,10 +33,12 @@ class OnCreateRouteStartEnd extends MapEvent {
   final List<LatLng> routeCoords;
   final double distance;
   final double duration;
+  final String destination;
 
   OnCreateRouteStartEnd({
     this.routeCoords,
     this.distance,
     this.duration,
+    this.destination,
   });
 }

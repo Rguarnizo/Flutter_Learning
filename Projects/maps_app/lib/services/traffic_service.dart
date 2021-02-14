@@ -88,7 +88,7 @@ class TrafficService {
 
 }
 
-  Future getCoordsInfo(LatLng proximity) async {
+  Future<ReverseQueryResponse> getCoordsInfo(LatLng proximity) async {
     final url = '${this.baseUrlGeo}/${proximity.longitude},${proximity.latitude}.json';
 
     final resp = await this._dio.get(url,
@@ -98,7 +98,7 @@ class TrafficService {
     }
     );
 
-    final data = reverseQueryResponseToJson(resp.data);
+    final data = reverseQueryResponseFromJson(resp.data);
 
     
     return data;
