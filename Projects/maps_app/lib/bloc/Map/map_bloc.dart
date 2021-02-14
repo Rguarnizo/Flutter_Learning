@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:maps_app/helpers/helpers.dart';
 import 'package:maps_app/themes/map_styles_themes.dart';
 import 'package:meta/meta.dart';
 
@@ -98,9 +99,12 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
     final currentPolylines = state.polylines;
     currentPolylines['mi_ruta_destino'] = this._routeStartEnd;
 
+    final iconOfMarkers = await getAssetImageMarker();
+
     final startMarker = new Marker(
         markerId: MarkerId('start'),
         position: event.routeCoords[0],
+        icon: iconOfMarkers,
         infoWindow: InfoWindow(
           title: 'My House',
           snippet:
@@ -112,7 +116,7 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
     final endMarker = new Marker(
       markerId: MarkerId('end'),
       position: event.routeCoords[event.routeCoords.length - 1],
-      
+      icon: iconOfMarkers,
       infoWindow: InfoWindow(
           snippet:
               'Kilimetros del recorrido: ${(event.distance / 1000).toStringAsFixed(2)} km',
