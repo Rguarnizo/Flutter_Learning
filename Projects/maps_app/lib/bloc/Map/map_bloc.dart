@@ -124,7 +124,7 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
 
     Future.delayed(Duration(milliseconds: 300)).then(
         (value){
-          _mapController.showMarkerInfoWindow(MarkerId('start'));
+          //_mapController.showMarkerInfoWindow(MarkerId('start'));
           _mapController.showMarkerInfoWindow(MarkerId('end'));
 
 

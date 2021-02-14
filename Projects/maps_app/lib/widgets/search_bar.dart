@@ -26,7 +26,7 @@ class SearchBar extends StatelessWidget {
               final historial = context.read<SearchBloc>().state.historial;
               final result = await showSearch(
                   context: context, delegate: SearchDestination(historial));
-              returnSearch(context, result);
+                  returnSearch(context, result);
             },
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -84,9 +84,11 @@ class SearchBar extends StatelessWidget {
 
     final points = Poly.Polyline.Decode(encodedString: geometry,precision: 6);
 
+    
+
     final List<LatLng> routeCoord = points.decodedCoords.map((e) => LatLng(e[0],e[1])).toList();
 
-    mapaBloc.add(OnCreateRouteStartEnd(distance: distance,duration: duration,routeCoords: routeCoord));
+    mapaBloc.add(OnCreateRouteStartEnd(distance: distance,duration: duration,routeCoords: routeCoord,destination: result.nombreDestino));
 
    final  searchBloc =  BlocProvider.of<SearchBloc>(context);
 
