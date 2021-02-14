@@ -112,6 +112,7 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
     final endMarker = new Marker(
       markerId: MarkerId('end'),
       position: event.routeCoords[event.routeCoords.length - 1],
+      
       infoWindow: InfoWindow(
           snippet:
               'Kilimetros del recorrido: ${(event.distance / 1000).toStringAsFixed(2)} km',
