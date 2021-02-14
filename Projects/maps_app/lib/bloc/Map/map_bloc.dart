@@ -99,12 +99,13 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
     final currentPolylines = state.polylines;
     currentPolylines['mi_ruta_destino'] = this._routeStartEnd;
 
-    final iconOfMarkers = await getAssetImageMarker();
+    final iconAssetMarkers = await getAssetImageMarker();
+    final iconNetworkMarker = await getNetworkImageMarker();
 
     final startMarker = new Marker(
         markerId: MarkerId('start'),
         position: event.routeCoords[0],
-        icon: iconOfMarkers,
+        icon: iconAssetMarkers,
         infoWindow: InfoWindow(
           title: 'My House',
           snippet:
@@ -116,7 +117,7 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
     final endMarker = new Marker(
       markerId: MarkerId('end'),
       position: event.routeCoords[event.routeCoords.length - 1],
-      icon: iconOfMarkers,
+      icon: iconNetworkMarker,
       infoWindow: InfoWindow(
           snippet:
               'Kilimetros del recorrido: ${(event.distance / 1000).toStringAsFixed(2)} km',
