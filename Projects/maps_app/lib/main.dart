@@ -4,6 +4,7 @@ import 'package:maps_app/bloc/Map/map_bloc.dart';
 import 'package:maps_app/bloc/Search/search_bloc.dart';
 import 'package:maps_app/pages/map_page.dart';
 import 'package:maps_app/pages/permissions_page.dart';
+import 'package:maps_app/pages/test_marker_page.dart';
 import 'bloc/Location/location_bloc.dart';
 import 'bloc/Permissions/permission_bloc.dart';
  
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         routes: {
           'permissions': (context) => PermissionsPage(),
         },
-        home: MapPage(),
+        home: TestMarkerPage(),
       ),
     );
   }
