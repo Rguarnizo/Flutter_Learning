@@ -67,7 +67,14 @@ class _MainMapState extends State<MainMap> {
     //* Read the location and save it to create a map and focus in this position
     final location = state.location;
 
-    if (!state.existLocation) return Text('Ubicando...');
+    if (!state.existLocation) return Center(child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Ubicando...',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+        SizedBox(height: 30,),
+        CircularProgressIndicator(),
+      ],
+    ));
 
     //* Set the camera position in the actual location
     final initialPosition = CameraPosition(target: location, zoom: 15);

@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         routes: {
           'permissions': (context) => PermissionsPage(),
         },
-        home: TestMarkerPage(),
+        home: MapPage(),
       ),
     );
   }
