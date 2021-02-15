@@ -3,7 +3,7 @@ part of 'custom_markers.dart';
 
 class MarkerStart extends CustomPainter {
 
-  final  min;
+  final double min;
 
   MarkerStart(this.min);
 
@@ -34,9 +34,10 @@ class MarkerStart extends CustomPainter {
     final blackBox = Rect.fromLTWH(40, 20, 70, 80);
     canvas.drawRect(blackBox, paint..color = Colors.black);
 
+    final time = min.toStringAsFixed(1);
     //Dibujar Textos
     TextSpan textSpan = new TextSpan(
-      text: '$min',
+      text: '$time',
       style: TextStyle(color: Colors.white,fontSize:30,fontWeight: FontWeight.w400)
     );
 

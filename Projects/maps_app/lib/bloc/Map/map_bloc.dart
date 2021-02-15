@@ -100,28 +100,20 @@ class MapBloc extends Bloc<MapEvent, MapInitial> {
     currentPolylines['mi_ruta_destino'] = this._routeStartEnd;
 
     final startMarkerIcon = await getMarkerStartIcon(event.duration.toInt());
-    final iconNetworkMarker = await getNetworkImageMarker();
+    final iconNetworkMarker = await getMarkerEndIcon(event.destination,event.duration);
 
     final startMarker = new Marker(
         markerId: MarkerId('start'),
         position: event.routeCoords[0],
         icon: startMarkerIcon,
-        infoWindow: InfoWindow(
-          title: 'My House',
-          snippet:
-              'Duración del recorrido: ${(event.duration / 60).floor()} minutos',
-          anchor: Offset(1, 1),
-          onTap: () => print('Info window tap'),
-        ));
+        anchor: Offset(0,1),
+        );
 
     final endMarker = new Marker(
       markerId: MarkerId('end'),
       position: event.routeCoords[event.routeCoords.length - 1],
-      icon: iconNetworkMarker,
-      infoWindow: InfoWindow(
-          snippet:
-              'Kilimetros del recorrido: ${(event.distance / 1000).toStringAsFixed(2)} km',
-          title: '${event.destination}'),
+      icon: iconNetworkMarker,      
+      anchor: Offset(0,1)
     );
 
     final newMarkers = {...state.markers};
