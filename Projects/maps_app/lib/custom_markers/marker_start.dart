@@ -2,6 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MarkerStart extends CustomPainter {
+
+  final  min;
+
+  MarkerStart(this.min);
+
+
+
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = new Paint()..color = Colors.black;
@@ -26,6 +33,49 @@ class MarkerStart extends CustomPainter {
     
     final blackBox = Rect.fromLTWH(40, 20, 70, 80);
     canvas.drawRect(blackBox, paint..color = Colors.black);
+
+    //Dibujar Textos
+    TextSpan textSpan = new TextSpan(
+      text: '$min',
+      style: TextStyle(color: Colors.white,fontSize:30,fontWeight: FontWeight.w400)
+    );
+
+    final textPainter = new TextPainter(
+      text: textSpan,
+      textDirection: TextDirection.ltr,
+      textAlign: TextAlign.center
+    )..layout(maxWidth: 70,minWidth: 70);
+
+    textPainter.paint(canvas, Offset(40,35));
+
+      textSpan = new TextSpan(
+      text: 'min',
+      style: TextStyle(color: Colors.white,fontSize:25,fontWeight: FontWeight.w400)
+    );
+
+    final textPainterT = new TextPainter(
+      text: textSpan,
+      textDirection: TextDirection.ltr,
+      textAlign: TextAlign.center
+    )..layout(maxWidth: 70,minWidth: 70);
+
+    textPainterT.paint(canvas, Offset(40,65));
+
+    textSpan = new TextSpan(
+      text: 'Mi ubicación',
+      style: TextStyle(color: Colors.black,fontSize:22,fontWeight: FontWeight.w400)
+    );
+
+    final textPainterUb = new TextPainter(
+      text: textSpan,
+      textDirection: TextDirection.ltr,
+      textAlign: TextAlign.center
+    )..layout(maxWidth: size.width-130,minWidth: 70);
+
+    textPainterUb.paint(canvas, Offset(150,50));
+
+
+
   }
 
   @override
