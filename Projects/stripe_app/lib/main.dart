@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
+      title: 'Stripe App',
       routes: {
         'home' : (_) => HomePage(),
         'checkPay': (_) => CheckPayPage(),
@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xff284879),
         scaffoldBackgroundColor: Color(0xff21232A)
       ),
+      debugShowCheckedModeBanner: false,
       initialRoute: 'home',
     );
   }
