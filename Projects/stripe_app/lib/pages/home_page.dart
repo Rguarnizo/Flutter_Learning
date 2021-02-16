@@ -16,7 +16,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Pay'),
       actions: [
-        IconButton(icon: Icon(Icons.add), onPressed: (){}),
+        IconButton(icon: Icon(Icons.add), onPressed: (){
+          showLoading(context);
+          Future.delayed(Duration(seconds: 1));
+          Navigator.pop(context);
+          
+        }),
       ],
       ),
       body: Stack(
