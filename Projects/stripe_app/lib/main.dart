@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xff284879),
         scaffoldBackgroundColor: Color(0xff21232A)
       ),
+      initialRoute: 'home',
     );
   }
 }
