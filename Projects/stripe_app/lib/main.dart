@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Stripe App',
+      title: 'StripeApp',
       routes: {
         'home' : (_) => HomePage(),
         'checkPay': (_) => CheckPayPage(),

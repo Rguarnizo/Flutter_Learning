@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
 import 'package:stripe_app/data/cards.dart';
+import 'package:stripe_app/helpers/helpers.dart';
+import 'package:stripe_app/pages/card_page.dart';
 import 'package:stripe_app/widgets/total_pay_button.dart';
 
 
@@ -32,12 +34,18 @@ class HomePage extends StatelessWidget {
               itemCount: tarjetas.length,
               itemBuilder: (context, i){
                 final card = tarjetas[i];
-                return CreditCardWidget(
-                  cardNumber: card.cardNumberHidden,
-                  expiryDate: card.expiracyDate,
-                  cardHolderName: card.cardHolderName,
-                  cvvCode: card.cvv,
-                  showBackView: false,
+                return Hero(
+                  tag: card.cardNumber,
+                  child: GestureDetector(
+                    onTap: () => Navigator.push(context,navegateFadeIn(context, CardPage())),
+                    child: CreditCardWidget(
+                      cardNumber: card.cardNumberHidden, 
+                      expiryDate: card.expiracyDate,
+                      cardHolderName: card.cardHolderName,
+                      cvvCode: card.cvv,
+                      showBackView: false,
+                    ),
+                  ),
                 );
               },
 
