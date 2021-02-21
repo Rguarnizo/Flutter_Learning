@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     StripeService().init();
-    
 
     return MultiBlocProvider(
       providers: [
