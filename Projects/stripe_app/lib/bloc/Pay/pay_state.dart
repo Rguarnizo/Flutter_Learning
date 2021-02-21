@@ -3,14 +3,16 @@ part of 'pay_bloc.dart';
 @immutable
 class PayState {
   final double payAmount;
-  final String money;
+  final String currency;
   final bool activeCard;
   final CreditsCard card;
+
+  String get payAmountStr => '${(this.payAmount*100).floor()}';
 
   PayState(
       {
       this.payAmount = 375.55,
-      this.money = 'USD',
+      this.currency = 'USD',
       this.activeCard = false,
       this.card      
       });
@@ -26,6 +28,6 @@ class PayState {
     payAmount: payAmount?? this.payAmount,
     activeCard: activeCard?? this.activeCard,
     card: card?? this.card,
-    money: money?? this.money,
+    currency: money?? this.currency,
     );
 }

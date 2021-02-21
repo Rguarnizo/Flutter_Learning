@@ -5,13 +5,17 @@ import 'package:stripe_app/bloc/Pay/pay_bloc.dart';
 import 'package:stripe_app/data/cards.dart';
 import 'package:stripe_app/helpers/helpers.dart';
 import 'package:stripe_app/pages/card_page.dart';
+import 'package:stripe_app/services/stripe_service.dart';
 import 'package:stripe_app/widgets/total_pay_button.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+
     final size = MediaQuery.of(context).size;
     final payBloc = BlocProvider.of<PayBloc>(context);
+    final stripeService = StripeService();
 
     return Scaffold(
         appBar: AppBar(
@@ -20,11 +24,17 @@ class HomePage extends StatelessWidget {
             IconButton(
                 icon: Icon(Icons.add),
                 onPressed: () async {
-                  showLoading(context);
-                  await Future.delayed(Duration(seconds: 1));
-                  Navigator.pop(context);
-                  showAlert(context, 'This is a title',
-                      'This is a message of dialog');
+                  final amount = payBloc.state.payAmountStr;
+                  final currency = payBloc.state.currency;
+
+                  final resp = await stripeService.payWithNewCard(amount: amount, currency: currency);
+                  
+                  if(resp.ok){
+                    showAlert(context, 'Tarjeta OK', 'Todo correcto');
+                  } else {
+                    showAlert(context, 'Algo paso mal', resp.msg);
+                  }
+
                 }),
           ],
         ),
