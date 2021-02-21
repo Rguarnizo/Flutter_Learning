@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:package_transitions/helpers/route_transitions.dart';
+import 'package:package_transitions/pages/page2.dart';
 
 
 class Page1 extends StatelessWidget {
@@ -11,8 +13,8 @@ class Page1 extends StatelessWidget {
       body: Center(
         child: MaterialButton(
           onPressed: () 
-          => 
-          Navigator.pushNamed(context, 'page2'),
+          =>
+          RouteTransitions(context: context, child: Page2()),
           child: Text(
             'Go to page 2',
           ),
