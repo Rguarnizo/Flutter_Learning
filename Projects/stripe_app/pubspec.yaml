@@ -32,6 +32,8 @@ dependencies:
   bloc:
   font_awesome_flutter:
   flutter_credit_card: 
+  dio:
+  stripe_payment:
 
 dev_dependencies:
   flutter_test:
