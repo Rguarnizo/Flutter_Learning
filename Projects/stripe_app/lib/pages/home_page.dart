@@ -27,7 +27,11 @@ class HomePage extends StatelessWidget {
                   final amount = payBloc.state.payAmountStr;
                   final currency = payBloc.state.currency;
 
+                  showLoading(context);
+
                   final resp = await stripeService.payWithNewCard(amount: amount, currency: currency);
+
+                  Navigator.pop(context);
                   
                   if(resp.ok){
                     showAlert(context, 'Tarjeta OK', 'Todo correcto');
