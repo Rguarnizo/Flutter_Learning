@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:stripe_app/bloc/Pay/pay_bloc.dart';
 
 class TotalPayButton extends StatelessWidget {
   @override
@@ -47,11 +49,13 @@ class _BtnPay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return !true? buildBtn(context):buildBtnCard(context);
-   
+    return BlocBuilder<PayBloc, PayState>(
+      builder: (context, state) {
+        return state.activeCard? buildBtnCard(context):buildBtn(context);
+      },
+    );
   }
 
-  
   Widget buildBtn(BuildContext context) {
     return MaterialButton(
       onPressed: () {},
@@ -79,7 +83,7 @@ class _BtnPay extends StatelessWidget {
     );
   }
 
-   Widget buildBtnCard(BuildContext context) {
+  Widget buildBtnCard(BuildContext context) {
     return MaterialButton(
       onPressed: () {},
       height: 45,
@@ -89,9 +93,7 @@ class _BtnPay extends StatelessWidget {
       color: Colors.black,
       child: Row(
         children: [
-          Icon(
-              FontAwesomeIcons.solidCreditCard,
-              color: Colors.white),
+          Icon(FontAwesomeIcons.solidCreditCard, color: Colors.white),
           SizedBox(
             width: 30,
           ),
@@ -103,6 +105,4 @@ class _BtnPay extends StatelessWidget {
       ),
     );
   }
-
-  
 }
