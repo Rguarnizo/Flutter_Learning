@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:stripe_app/models/payment_intent_response.dart';
 import 'package:stripe_app/models/stripe_custom_response.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 
@@ -15,14 +17,25 @@ class StripeService {
   String _apiKey =
       'pk_test_51IN8WbFDFJjKdaSPDCcO66I9MkLhSEzSnBv7SBxgjXXZYZZWOb9RUiH9oX0dePUGu95rnmtFvtKcg0Gk8TOaYnw100QAV1WdiI';
 
+  Options headerOptions; 
+
   void init() {
     StripePayment.setOptions(StripeOptions(
         publishableKey: this._apiKey,
         androidPayMode: 'test',
         merchantId: 'test'));
+
+    headerOptions = Options(
+    contentType: Headers.formUrlEncodedContentType,
+    headers: {
+      'Authorization': 'Bearer $_secretKey',
+
+    }
+  );
   }
 
   Future payWithExistCard({
+
     @required String amount,
     @required String currency,
     @required CreditCard card,
@@ -36,9 +49,10 @@ class StripeService {
       final paymentMethod =
           await StripePayment.paymentRequestWithCardForm(CardFormPaymentRequest());
 
-          //TODO: Crear un intent.
+        final resp = await this._createPaymentIntent(amount: amount, currency: currency);        
 
-      return StripeCustomResponse(ok: true,msg: 'Todo Correcto!');
+        return StripeCustomResponse(ok: true,msg: 'Todo Correcto!');
+
     } catch (e) {
       return StripeCustomResponse(ok: false, msg: e.toString());
     }
@@ -52,7 +66,27 @@ class StripeService {
   Future _createPaymentIntent({
     @required String amount,
     @required String currency,
-  }) async {}
+  }) async {
+    
+    try {
+      final dio = Dio();
+      
+      final data = {
+        'amount': amount,
+        'currency': currency,
+      };
+      
+      final resp = await dio.post(this._paymentApiUrl,data: data,options: this.headerOptions);
+      
+      
+      return PaymentIntentResponse.fromJson(resp.data);
+    } on Exception catch (e) {
+          print('Error en intento:');
+          return PaymentIntentResponse(
+            status: '400',
+          );
+    }
+  }
 
   Future _realicePay({
     @required String amount,
