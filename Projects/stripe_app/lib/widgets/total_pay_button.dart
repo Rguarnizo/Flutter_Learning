@@ -60,8 +60,18 @@ class _BtnPay extends StatelessWidget {
   }
 
   Widget buildBtn(BuildContext context) {
+
+    final stripeService = StripeService();
+    final payBloc = BlocProvider.of<PayBloc>(context);
+
     return MaterialButton(
-      onPressed: () {},
+      onPressed: () async {
+
+        final data = payBloc.state;
+        
+
+        await stripeService.payWithAppleOrGoogle(amount: data.payAmountStr, currency: data.currency);
+      },
       height: 45,
       minWidth: 150,
       shape: StadiumBorder(),

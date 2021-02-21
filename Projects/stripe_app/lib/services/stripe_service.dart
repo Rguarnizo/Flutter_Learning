@@ -36,7 +36,7 @@ class StripeService {
     @required String currency,
     @required CreditCard card,
   }) async {
-     try {
+    try {
       final paymentMethod = await StripePayment.createPaymentMethod(
           PaymentMethodRequest(card: card));
 
@@ -47,7 +47,6 @@ class StripeService {
     } catch (e) {
       return StripeCustomResponse(ok: false, msg: e.toString());
     }
-
   }
 
   Future payWithNewCard({
@@ -70,7 +69,28 @@ class StripeService {
   Future payWithAppleOrGoogle({
     @required String amount,
     @required String currency,
-  }) async {}
+  }) async {
+    try {
+      final token = await StripePayment.paymentRequestWithNativePay(
+          androidPayOptions: AndroidPayPaymentRequest(
+              currencyCode: currency, totalPrice: amount),
+          applePayOptions: ApplePayPaymentOptions(
+              currencyCode: currency,
+              countryCode: 'US',
+              items: [ApplePayItem(amount: '${double.parse(amount)/100}' , label: 'Super Producto')]));
+
+    final paymentMethod = await StripePayment.createPaymentMethod(PaymentMethodRequest(token:token));
+
+    final resp = await this._realicePay(
+          amount: amount, currency: currency, paymentMethod: paymentMethod);
+
+      StripePayment.completeNativePayRequest();
+
+      return resp;
+    } catch (e) {
+      return StripeCustomResponse(ok: false, msg: e.toString());
+    }
+  }
 
   Future<PaymentIntentResponse> _createPaymentIntent({
     @required String amount,
@@ -110,12 +130,11 @@ class StripeService {
               clientSecret: paymentIntent.clientSecret,
               paymentMethodId: paymentMethod.id));
 
-      if(paymentResult.status == 'succeeded'){
+      if (paymentResult.status == 'succeeded') {
         return StripeCustomResponse(ok: true, msg: 'Todo correcto');
-      }else{
+      } else {
         return StripeCustomResponse(ok: false, msg: paymentResult.status);
       }
-
     } on Exception catch (e) {
       return StripeCustomResponse(ok: false, msg: e.toString());
     }
