@@ -17,7 +17,7 @@ class StripeService {
   String _apiKey =
       'pk_test_51IN8WbFDFJjKdaSPDCcO66I9MkLhSEzSnBv7SBxgjXXZYZZWOb9RUiH9oX0dePUGu95rnmtFvtKcg0Gk8TOaYnw100QAV1WdiI';
 
-  Options headerOptions; 
+  Options headerOptions;
 
   void init() {
     StripePayment.setOptions(StripeOptions(
@@ -25,17 +25,13 @@ class StripeService {
         androidPayMode: 'test',
         merchantId: 'test'));
 
-    headerOptions = Options(
-    contentType: Headers.formUrlEncodedContentType,
-    headers: {
+    headerOptions =
+        Options(contentType: Headers.formUrlEncodedContentType, headers: {
       'Authorization': 'Bearer $_secretKey',
-
-    }
-  );
+    });
   }
 
   Future payWithExistCard({
-
     @required String amount,
     @required String currency,
     @required CreditCard card,
@@ -46,13 +42,13 @@ class StripeService {
     @required String currency,
   }) async {
     try {
-      final paymentMethod =
-          await StripePayment.paymentRequestWithCardForm(CardFormPaymentRequest());
+      final paymentMethod = await StripePayment.paymentRequestWithCardForm(
+          CardFormPaymentRequest());
 
-        final resp = await this._createPaymentIntent(amount: amount, currency: currency);        
+      final resp = await this._realicePay(
+          amount: amount, currency: currency, paymentMethod: paymentMethod);
 
-        return StripeCustomResponse(ok: true,msg: 'Todo Correcto!');
-
+      return resp;
     } catch (e) {
       return StripeCustomResponse(ok: false, msg: e.toString());
     }
@@ -63,34 +59,52 @@ class StripeService {
     @required String currency,
   }) async {}
 
-  Future _createPaymentIntent({
+  Future<PaymentIntentResponse> _createPaymentIntent({
     @required String amount,
     @required String currency,
   }) async {
-    
     try {
       final dio = Dio();
-      
+
       final data = {
         'amount': amount,
         'currency': currency,
       };
-      
-      final resp = await dio.post(this._paymentApiUrl,data: data,options: this.headerOptions);
-      
-      
+
+      final resp = await dio.post(this._paymentApiUrl,
+          data: data, options: this.headerOptions);
+
       return PaymentIntentResponse.fromJson(resp.data);
     } on Exception catch (e) {
-          print('Error en intento:');
-          return PaymentIntentResponse(
-            status: '400',
-          );
+      print('Error en intento:');
+      return PaymentIntentResponse(
+        status: '400',
+      );
     }
   }
 
-  Future _realicePay({
+  Future<StripeCustomResponse> _realicePay({
     @required String amount,
     @required String currency,
     @required PaymentMethod paymentMethod,
-  }) async {}
+  }) async {
+    try {
+      final paymentIntent =
+          await this._createPaymentIntent(amount: amount, currency: currency);
+
+      final paymentResult = await StripePayment.confirmPaymentIntent(
+          PaymentIntent(
+              clientSecret: paymentIntent.clientSecret,
+              paymentMethodId: paymentMethod.id));
+
+      if(paymentResult.status == 'succeeded'){
+        return StripeCustomResponse(ok: true, msg: 'Todo correcto');
+      }else{
+        return StripeCustomResponse(ok: false, msg: paymentResult.status);
+      }
+
+    } on Exception catch (e) {
+      return StripeCustomResponse(ok: false, msg: e.toString());
+    }
+  }
 }
