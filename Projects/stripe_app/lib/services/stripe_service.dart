@@ -92,7 +92,7 @@ class StripeService {
     }
   }
 
-  Future<PaymentIntentResponse> _createPaymentIntent({
+  Future<PaymentIntentResponse> _createPaymentIntent({ 
     @required String amount,
     @required String currency,
   }) async {
