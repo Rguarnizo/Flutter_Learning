@@ -7,10 +7,12 @@ class RouteTransitions {
   final Widget child;
   final AnimationType animation;
   final Duration duration;
+  final bool replacement;
 
   RouteTransitions(
       {@required this.context,
       @required this.child,
+      this.replacement = false,
       this.duration = const Duration(milliseconds: 300),
       this.animation = AnimationType.normal}){
     switch (animation) {
@@ -31,6 +33,8 @@ class RouteTransitions {
           return FadeTransition(child: child,opacity: Tween<double>(begin: 0.0,end: 1.0).animate(CurvedAnimation(parent: animation, curve: Curves.easeOut)));
         });
 
-    Navigator.push(context, route);
+    navigateToPage(route);
   }
+
+  void navigateToPage(Route route) => this.replacement? Navigator.pushReplacement(context, route):Navigator.push(context, route);
 }
