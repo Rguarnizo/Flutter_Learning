@@ -14,7 +14,7 @@ class Page1 extends StatelessWidget {
         child: MaterialButton(
           onPressed: () 
           =>
-          RouteTransitions(context: context, child: Page2()),
+          RouteTransitions(context: context, child: Page2(),animation: AnimationType.fadeIn,duration: Duration(seconds: 2)),
           child: Text(
             'Go to page 2',
           ),
