@@ -9,6 +9,7 @@ enum AnimationType { normal, fadeIn }
 ///Main class, [context] is a BuildContext in the app,
 ///[child] is a page to navigate,
 ///[animation] is a type of aniamation,
+@deprecated
 class RouteTransitions {
   final BuildContext context;
   final Widget child;
