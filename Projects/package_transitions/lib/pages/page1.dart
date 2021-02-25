@@ -1,5 +1,5 @@
+import 'package:easy_route_transitions/easy_route_transitions.dart';
 import 'package:flutter/material.dart';
-import 'package:package_transitions/helpers/route_transitions.dart';
 import 'package:package_transitions/pages/page2.dart';
 
 class Page1 extends StatelessWidget {
