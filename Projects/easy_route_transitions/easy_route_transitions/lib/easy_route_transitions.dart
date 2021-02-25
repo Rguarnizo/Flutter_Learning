@@ -3,8 +3,12 @@ library easy_route_transitions;
 /// A Calculator.
 import 'package:flutter/material.dart';
 
+/// Animation Types, espected add more.
 enum AnimationType { normal, fadeIn }
 
+///Main class, [context] is a BuildContext in the app,
+///[child] is a page to navigate,
+///[animation] is a type of aniamation,
 class RouteTransitions {
   final BuildContext context;
   final Widget child;
@@ -12,6 +16,9 @@ class RouteTransitions {
   final Duration duration;
   final bool replacement;
 
+
+  ///Instanciate of Route Transitions,[replacement] default value is false, [duration] default value is 300 milliseconds, and
+  ///[animation] default value is Normal.
   RouteTransitions(
       {@required this.context,
       @required this.child,
@@ -28,6 +35,7 @@ class RouteTransitions {
     }
   }
 
+  ///Push with tansition FadeIn for navigate to other page
   void _fadeInTransition() {
     final route = PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) => this.child,
@@ -42,6 +50,7 @@ class RouteTransitions {
     navigateToPage(route);
   }
 
+  //Decition to replacement or not route navigation.
   void navigateToPage(Route route) => this.replacement
       ? Navigator.pushReplacement(context, route)
       : Navigator.push(context, route);
